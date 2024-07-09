@@ -182,7 +182,10 @@ class _ProjectDetailScreenWidgetState extends State<ProjectDetailScreenWidget> {
                                 controller:
                                     _model.descriptionTextFieldTextController,
                                 focusNode: _model.descriptionTextFieldFocusNode,
-                                onFieldSubmitted: (_) async {},
+                                onFieldSubmitted: (_) async {
+                                  await _model.updateProjectDetail(context);
+                                  setState(() {});
+                                },
                                 autofocus: false,
                                 textCapitalization: TextCapitalization.none,
                                 textInputAction: TextInputAction.done,
@@ -320,9 +323,14 @@ class _ProjectDetailScreenWidgetState extends State<ProjectDetailScreenWidget> {
                                                   .clientData
                                                   .map((e) => e.clientName)
                                                   .toList(),
-                                              onChanged: (val) => setState(() =>
-                                                  _model.clientDropDownValue =
-                                                      val),
+                                              onChanged: (val) async {
+                                                setState(() => _model
+                                                    .clientDropDownValue = val);
+                                                await _model
+                                                    .updateProjectDetail(
+                                                        context);
+                                                setState(() {});
+                                              },
                                               width: 300.0,
                                               height: 48.0,
                                               textStyle:
@@ -397,9 +405,14 @@ class _ProjectDetailScreenWidgetState extends State<ProjectDetailScreenWidget> {
                                                   FormFieldController<String>(
                                                       null),
                                               options: FFAppState().Status,
-                                              onChanged: (val) => setState(() =>
-                                                  _model.statusDropDownValue =
-                                                      val),
+                                              onChanged: (val) async {
+                                                setState(() => _model
+                                                    .statusDropDownValue = val);
+                                                await _model
+                                                    .updateProjectDetail(
+                                                        context);
+                                                setState(() {});
+                                              },
                                               width: 300.0,
                                               height: 48.0,
                                               textStyle:
@@ -473,7 +486,12 @@ class _ProjectDetailScreenWidgetState extends State<ProjectDetailScreenWidget> {
                                                   .totalHourseTextFieldTextController,
                                               focusNode: _model
                                                   .totalHourseTextFieldFocusNode,
-                                              onFieldSubmitted: (_) async {},
+                                              onFieldSubmitted: (_) async {
+                                                await _model
+                                                    .updateProjectDetail(
+                                                        context);
+                                                setState(() {});
+                                              },
                                               autofocus: false,
                                               textInputAction:
                                                   TextInputAction.done,
@@ -602,8 +620,12 @@ class _ProjectDetailScreenWidgetState extends State<ProjectDetailScreenWidget> {
                                                             setState(() => _model
                                                                     .excessHoursValue =
                                                                 newValue!);
-
-                                                            if (!newValue!) {
+                                                            if (newValue!) {
+                                                              await _model
+                                                                  .updateProjectDetail(
+                                                                      context);
+                                                              setState(() {});
+                                                            } else {
                                                               await Future.delayed(
                                                                   const Duration(
                                                                       milliseconds:
@@ -684,8 +706,12 @@ class _ProjectDetailScreenWidgetState extends State<ProjectDetailScreenWidget> {
                                                             setState(() => _model
                                                                     .taskEntryValue =
                                                                 newValue!);
-
-                                                            if (!newValue!) {
+                                                            if (newValue!) {
+                                                              await _model
+                                                                  .updateProjectDetail(
+                                                                      context);
+                                                              setState(() {});
+                                                            } else {
                                                               await Future.delayed(
                                                                   const Duration(
                                                                       milliseconds:

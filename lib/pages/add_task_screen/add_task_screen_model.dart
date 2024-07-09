@@ -52,11 +52,29 @@ class AddTaskScreenModel extends FlutterFlowModel<AddTaskScreenWidget> {
   TextEditingController? descriptionTextFieldTextController;
   String? Function(BuildContext, String?)?
       descriptionTextFieldTextControllerValidator;
+  String? _descriptionTextFieldTextControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // State field(s) for ProjectTextField widget.
   FocusNode? projectTextFieldFocusNode;
   TextEditingController? projectTextFieldTextController;
   String? Function(BuildContext, String?)?
       projectTextFieldTextControllerValidator;
+  String? _projectTextFieldTextControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // State field(s) for SectionDropDown widget.
   String? sectionDropDownValue;
   FormFieldController<String>? sectionDropDownValueController;
@@ -66,14 +84,23 @@ class AddTaskScreenModel extends FlutterFlowModel<AddTaskScreenWidget> {
   // State field(s) for StatusDropDown widget.
   String? statusDropDownValue;
   FormFieldController<String>? statusDropDownValueController;
-  // State field(s) for AssignToDropDown widget.
-  String? assignToDropDownValue;
-  FormFieldController<String>? assignToDropDownValueController;
   // State field(s) for PlannedHoursTextField widget.
   FocusNode? plannedHoursTextFieldFocusNode;
   TextEditingController? plannedHoursTextFieldTextController;
   String? Function(BuildContext, String?)?
       plannedHoursTextFieldTextControllerValidator;
+  String? _plannedHoursTextFieldTextControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Please provide project budget hours';
+    }
+
+    return null;
+  }
+
+  // State field(s) for AssignToDropDown widget.
+  String? assignToDropDownValue;
+  FormFieldController<String>? assignToDropDownValueController;
   // State field(s) for StartDateTextField widget.
   FocusNode? startDateTextFieldFocusNode;
   TextEditingController? startDateTextFieldTextController;
@@ -109,6 +136,12 @@ class AddTaskScreenModel extends FlutterFlowModel<AddTaskScreenWidget> {
   void initState(BuildContext context) {
     taskNameTextFieldTextControllerValidator =
         _taskNameTextFieldTextControllerValidator;
+    descriptionTextFieldTextControllerValidator =
+        _descriptionTextFieldTextControllerValidator;
+    projectTextFieldTextControllerValidator =
+        _projectTextFieldTextControllerValidator;
+    plannedHoursTextFieldTextControllerValidator =
+        _plannedHoursTextFieldTextControllerValidator;
     startDateTextFieldTextControllerValidator =
         _startDateTextFieldTextControllerValidator;
     endDateTextFieldTextControllerValidator =

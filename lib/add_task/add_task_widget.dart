@@ -1398,7 +1398,9 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                                               ].divide(const SizedBox(width: 12.0)),
                                             ),
                                             FFButtonWidget(
-                                              onPressed: () async {},
+                                              onPressed: () {
+                                                print('Button pressed ...');
+                                              },
                                               text: widget.isEdit!
                                                   ? FFAppConstants.updateTask
                                                   : FFAppConstants.addTaskBtn,

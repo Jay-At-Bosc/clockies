@@ -96,6 +96,9 @@ class _MyTaskScreenWidgetState extends State<MyTaskScreenWidget> {
                         .allowManualTask ==
                     true) ||
                 (FFAppState().user.userRoleId == 1)) {
+              await _model.fetchMyTask(context);
+              setState(() {});
+
               context.pushNamed(
                 'AddTaskScreen',
                 queryParameters: {
@@ -127,9 +130,6 @@ class _MyTaskScreenWidgetState extends State<MyTaskScreenWidget> {
                   ),
                 }.withoutNulls,
               );
-
-              await _model.fetchMyTask(context);
-              setState(() {});
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
