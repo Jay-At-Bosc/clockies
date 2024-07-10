@@ -283,6 +283,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                         builder: (context) {
                           final timeLineTasks =
                               _model.taskList.toList().take(20).toList();
+
                           return ListView.separated(
                             padding: EdgeInsets.zero,
                             shrinkWrap: true,

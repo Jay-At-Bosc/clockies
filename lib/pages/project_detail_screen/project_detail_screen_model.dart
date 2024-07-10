@@ -90,7 +90,7 @@ class ProjectDetailScreenModel
 
     updateProjectApiResult = await UpdateProjectDetailCall.call(
       authToken: FFAppState().userToken,
-      id: widget.id,
+      id: widget!.id,
       projectName: projectDetail?.projectName,
       clientId: FFAppState()
           .clientData
@@ -144,7 +144,7 @@ class ProjectDetailScreenModel
 
     deleteProjectApiResult = await DeleteProjectCall.call(
       authToken: FFAppState().userToken,
-      id: widget.id,
+      id: widget!.id,
     );
 
     if ((deleteProjectApiResult.succeeded ?? true)) {
@@ -187,7 +187,7 @@ class ProjectDetailScreenModel
 
     fetchProjectByIdResult = await FetchProjectByIDCall.call(
       authToken: FFAppState().userToken,
-      id: widget.id,
+      id: widget!.id,
     );
 
     if ((fetchProjectByIdResult.succeeded ?? true)) {

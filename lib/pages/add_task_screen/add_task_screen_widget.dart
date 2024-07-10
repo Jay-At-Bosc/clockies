@@ -71,7 +71,8 @@ class _AddTaskScreenWidgetState extends State<AddTaskScreenWidget> {
 
     _model.descriptionTextFieldTextController ??= TextEditingController(
         text: widget.isEdit!
-            ? functions.removeHtmlTagsFromString(widget.taskDetail?.description)
+            ? functions
+                .removeHtmlTagsFromString(widget.taskDetail?.description)
             : null);
     _model.descriptionTextFieldFocusNode ??= FocusNode();
 

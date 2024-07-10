@@ -283,6 +283,7 @@ class _ProjectScreenWidgetState extends State<ProjectScreenWidget>
                                                 ),
                                               );
                                             }
+
                                             return FlutterFlowDataTable<
                                                 ProjectModelStruct>(
                                               controller: _model
@@ -541,6 +542,7 @@ class _ProjectScreenWidgetState extends State<ProjectScreenWidget>
                                                 ),
                                               );
                                             }
+
                                             return FlutterFlowDataTable<
                                                 ProjectModelStruct>(
                                               controller: _model
@@ -799,6 +801,7 @@ class _ProjectScreenWidgetState extends State<ProjectScreenWidget>
                                                 ),
                                               );
                                             }
+
                                             return FlutterFlowDataTable<
                                                 ProjectModelStruct>(
                                               controller: _model

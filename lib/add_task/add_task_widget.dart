@@ -47,7 +47,8 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
 
     _model.descriptionTextFieldTextController ??= TextEditingController(
         text: widget.isEdit!
-            ? functions.removeHtmlTagsFromString(widget.taskDetail?.description)
+            ? functions
+                .removeHtmlTagsFromString(widget.taskDetail?.description)
             : '');
     _model.descriptionTextFieldFocusNode ??= FocusNode();
 
@@ -56,8 +57,9 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
     _model.projectTextFieldFocusNode ??= FocusNode();
 
     _model.plannedHoursTextFieldTextController ??= TextEditingController(
-        text:
-            widget.isEdit! ? widget.taskDetail?.plannedHours.toString() : '');
+        text: widget.isEdit!
+            ? widget.taskDetail?.plannedHours.toString()
+            : '');
     _model.plannedHoursTextFieldFocusNode ??= FocusNode();
 
     _model.startDateTextFieldTextController ??= TextEditingController(
