@@ -44,3 +44,14 @@ String? formateDateString(String? stringDate) {
     return null;
   }
 }
+
+DateTime convertToLocalTime(String utcTime) {
+  // Parse the input time string to a DateTime object in UTC
+  DateTime dateTimeUtc = DateTime.parse(utcTime).toUtc();
+
+  // Convert the UTC DateTime object to local time
+  DateTime dateTimeLocal = dateTimeUtc.toLocal();
+
+  // Return the local DateTime object
+  return dateTimeLocal;
+}

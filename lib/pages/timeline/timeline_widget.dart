@@ -2,6 +2,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -199,6 +200,8 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                       );
                                     });
                                   }
+                                  _model.isDatePicked = false;
+                                  setState(() {});
                                 },
                                 child: Icon(
                                   Icons.calendar_today,
@@ -209,7 +212,11 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                               ),
                               Expanded(
                                 child: Text(
-                                  dateTimeFormat('d/M/y', getCurrentTimestamp),
+                                  _model.isDatePicked
+                                      ? dateTimeFormat(
+                                          'd/M/y', getCurrentTimestamp)
+                                      : dateTimeFormat(
+                                          'yMd', _model.datePicked),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -335,7 +342,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                             alignment: const AlignmentDirectional(
                                                 -1.0, -1.0),
                                             child: Text(
-                                              '${dateTimeFormat('jms', getCurrentTimestamp)} - ${dateTimeFormat('jms', getCurrentTimestamp)}',
+                                              '${dateTimeFormat('jms', functions.convertToLocalTime(timeLineTasksItem.startDate))} - ${dateTimeFormat('jms', functions.convertToLocalTime(timeLineTasksItem.endDate))}',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -353,7 +360,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'Task Name',
+                                            timeLineTasksItem.taskName,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
