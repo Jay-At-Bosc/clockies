@@ -45,13 +45,15 @@ String? formateDateString(String? stringDate) {
   }
 }
 
-DateTime convertToLocalTime(String utcTime) {
+String convertToLocalTime(String utcTime) {
   // Parse the input time string to a DateTime object in UTC
   DateTime dateTimeUtc = DateTime.parse(utcTime).toUtc();
 
   // Convert the UTC DateTime object to local time
   DateTime dateTimeLocal = dateTimeUtc.toLocal();
 
-  // Return the local DateTime object
-  return dateTimeLocal;
+  String formattedTime = DateFormat.jms().format(dateTimeLocal);
+
+  // Return the formatted local time as a string
+  return formattedTime;
 }

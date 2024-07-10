@@ -342,7 +342,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                             alignment: const AlignmentDirectional(
                                                 -1.0, -1.0),
                                             child: Text(
-                                              '${dateTimeFormat('jms', functions.convertToLocalTime(timeLineTasksItem.startDate))} - ${dateTimeFormat('jms', functions.convertToLocalTime(timeLineTasksItem.endDate))}',
+                                              '${functions.convertToLocalTime(timeLineTasksItem.startDate)} - ${functions.convertToLocalTime(timeLineTasksItem.endDate)}',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
