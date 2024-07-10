@@ -202,7 +202,7 @@ Future updateTask(
       SnackBar(
         content: Text(
           getJsonField(
-            (newTaskApiResult?.jsonBody ?? ''),
+            (updateTaskApiResult.jsonBody ?? ''),
             r'''$.message''',
           ).toString().toString(),
           style: TextStyle(
