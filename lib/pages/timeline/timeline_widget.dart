@@ -47,6 +47,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
             .cast<TimelineModelStruct>();
         setState(() {});
         _model.isDataFound = false;
+        _model.isLoading = false;
         setState(() {});
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
