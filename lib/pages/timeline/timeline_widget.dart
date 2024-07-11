@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'timeline_model.dart';
 export 'timeline_model.dart';
@@ -437,14 +438,12 @@ class _TimelineWidgetState extends State<TimelineWidget> {
               } else {
                 return Align(
                   alignment: const AlignmentDirectional(0.0, 0.0),
-                  child: Text(
-                    'No Data Found',
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
-                          fontSize: 18.0,
-                          letterSpacing: 0.0,
-                          fontWeight: FontWeight.w600,
-                        ),
+                  child: Lottie.asset(
+                    'assets/lottie_animations/Animation_-_1718873537938.json',
+                    width: 150.0,
+                    height: 130.0,
+                    fit: BoxFit.cover,
+                    animate: true,
                   ),
                 );
               }
