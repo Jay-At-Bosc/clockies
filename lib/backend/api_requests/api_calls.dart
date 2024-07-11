@@ -628,6 +628,43 @@ class TimelineFetchManualLogsAPICall {
       ) as List?;
 }
 
+class FetchTimelineAPICall {
+  static Future<ApiCallResponse> call({
+    String? startTime = '2024-07-11T00:00:00.567Z',
+    String? stopTime = '2024-07-11T23:59:59.567Z',
+    String? authToken =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjE5LCJ1c2VyTmFtZSI6ImpheSB2ZWthcml5YSIsImVtYWlsIjoiamF5LnZla2FyaXlhQGJvc2N0ZWNobGFicy5jb20iLCJ1c2VyVGltZXpvbmUiOiJBc2lhL0NhbGN1dHRhIiwic3RhdHVzIjoiYWN0aXZlIiwidXNlclJvbGVJZCI6MSwiY3JlYXRlZEF0IjoiMjAyNC0wNi0yNVQxMDozMzozMi4wMDBaIiwidXBkYXRlZEF0IjoiMjAyNC0wNy0xMFQwOTozNDoyMC4wMDBaIiwiY29tcGFueUlkIjoxNywicGVybWlzc2lvbnMiOlsiQ09OVEVOVF9EQVNIQk9BUkQiLCJSVU5fVElNRVRSQUNLRVIiLCJFRElUX1RJTUVMSU5FIiwiREVMRVRFX1RJTUVMSU5FIiwiQ1JFQVRFX1JFUE9SVCIsIlJFQURfUkVQT1JUIiwiQ1JFQVRFX1BST0pFQ1QiLCJFRElUX1BST0pFQ1QiLCJSRUFEX1BST0pFQ1QiLCJERUxFVEVfUFJPSkVDVCIsIkNSRUFURV9UQVNLIiwiUkVBRF9UQVNLIiwiRURJVF9UQVNLIiwiREVMRVRFX1RBU0siLCJDUkVBVEVfQ0xJRU5UIiwiUkVBRF9DTElFTlQiLCJFRElUX0NMSUVOVCIsIkRFTEVURV9DTElFTlQiLCJDUkVBVEVfVVNFUiIsIlJFQURfVVNFUiIsIkVESVRfVVNFUiIsIkRFTEVURV9VU0VSIiwiQ1JFQVRFX1RFQU0iLCJSRUFEX1RFQU0iLCJFRElUX1RFQU0iLCJERUxFVEVfVEVBTSIsIkNSRUFURV9QUk9KRUNUX01FTUJFUiIsIlJFQURfUFJPSkVDVF9NRU1CRVIiLCJFRElUX1BST0pFQ1RfTUVNQkVSIiwiREVMRVRFX1BST0pFQ1RfTUVNQkVSIiwiUkVBRF9BQ0NPVU5UIl0sImlhdCI6MTcyMDY4MzAyOSwiZXhwIjoxNzIxOTc5MDI5fQ._b1aWfHZswGcOlFbOsiTT-WWv5GVEh5gl3aErGXhoww',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Fetch Timeline API',
+      apiUrl: 'http://3.144.249.140:5000/api/timeline',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': '$authToken',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static List? responseTimelineTask(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+        true,
+      ) as List?;
+  static String? responseMessage(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

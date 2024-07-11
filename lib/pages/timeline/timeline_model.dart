@@ -7,13 +7,14 @@ import 'package:flutter/material.dart';
 class TimelineModel extends FlutterFlowModel<TimelineWidget> {
   ///  Local state fields for this page.
 
-  List<TaskModelStruct> taskList = [];
-  void addToTaskList(TaskModelStruct item) => taskList.add(item);
-  void removeFromTaskList(TaskModelStruct item) => taskList.remove(item);
+  List<TimelineModelStruct> taskList = [];
+  void addToTaskList(TimelineModelStruct item) => taskList.add(item);
+  void removeFromTaskList(TimelineModelStruct item) => taskList.remove(item);
   void removeAtIndexFromTaskList(int index) => taskList.removeAt(index);
-  void insertAtIndexInTaskList(int index, TaskModelStruct item) =>
+  void insertAtIndexInTaskList(int index, TimelineModelStruct item) =>
       taskList.insert(index, item);
-  void updateTaskListAtIndex(int index, Function(TaskModelStruct) updateFn) =>
+  void updateTaskListAtIndex(
+          int index, Function(TimelineModelStruct) updateFn) =>
       taskList[index] = updateFn(taskList[index]);
 
   bool isLoading = true;
@@ -23,8 +24,8 @@ class TimelineModel extends FlutterFlowModel<TimelineWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Stores action output result for [Backend Call - API (Timeline Fetch Manual Logs API)] action in timeline widget.
-  ApiCallResponse? onPageTimeline;
+  // Stores action output result for [Backend Call - API (Fetch Timeline API)] action in timeline widget.
+  ApiCallResponse? onPageTimelineTask;
   DateTime? datePicked;
 
   @override

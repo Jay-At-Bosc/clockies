@@ -57,3 +57,13 @@ String convertToLocalTime(String utcTime) {
   // Return the formatted local time as a string
   return formattedTime;
 }
+
+String startDateFormat(DateTime date) {
+  return DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(date.toUtc());
+}
+
+String endTimeFormat(DateTime date) {
+  DateTime endTime =
+      DateTime(date.year, date.month, date.day, 23, 59, 59, 999, 0);
+  return DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(endTime.toUtc());
+}
