@@ -63,6 +63,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
             backgroundColor: FlutterFlowTheme.of(context).secondary,
           ),
         );
+        return;
       } else {
         _model.isDataFound = false;
         setState(() {});
@@ -80,6 +81,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
             backgroundColor: FlutterFlowTheme.of(context).error,
           ),
         );
+        return;
       }
     });
   }
