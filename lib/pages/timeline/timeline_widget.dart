@@ -28,7 +28,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.isLoading = false;
+      _model.isLoading = true;
       setState(() {});
       _model.onPageTimelineTask = await FetchTimelineAPICall.call(
         startTime: functions.startDateFormat(getCurrentTimestamp),
@@ -46,9 +46,6 @@ class _TimelineWidgetState extends State<TimelineWidget> {
             .toList()
             .cast<TimelineModelStruct>();
         setState(() {});
-        _model.isDataFound = false;
-        _model.isLoading = false;
-        setState(() {});
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
@@ -63,10 +60,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
             backgroundColor: FlutterFlowTheme.of(context).secondary,
           ),
         );
-        return;
       } else {
-        _model.isDataFound = false;
-        setState(() {});
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
@@ -81,8 +75,10 @@ class _TimelineWidgetState extends State<TimelineWidget> {
             backgroundColor: FlutterFlowTheme.of(context).error,
           ),
         );
-        return;
       }
+
+      _model.isLoading = false;
+      setState(() {});
     });
   }
 
