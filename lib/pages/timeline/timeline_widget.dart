@@ -28,7 +28,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.isLoading = true;
+      _model.isLoading = false;
       setState(() {});
       _model.onPageTimelineTask = await FetchTimelineAPICall.call(
         startTime: functions.startDateFormat(getCurrentTimestamp),
@@ -61,6 +61,8 @@ class _TimelineWidgetState extends State<TimelineWidget> {
           ),
         );
       } else {
+        _model.isDataFound = false;
+        setState(() {});
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
@@ -76,9 +78,6 @@ class _TimelineWidgetState extends State<TimelineWidget> {
           ),
         );
       }
-
-      _model.isLoading = false;
-      setState(() {});
     });
   }
 
@@ -136,7 +135,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
           top: true,
           child: Builder(
             builder: (context) {
-              if (!_model.isLoading) {
+              if (_model.isLoading) {
                 return Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
