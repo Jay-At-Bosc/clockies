@@ -59,11 +59,16 @@ String convertToLocalTime(String utcTime) {
 }
 
 String startDateFormat(DateTime date) {
-  return DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(date.toUtc());
+  DateTime startOfDay =
+      DateTime(date.year, date.month, date.day, 0, 0, 0, 0, 0);
+
+  // Format the DateTime to the desired string format
+  return DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(startOfDay);
 }
 
 String endTimeFormat(DateTime date) {
   DateTime endTime =
       DateTime(date.year, date.month, date.day, 23, 59, 59, 999, 0);
-  return DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(endTime.toUtc());
+
+  return DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(endTime);
 }

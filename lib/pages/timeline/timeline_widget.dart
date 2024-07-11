@@ -363,6 +363,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                           children: [
                                             Text(
                                               timeLineTasksItem.tasks.taskName,
+                                              maxLines: 1,
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodyMedium
@@ -378,6 +379,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                             ),
                                             Text(
                                               '${timeLineTasksItem.tasks.projects.clients.clientName} ➔ ${timeLineTasksItem.tasks.projects.projectName}',
+                                              maxLines: 1,
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
