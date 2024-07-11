@@ -30,28 +30,43 @@ class _TimelineWidgetState extends State<TimelineWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.isLoading = true;
       setState(() {});
-      _model.onPageTimeline = await TimelineFetchManualLogsAPICall.call(
+      _model.onPageTimelineTask = await FetchTimelineAPICall.call(
+        startTime: functions.startDateFormat(getCurrentTimestamp),
+        stopTime: functions.endTimeFormat(getCurrentTimestamp),
         authToken: FFAppState().userToken,
       );
 
-      if ((_model.onPageTimeline?.succeeded ?? true)) {
-        _model.taskList = TimelineFetchManualLogsAPICall.timlineData(
-          (_model.onPageTimeline?.jsonBody ?? ''),
+      if ((_model.onPageTimelineTask?.succeeded ?? true)) {
+        _model.taskList = FetchTimelineAPICall.responseTimelineTask(
+          (_model.onPageTimelineTask?.jsonBody ?? ''),
         )!
-            .map((e) => TaskModelStruct.maybeFromMap(e))
+            .map((e) => TimelineModelStruct.maybeFromMap(e))
             .withoutNulls
             .toList()
             .toList()
-            .cast<TaskModelStruct>();
+            .cast<TimelineModelStruct>();
         setState(() {});
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              FetchTimelineAPICall.responseMessage(
+                (_model.onPageTimelineTask?.jsonBody ?? ''),
+              )!,
+              style: TextStyle(
+                color: FlutterFlowTheme.of(context).primaryText,
+              ),
+            ),
+            duration: const Duration(milliseconds: 4000),
+            backgroundColor: FlutterFlowTheme.of(context).secondary,
+          ),
+        );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              getJsonField(
-                (_model.onPageTimeline?.jsonBody ?? ''),
-                r'''$.message''',
-              ).toString().toString(),
+              FetchTimelineAPICall.responseMessage(
+                (_model.onPageTimelineTask?.jsonBody ?? ''),
+              )!,
               style: TextStyle(
                 color: FlutterFlowTheme.of(context).primaryText,
               ),
@@ -288,8 +303,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                           const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                       child: Builder(
                         builder: (context) {
-                          final timeLineTasks =
-                              _model.taskList.toList().take(20).toList();
+                          final timeLineTasks = _model.taskList.toList();
 
                           return ListView.separated(
                             padding: EdgeInsets.zero,
@@ -301,7 +315,6 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                               final timeLineTasksItem =
                                   timeLineTasks[timeLineTasksIndex];
                               return Container(
-                                width: 100.0,
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
@@ -332,7 +345,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .primary,
-                                                    fontSize: 16.0,
+                                                    fontSize: 10.0,
                                                     letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w600,
                                                   ),
@@ -342,74 +355,70 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                             alignment: const AlignmentDirectional(
                                                 -1.0, -1.0),
                                             child: Text(
-                                              '${functions.convertToLocalTime(timeLineTasksItem.startDate)} - ${functions.convertToLocalTime(timeLineTasksItem.endDate)}',
+                                              '${functions.convertToLocalTime(timeLineTasksItem.startTime)} - ${functions.convertToLocalTime(timeLineTasksItem.stopTime)}',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily: 'Inter',
+                                                        fontSize: 10.0,
                                                         letterSpacing: 0.0,
                                                       ),
                                             ),
                                           ),
                                         ],
                                       ),
-                                      Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            timeLineTasksItem.taskName,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Inter',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  fontSize: 16.0,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                          ),
-                                          Text(
-                                            'ClientName ➔ ProjectName',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Inter',
-                                                  letterSpacing: 0.0,
-                                                ),
-                                          ),
-                                        ],
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              timeLineTasksItem.tasks.taskName,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Inter',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    fontSize: 10.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                            ),
+                                            Text(
+                                              '${timeLineTasksItem.tasks.projects.clients.clientName} ➔ ${timeLineTasksItem.tasks.projects.projectName}',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        fontSize: 10.0,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       Align(
                                         alignment:
                                             const AlignmentDirectional(0.0, 0.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Icon(
-                                                  Icons.edit_sharp,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
+                                            Icon(
+                                              Icons.more_vert,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
                                                       .primary,
-                                                  size: 24.0,
-                                                ),
-                                                Icon(
-                                                  Icons.delete,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  size: 24.0,
-                                                ),
-                                              ].divide(const SizedBox(width: 8.0)),
+                                              size: 24.0,
                                             ),
                                           ],
                                         ),
