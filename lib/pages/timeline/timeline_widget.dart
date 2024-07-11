@@ -140,7 +140,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
           top: true,
           child: Builder(
             builder: (context) {
-              if (_model.isLoading) {
+              if (!_model.isLoading) {
                 return Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
