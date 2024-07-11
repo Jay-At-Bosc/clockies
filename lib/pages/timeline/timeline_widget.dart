@@ -47,20 +47,6 @@ class _TimelineWidgetState extends State<TimelineWidget> {
             .toList()
             .cast<TimelineModelStruct>();
         setState(() {});
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              FetchTimelineAPICall.responseMessage(
-                (_model.onPageTimelineTask?.jsonBody ?? ''),
-              )!,
-              style: TextStyle(
-                color: FlutterFlowTheme.of(context).primaryText,
-              ),
-            ),
-            duration: const Duration(milliseconds: 4000),
-            backgroundColor: FlutterFlowTheme.of(context).secondary,
-          ),
-        );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
