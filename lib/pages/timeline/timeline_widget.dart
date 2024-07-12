@@ -516,7 +516,17 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                                         );
                                                       },
                                                     ).then((value) =>
-                                                        setState(() {}));
+                                                        safeSetState(() =>
+                                                            _model.result =
+                                                                value));
+
+                                                    _model.removeFromTaskList(
+                                                        TimelineModelStruct(
+                                                      id: _model.result,
+                                                    ));
+                                                    setState(() {});
+
+                                                    setState(() {});
                                                   },
                                                   child: Icon(
                                                     Icons.more_vert,

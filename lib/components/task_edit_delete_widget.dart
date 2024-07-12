@@ -1,11 +1,18 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'task_edit_delete_model.dart';
 export 'task_edit_delete_model.dart';
 
 class TaskEditDeleteWidget extends StatefulWidget {
-  const TaskEditDeleteWidget({super.key});
+  const TaskEditDeleteWidget({
+    super.key,
+    int? deleteId,
+  }) : deleteId = deleteId ?? 0;
+
+  final int deleteId;
 
   @override
   State<TaskEditDeleteWidget> createState() => _TaskEditDeleteWidgetState();
@@ -35,6 +42,8 @@ class _TaskEditDeleteWidgetState extends State<TaskEditDeleteWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Align(
       alignment: const AlignmentDirectional(0.0, 0.0),
       child: Padding(
@@ -104,37 +113,92 @@ class _TaskEditDeleteWidgetState extends State<TaskEditDeleteWidget> {
                         ),
                       ),
                     ),
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Icon(
-                              Icons.delete_outline_rounded,
-                              color: FlutterFlowTheme.of(context).error,
-                              size: 24.0,
-                            ),
-                            Expanded(
-                              child: Text(
-                                'Delete',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      color: FlutterFlowTheme.of(context).error,
-                                      fontSize: 16.0,
-                                      letterSpacing: 0.0,
-                                    ),
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        _model.deleteResponse =
+                            await DeleteTaskFromTimelineCall.call(
+                          id: widget.deleteId,
+                          authToken: FFAppState().userToken,
+                        );
+
+                        if ((_model.deleteResponse?.succeeded ?? true)) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                DeleteTaskFromTimelineCall.responseMessage(
+                                  (_model.deleteResponse?.jsonBody ?? ''),
+                                )!,
+                                style: TextStyle(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
                               ),
+                              duration: const Duration(milliseconds: 4000),
+                              backgroundColor:
+                                  FlutterFlowTheme.of(context).secondary,
                             ),
-                          ].divide(const SizedBox(width: 8.0)),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                DeleteTaskFromTimelineCall.responseMessage(
+                                  (_model.deleteResponse?.jsonBody ?? ''),
+                                )!,
+                                style: TextStyle(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
+                              ),
+                              duration: const Duration(milliseconds: 4000),
+                              backgroundColor:
+                                  FlutterFlowTheme.of(context).error,
+                            ),
+                          );
+                        }
+
+                        Navigator.pop(context, widget.deleteId);
+
+                        setState(() {});
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              8.0, 0.0, 8.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Icon(
+                                Icons.delete_outline_rounded,
+                                color: FlutterFlowTheme.of(context).error,
+                                size: 24.0,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  'Delete',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        color:
+                                            FlutterFlowTheme.of(context).error,
+                                        fontSize: 16.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ),
+                            ].divide(const SizedBox(width: 8.0)),
+                          ),
                         ),
                       ),
                     ),
