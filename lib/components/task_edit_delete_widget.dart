@@ -46,7 +46,7 @@ class _TaskEditDeleteWidgetState extends State<TaskEditDeleteWidget> {
               minWidth: 100.0,
               minHeight: 60.0,
               maxWidth: 100.0,
-              maxHeight: 60.0,
+              maxHeight: 63.0,
             ),
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).secondaryBackground,
