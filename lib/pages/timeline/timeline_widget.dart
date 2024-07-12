@@ -479,7 +479,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                                       avoidOverflow: false,
                                                       targetAnchor:
                                                           const AlignmentDirectional(
-                                                                  1.0, -1.0)
+                                                                  0.0, 4.0)
                                                               .resolve(
                                                                   Directionality.of(
                                                                       context)),
@@ -507,8 +507,8 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                                                         context)
                                                                     .unfocus(),
                                                             child: const SizedBox(
-                                                              height: 60.0,
-                                                              width: 100.0,
+                                                              height: 80.0,
+                                                              width: 140.0,
                                                               child:
                                                                   TaskEditDeleteWidget(),
                                                             ),
