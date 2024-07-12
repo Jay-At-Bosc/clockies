@@ -4,6 +4,7 @@ import '/components/task_edit_delete_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:lottie/lottie.dart';
@@ -472,21 +473,26 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                                   highlightColor:
                                                       Colors.transparent,
                                                   onTap: () async {
-                                                    await showDialog(
+                                                    await showAlignedDialog(
                                                       context: context,
-                                                      builder: (dialogContext) {
-                                                        return Dialog(
-                                                          elevation: 0,
-                                                          insetPadding:
-                                                              EdgeInsets.zero,
-                                                          backgroundColor:
-                                                              Colors
-                                                                  .transparent,
-                                                          alignment: const AlignmentDirectional(
+                                                      isGlobal: false,
+                                                      avoidOverflow: false,
+                                                      targetAnchor:
+                                                          const AlignmentDirectional(
+                                                                  1.0, -1.0)
+                                                              .resolve(
+                                                                  Directionality.of(
+                                                                      context)),
+                                                      followerAnchor:
+                                                          const AlignmentDirectional(
                                                                   1.0, 0.0)
                                                               .resolve(
                                                                   Directionality.of(
                                                                       context)),
+                                                      builder: (dialogContext) {
+                                                        return Material(
+                                                          color: Colors
+                                                              .transparent,
                                                           child:
                                                               GestureDetector(
                                                             onTap: () => _model
