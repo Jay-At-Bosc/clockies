@@ -29,6 +29,8 @@ class TimelineModel extends FlutterFlowModel<TimelineWidget> {
   // Stores action output result for [Backend Call - API (Fetch Timeline API)] action in timeline widget.
   ApiCallResponse? onPageTimelineTask;
   DateTime? datePicked;
+  // Stores action output result for [Backend Call - API (Fetch Timeline API)] action in Icon widget.
+  ApiCallResponse? customDayResponse;
 
   @override
   void initState(BuildContext context) {}

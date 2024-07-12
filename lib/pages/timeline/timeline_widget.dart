@@ -205,6 +205,45 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                   }
                                   _model.isDatePicked = false;
                                   setState(() {});
+                                  _model.customDayResponse =
+                                      await FetchTimelineAPICall.call();
+
+                                  if ((_model.customDayResponse?.succeeded ??
+                                      true)) {
+                                    _model.taskList = FetchTimelineAPICall
+                                            .responseTimelineTask(
+                                      (_model.customDayResponse?.jsonBody ??
+                                          ''),
+                                    )!
+                                        .map((e) =>
+                                            TimelineModelStruct.maybeFromMap(e))
+                                        .withoutNulls
+                                        .toList()
+                                        .cast<TimelineModelStruct>();
+                                    setState(() {});
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          FetchTimelineAPICall.responseMessage(
+                                            (_model.customDayResponse
+                                                    ?.jsonBody ??
+                                                ''),
+                                          )!,
+                                          style: TextStyle(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                          ),
+                                        ),
+                                        duration: const Duration(milliseconds: 4000),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .secondary,
+                                      ),
+                                    );
+                                  }
+
+                                  setState(() {});
                                 },
                                 child: Icon(
                                   Icons.calendar_today,
