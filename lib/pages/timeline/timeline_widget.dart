@@ -500,14 +500,11 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                                                 : FocusScope.of(
                                                                         context)
                                                                     .unfocus(),
-                                                            child: SizedBox(
-                                                              width: MediaQuery
-                                                                          .sizeOf(
-                                                                              context)
-                                                                      .width *
-                                                                  0.5,
+                                                            child: const SizedBox(
+                                                              height: 60.0,
+                                                              width: 100.0,
                                                               child:
-                                                                  const TaskEditDeleteWidget(),
+                                                                  TaskEditDeleteWidget(),
                                                             ),
                                                           ),
                                                         );
