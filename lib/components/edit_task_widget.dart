@@ -238,7 +238,7 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                                 });
                               }
                               _model.startDate = _model.datePicked1;
-                              setState(() {});
+                              _model.updatePage(() {});
                             },
                             child: Icon(
                               Icons.calendar_today,
@@ -535,6 +535,8 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                           );
                         });
                       }
+                      _model.startDate = _model.datePicked3;
+                      setState(() {});
                     },
                     text: 'Save',
                     options: FFButtonOptions(
