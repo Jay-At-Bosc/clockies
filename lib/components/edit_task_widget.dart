@@ -122,6 +122,7 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                                   fontFamily: 'Inter',
                                   fontSize: 16.0,
                                   letterSpacing: 0.0,
+                                  fontWeight: FontWeight.w600,
                                 ),
                             hintStyle: FlutterFlowTheme.of(context)
                                 .labelMedium
@@ -161,7 +162,7 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Inter',
-                                    fontSize: 18.0,
+                                    fontSize: 14.0,
                                     letterSpacing: 0.0,
                                   ),
                           validator: _model.textControllerValidator
