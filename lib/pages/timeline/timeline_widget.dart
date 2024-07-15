@@ -287,7 +287,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                               ),
                               Expanded(
                                 child: Text(
-                                  _model.isDatePicked
+                                  !_model.isDatePicked
                                       ? dateTimeFormat(
                                           'yMMMd', _model.datePicked)
                                       : dateTimeFormat(
