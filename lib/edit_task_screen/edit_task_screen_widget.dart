@@ -22,9 +22,8 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
     super.initState();
     _model = createModel(context, () => EditTaskScreenModel());
 
-    _model.textController1 ??= TextEditingController(
-        text:
-            '${dateTimeFormat('yMd', _model.startDate)} ${dateTimeFormat('jms', _model.startDate)}');
+    _model.textController1 ??=
+        TextEditingController(text: dateTimeFormat('yMd', _model.startDate));
     _model.textFieldFocusNode1 ??= FocusNode();
 
     _model.textController2 ??=
@@ -168,8 +167,8 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
                                 final datePicked1Date = await showDatePicker(
                                   context: context,
                                   initialDate: getCurrentTimestamp,
-                                  firstDate: getCurrentTimestamp,
-                                  lastDate: DateTime(2050),
+                                  firstDate: DateTime(1900),
+                                  lastDate: getCurrentTimestamp,
                                   builder: (context, child) {
                                     return wrapInMaterialDatePickerTheme(
                                       context,
@@ -205,12 +204,59 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
                                   },
                                 );
 
+                                TimeOfDay? datePicked1Time;
                                 if (datePicked1Date != null) {
+                                  datePicked1Time = await showTimePicker(
+                                    context: context,
+                                    initialTime: TimeOfDay.fromDateTime(
+                                        getCurrentTimestamp),
+                                    builder: (context, child) {
+                                      return wrapInMaterialTimePickerTheme(
+                                        context,
+                                        child!,
+                                        headerBackgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primary,
+                                        headerForegroundColor:
+                                            FlutterFlowTheme.of(context).info,
+                                        headerTextStyle:
+                                            FlutterFlowTheme.of(context)
+                                                .headlineLarge
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  fontSize: 32.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                        pickerBackgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                        pickerForegroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                        selectedDateTimeBackgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primary,
+                                        selectedDateTimeForegroundColor:
+                                            FlutterFlowTheme.of(context).info,
+                                        actionButtonForegroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                        iconSize: 24.0,
+                                      );
+                                    },
+                                  );
+                                }
+
+                                if (datePicked1Date != null &&
+                                    datePicked1Time != null) {
                                   safeSetState(() {
                                     _model.datePicked1 = DateTime(
                                       datePicked1Date.year,
                                       datePicked1Date.month,
                                       datePicked1Date.day,
+                                      datePicked1Time!.hour,
+                                      datePicked1Time.minute,
                                     );
                                   });
                                 }
