@@ -396,7 +396,9 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                               alignment: const AlignmentDirectional(
                                                   -1.0, -1.0),
                                               child: Text(
-                                                '3h 32m',
+                                                functions.calculateTImeDiff(
+                                                    timeLineTasksItem.startTime,
+                                                    timeLineTasksItem.stopTime),
                                                 maxLines: 1,
                                                 style:
                                                     FlutterFlowTheme.of(context)
