@@ -22,6 +22,7 @@ class EditTaskModel extends FlutterFlowModel<EditTaskWidget> {
   TextEditingController? endTimeTextController;
   String? Function(BuildContext, String?)? endTimeTextControllerValidator;
   DateTime? datePicked2;
+  DateTime? datePicked3;
 
   @override
   void initState(BuildContext context) {}
