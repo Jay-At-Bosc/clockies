@@ -12,11 +12,11 @@ class EditTaskModel extends FlutterFlowModel<EditTaskWidget> {
   ///  State fields for stateful widgets in this component.
 
   final formKey = GlobalKey<FormState>();
+  DateTime? datePicked1;
   // State field(s) for startTime widget.
   FocusNode? startTimeFocusNode;
   TextEditingController? startTimeTextController;
   String? Function(BuildContext, String?)? startTimeTextControllerValidator;
-  DateTime? datePicked1;
   // State field(s) for endTime widget.
   FocusNode? endTimeFocusNode;
   TextEditingController? endTimeTextController;
