@@ -210,9 +210,14 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                       .startDateFormat(_model.datePicked!);
                                   _model.endDate = functions
                                       .endTimeFormat(_model.datePicked!);
+                                  _model.isLoading = true;
                                   setState(() {});
                                   _model.customDayResponse =
-                                      await FetchTimelineAPICall.call();
+                                      await FetchTimelineAPICall.call(
+                                    startTime: _model.startDate,
+                                    stopTime: _model.endDate,
+                                    authToken: FFAppState().userToken,
+                                  );
 
                                   if ((_model.customDayResponse?.succeeded ??
                                       true)) {
@@ -227,6 +232,25 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                         .toList()
                                         .cast<TimelineModelStruct>();
                                     setState(() {});
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          FetchTimelineAPICall.responseMessage(
+                                            (_model.customDayResponse
+                                                    ?.jsonBody ??
+                                                ''),
+                                          )!,
+                                          style: TextStyle(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                          ),
+                                        ),
+                                        duration: const Duration(milliseconds: 4000),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .secondary,
+                                      ),
+                                    );
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
@@ -248,6 +272,9 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                       ),
                                     );
                                   }
+
+                                  _model.isLoading = false;
+                                  setState(() {});
 
                                   setState(() {});
                                 },
