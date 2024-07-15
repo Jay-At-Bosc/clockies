@@ -544,7 +544,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                                                   TaskEditDeleteWidget(
                                                                 deleteId:
                                                                     timeLineTasksItem
-                                                                        .taskId,
+                                                                        .id,
                                                               ),
                                                             ),
                                                           ),
