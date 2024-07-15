@@ -96,8 +96,8 @@ String calculateTotalTime(List<TimelineModelStruct> dataList) {
   Duration totalDuration = Duration.zero;
 
   for (var item in dataList) {
-    DateTime startTime = DateTime.parse(item['startTime']);
-    DateTime stopTime = DateTime.parse(item['stopTime']);
+    DateTime startTime = DateTime.parse(item.startTime);
+    DateTime stopTime = DateTime.parse(item.stopTime);
 
     Duration difference = stopTime.difference(startTime);
     totalDuration += difference;
