@@ -305,8 +305,8 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
                                 final datePicked2Date = await showDatePicker(
                                   context: context,
                                   initialDate: getCurrentTimestamp,
-                                  firstDate: getCurrentTimestamp,
-                                  lastDate: DateTime(2050),
+                                  firstDate: DateTime(1900),
+                                  lastDate: getCurrentTimestamp,
                                   builder: (context, child) {
                                     return wrapInMaterialDatePickerTheme(
                                       context,
