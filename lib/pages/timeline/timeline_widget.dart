@@ -34,6 +34,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
       _model.isLoading = true;
       _model.startDate = functions.startDateFormat(getCurrentTimestamp);
       _model.endDate = functions.endTimeFormat(getCurrentTimestamp);
+      _model.selectedDate = getCurrentTimestamp;
       setState(() {});
       _model.onPageTimelineTask = await FetchTimelineAPICall.call(
         startTime: _model.startDate,
@@ -210,7 +211,8 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                       .startDateFormat(_model.datePicked!);
                                   _model.endDate = functions
                                       .endTimeFormat(_model.datePicked!);
-                                  _model.isDatePicked = false;
+                                  _model.isDatePicked = true;
+                                  _model.selectedDate = _model.datePicked;
                                   setState(() {});
                                   _model.customDayResponse =
                                       await FetchTimelineAPICall.call(
@@ -287,11 +289,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                               ),
                               Expanded(
                                 child: Text(
-                                  _model.isDatePicked
-                                      ? dateTimeFormat(
-                                          'yMMMd', _model.datePicked)
-                                      : dateTimeFormat(
-                                          'yMMMd', getCurrentTimestamp),
+                                  dateTimeFormat('yMMMd', _model.selectedDate),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
