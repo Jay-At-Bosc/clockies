@@ -26,9 +26,8 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
     super.initState();
     _model = createModel(context, () => EditTaskModel());
 
-    _model.textController1 ??= TextEditingController(
-        text:
-            '${dateTimeFormat('yMd', _model.startDate)} ${dateTimeFormat('jms', _model.startDate)}vsgvas');
+    _model.textController1 ??=
+        TextEditingController(text: dateTimeFormat('yMd', _model.startDate));
     _model.textFieldFocusNode1 ??= FocusNode();
 
     _model.textController2 ??= TextEditingController(
@@ -147,8 +146,8 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                               final datePicked1Date = await showDatePicker(
                                 context: context,
                                 initialDate: getCurrentTimestamp,
-                                firstDate: getCurrentTimestamp,
-                                lastDate: DateTime(2050),
+                                firstDate: DateTime(1900),
+                                lastDate: getCurrentTimestamp,
                                 builder: (context, child) {
                                   return wrapInMaterialDatePickerTheme(
                                     context,
