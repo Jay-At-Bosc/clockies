@@ -14,6 +14,10 @@ class EditTaskScreenModel extends FlutterFlowModel<EditTaskScreenWidget> {
   final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   DateTime? datePicked1;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode;
+  TextEditingController? textController;
+  String? Function(BuildContext, String?)? textControllerValidator;
   DateTime? datePicked2;
   DateTime? datePicked3;
 
@@ -23,5 +27,7 @@ class EditTaskScreenModel extends FlutterFlowModel<EditTaskScreenWidget> {
   @override
   void dispose() {
     unfocusNode.dispose();
+    textFieldFocusNode?.dispose();
+    textController?.dispose();
   }
 }
