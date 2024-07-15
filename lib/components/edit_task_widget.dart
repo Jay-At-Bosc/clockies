@@ -321,7 +321,7 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                       readOnly: true,
                       obscureText: false,
                       decoration: InputDecoration(
-                        labelText: 'From',
+                        labelText: 'To',
                         labelStyle:
                             FlutterFlowTheme.of(context).bodyMedium.override(
                                   fontFamily: 'Inter',
@@ -387,8 +387,94 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      final datePicked3Date = await showDatePicker(
+                        context: context,
+                        initialDate: getCurrentTimestamp,
+                        firstDate: DateTime(1900),
+                        lastDate: getCurrentTimestamp,
+                        builder: (context, child) {
+                          return wrapInMaterialDatePickerTheme(
+                            context,
+                            child!,
+                            headerBackgroundColor:
+                                FlutterFlowTheme.of(context).primary,
+                            headerForegroundColor:
+                                FlutterFlowTheme.of(context).info,
+                            headerTextStyle: FlutterFlowTheme.of(context)
+                                .headlineLarge
+                                .override(
+                                  fontFamily: 'Inter',
+                                  fontSize: 32.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                            pickerBackgroundColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            pickerForegroundColor:
+                                FlutterFlowTheme.of(context).primaryText,
+                            selectedDateTimeBackgroundColor:
+                                FlutterFlowTheme.of(context).primary,
+                            selectedDateTimeForegroundColor:
+                                FlutterFlowTheme.of(context).info,
+                            actionButtonForegroundColor:
+                                FlutterFlowTheme.of(context).primaryText,
+                            iconSize: 24.0,
+                          );
+                        },
+                      );
+
+                      TimeOfDay? datePicked3Time;
+                      if (datePicked3Date != null) {
+                        datePicked3Time = await showTimePicker(
+                          context: context,
+                          initialTime:
+                              TimeOfDay.fromDateTime(getCurrentTimestamp),
+                          builder: (context, child) {
+                            return wrapInMaterialTimePickerTheme(
+                              context,
+                              child!,
+                              headerBackgroundColor:
+                                  FlutterFlowTheme.of(context).primary,
+                              headerForegroundColor:
+                                  FlutterFlowTheme.of(context).info,
+                              headerTextStyle: FlutterFlowTheme.of(context)
+                                  .headlineLarge
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    fontSize: 32.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                              pickerBackgroundColor:
+                                  FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                              pickerForegroundColor:
+                                  FlutterFlowTheme.of(context).primaryText,
+                              selectedDateTimeBackgroundColor:
+                                  FlutterFlowTheme.of(context).primary,
+                              selectedDateTimeForegroundColor:
+                                  FlutterFlowTheme.of(context).info,
+                              actionButtonForegroundColor:
+                                  FlutterFlowTheme.of(context).primaryText,
+                              iconSize: 24.0,
+                            );
+                          },
+                        );
+                      }
+
+                      if (datePicked3Date != null &&
+                          datePicked3Time != null) {
+                        safeSetState(() {
+                          _model.datePicked3 = DateTime(
+                            datePicked3Date.year,
+                            datePicked3Date.month,
+                            datePicked3Date.day,
+                            datePicked3Time!.hour,
+                            datePicked3Time.minute,
+                          );
+                        });
+                      }
                     },
                     text: 'Save',
                     options: FFButtonOptions(
