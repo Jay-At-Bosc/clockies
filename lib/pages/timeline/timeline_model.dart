@@ -27,6 +27,8 @@ class TimelineModel extends FlutterFlowModel<TimelineWidget> {
 
   bool isDatePicked = true;
 
+  DateTime? selectedDate;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
