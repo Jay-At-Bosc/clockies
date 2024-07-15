@@ -12,15 +12,15 @@ class EditTaskModel extends FlutterFlowModel<EditTaskWidget> {
   ///  State fields for stateful widgets in this component.
 
   final formKey = GlobalKey<FormState>();
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode1;
+  TextEditingController? textController1;
+  String? Function(BuildContext, String?)? textController1Validator;
   DateTime? datePicked1;
-  // State field(s) for startTime widget.
-  FocusNode? startTimeFocusNode;
-  TextEditingController? startTimeTextController;
-  String? Function(BuildContext, String?)? startTimeTextControllerValidator;
-  // State field(s) for endTime widget.
-  FocusNode? endTimeFocusNode;
-  TextEditingController? endTimeTextController;
-  String? Function(BuildContext, String?)? endTimeTextControllerValidator;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode2;
+  TextEditingController? textController2;
+  String? Function(BuildContext, String?)? textController2Validator;
   DateTime? datePicked2;
   DateTime? datePicked3;
 
@@ -29,10 +29,10 @@ class EditTaskModel extends FlutterFlowModel<EditTaskWidget> {
 
   @override
   void dispose() {
-    startTimeFocusNode?.dispose();
-    startTimeTextController?.dispose();
+    textFieldFocusNode1?.dispose();
+    textController1?.dispose();
 
-    endTimeFocusNode?.dispose();
-    endTimeTextController?.dispose();
+    textFieldFocusNode2?.dispose();
+    textController2?.dispose();
   }
 }
