@@ -91,3 +91,20 @@ String calculateTImeDiff(
   // Format the result
   return '${hours.toString().padLeft(2, '0')}h ${minutes.toString().padLeft(2, '0')}m';
 }
+
+String calculateTotalTime(List<TimelineModelStruct> dataList) {
+  Duration totalDuration = Duration.zero;
+
+  for (var item in dataList) {
+    DateTime startTime = DateTime.parse(item['startTime']);
+    DateTime stopTime = DateTime.parse(item['stopTime']);
+
+    Duration difference = stopTime.difference(startTime);
+    totalDuration += difference;
+  }
+
+  int totalHours = totalDuration.inHours;
+  int totalMinutes = totalDuration.inMinutes % 60;
+
+  return '${totalHours.toString().padLeft(2, '0')}h ${totalMinutes.toString().padLeft(2, '0')}m';
+}
