@@ -119,12 +119,14 @@ class _TaskEditDeleteWidgetState extends State<TaskEditDeleteWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        var shouldSetState = false;
                         _model.deleteResponse =
                             await DeleteTaskFromTimelineCall.call(
                           id: widget.deleteId,
                           authToken: FFAppState().userToken,
                         );
 
+                        shouldSetState = true;
                         if ((_model.deleteResponse?.succeeded ?? true)) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
@@ -142,6 +144,9 @@ class _TaskEditDeleteWidgetState extends State<TaskEditDeleteWidget> {
                                   FlutterFlowTheme.of(context).secondary,
                             ),
                           );
+                          Navigator.pop(context, true);
+                          if (shouldSetState) setState(() {});
+                          return;
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
@@ -159,11 +164,12 @@ class _TaskEditDeleteWidgetState extends State<TaskEditDeleteWidget> {
                                   FlutterFlowTheme.of(context).error,
                             ),
                           );
+                          Navigator.pop(context, false);
+                          if (shouldSetState) setState(() {});
+                          return;
                         }
 
-                        Navigator.pop(context, widget.deleteId);
-
-                        setState(() {});
+                        if (shouldSetState) setState(() {});
                       },
                       child: Container(
                         width: double.infinity,

@@ -32,10 +32,12 @@ class _TimelineWidgetState extends State<TimelineWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.isLoading = true;
+      _model.startDate = functions.startDateFormat(getCurrentTimestamp);
+      _model.endDate = functions.endTimeFormat(getCurrentTimestamp);
       setState(() {});
       _model.onPageTimelineTask = await FetchTimelineAPICall.call(
-        startTime: functions.startDateFormat(getCurrentTimestamp),
-        stopTime: functions.endTimeFormat(getCurrentTimestamp),
+        startTime: _model.startDate,
+        stopTime: _model.endDate,
         authToken: FFAppState().userToken,
       );
 
@@ -204,7 +206,10 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                       );
                                     });
                                   }
-                                  _model.isDatePicked = false;
+                                  _model.startDate = functions
+                                      .startDateFormat(_model.datePicked!);
+                                  _model.endDate = functions
+                                      .endTimeFormat(_model.datePicked!);
                                   setState(() {});
                                   _model.customDayResponse =
                                       await FetchTimelineAPICall.call();
@@ -257,9 +262,9 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                 child: Text(
                                   _model.isDatePicked
                                       ? dateTimeFormat(
-                                          'd/M/y', getCurrentTimestamp)
+                                          'yMMMd', _model.datePicked)
                                       : dateTimeFormat(
-                                          'yMd', _model.datePicked),
+                                          'yMMMd', getCurrentTimestamp),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -473,6 +478,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                                   highlightColor:
                                                       Colors.transparent,
                                                   onTap: () async {
+                                                    var shouldSetState = false;
                                                     await showAlignedDialog(
                                                       context: context,
                                                       isGlobal: false,
@@ -506,27 +512,106 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                                                 : FocusScope.of(
                                                                         context)
                                                                     .unfocus(),
-                                                            child: const SizedBox(
+                                                            child: SizedBox(
                                                               height: 80.0,
                                                               width: 140.0,
                                                               child:
-                                                                  TaskEditDeleteWidget(),
+                                                                  TaskEditDeleteWidget(
+                                                                deleteId:
+                                                                    timeLineTasksItem
+                                                                        .taskId,
+                                                              ),
                                                             ),
                                                           ),
                                                         );
                                                       },
                                                     ).then((value) =>
-                                                        safeSetState(() =>
-                                                            _model.result =
-                                                                value));
+                                                        safeSetState(() => _model
+                                                                .dialogueResult =
+                                                            value));
 
-                                                    _model.removeFromTaskList(
-                                                        TimelineModelStruct(
-                                                      id: _model.result,
-                                                    ));
-                                                    setState(() {});
+                                                    shouldSetState = true;
+                                                    if (_model.dialogueResult ==
+                                                        true) {
+                                                      _model.isLoading = true;
+                                                      setState(() {});
+                                                      _model.updateTimelineTask =
+                                                          await FetchTimelineAPICall
+                                                              .call(
+                                                        startTime:
+                                                            _model.startDate,
+                                                        stopTime:
+                                                            _model.endDate,
+                                                        authToken: FFAppState()
+                                                            .userToken,
+                                                      );
 
-                                                    setState(() {});
+                                                      shouldSetState = true;
+                                                      if ((_model
+                                                              .onPageTimelineTask
+                                                              ?.succeeded ??
+                                                          true)) {
+                                                        _model
+                                                            .taskList = FetchTimelineAPICall
+                                                                .responseTimelineTask(
+                                                          (_model.updateTimelineTask
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                        )!
+                                                            .map((e) =>
+                                                                TimelineModelStruct
+                                                                    .maybeFromMap(
+                                                                        e))
+                                                            .withoutNulls
+                                                            .toList()
+                                                            .cast<
+                                                                TimelineModelStruct>();
+                                                        setState(() {});
+                                                      } else {
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                          SnackBar(
+                                                            content: Text(
+                                                              FetchTimelineAPICall
+                                                                  .responseMessage(
+                                                                (_model.onPageTimelineTask
+                                                                        ?.jsonBody ??
+                                                                    ''),
+                                                              )!,
+                                                              style: TextStyle(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryText,
+                                                              ),
+                                                            ),
+                                                            duration: const Duration(
+                                                                milliseconds:
+                                                                    4000),
+                                                            backgroundColor:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .error,
+                                                          ),
+                                                        );
+                                                      }
+
+                                                      _model.isLoading = false;
+                                                      setState(() {});
+                                                      if (shouldSetState) {
+                                                        setState(() {});
+                                                      }
+                                                      return;
+                                                    } else {
+                                                      if (shouldSetState) {
+                                                        setState(() {});
+                                                      }
+                                                      return;
+                                                    }
+
+                                                    if (shouldSetState) {
+                                                      setState(() {});
+                                                    }
                                                   },
                                                   child: Icon(
                                                     Icons.more_vert,

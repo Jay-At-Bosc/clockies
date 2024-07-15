@@ -19,9 +19,13 @@ class TimelineModel extends FlutterFlowModel<TimelineWidget> {
 
   bool isLoading = true;
 
-  bool isDatePicked = true;
-
   bool isDataFound = true;
+
+  String? startDate;
+
+  String? endDate;
+
+  bool isDatePicked = true;
 
   ///  State fields for stateful widgets in this page.
 
@@ -32,7 +36,9 @@ class TimelineModel extends FlutterFlowModel<TimelineWidget> {
   // Stores action output result for [Backend Call - API (Fetch Timeline API)] action in Icon widget.
   ApiCallResponse? customDayResponse;
   // Stores action output result for [Alert Dialog - Custom Dialog] action in Icon widget.
-  int? result;
+  bool? dialogueResult;
+  // Stores action output result for [Backend Call - API (Fetch Timeline API)] action in Icon widget.
+  ApiCallResponse? updateTimelineTask;
 
   @override
   void initState(BuildContext context) {}
