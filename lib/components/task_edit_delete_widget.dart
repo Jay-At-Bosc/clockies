@@ -1,5 +1,4 @@
 import '/backend/api_requests/api_calls.dart';
-import '/components/edit_task_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -81,65 +80,45 @@ class _TaskEditDeleteWidgetState extends State<TaskEditDeleteWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Builder(
-                      builder: (context) => InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          await showDialog(
-                            context: context,
-                            builder: (dialogContext) {
-                              return Dialog(
-                                elevation: 0,
-                                insetPadding: EdgeInsets.zero,
-                                backgroundColor: Colors.transparent,
-                                alignment: const AlignmentDirectional(0.0, 0.0)
-                                    .resolve(Directionality.of(context)),
-                                child: SizedBox(
-                                  height:
-                                      MediaQuery.sizeOf(context).height * 0.6,
-                                  width: MediaQuery.sizeOf(context).width * 0.5,
-                                  child: const EditTaskWidget(),
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.pushNamed('editTaskScreen');
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              8.0, 0.0, 8.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Icon(
+                                Icons.edit_sharp,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                size: 24.0,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  'Edit',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        fontSize: 16.0,
+                                        letterSpacing: 0.0,
+                                      ),
                                 ),
-                              );
-                            },
-                          ).then((value) => setState(() {}));
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                8.0, 0.0, 8.0, 0.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Icon(
-                                  Icons.edit_sharp,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  size: 24.0,
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    'Edit',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Inter',
-                                          fontSize: 16.0,
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                ),
-                              ].divide(const SizedBox(width: 8.0)),
-                            ),
+                              ),
+                            ].divide(const SizedBox(width: 8.0)),
                           ),
                         ),
                       ),

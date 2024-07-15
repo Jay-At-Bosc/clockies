@@ -14,3 +14,5 @@ export '/pages/add_task_screen/add_task_screen_widget.dart'
     show AddTaskScreenWidget;
 export '/pages/timeline/timeline_widget.dart' show TimelineWidget;
 export '/add_task/add_task_widget.dart' show AddTaskWidget;
+export '/edit_task_screen/edit_task_screen_widget.dart'
+    show EditTaskScreenWidget;
