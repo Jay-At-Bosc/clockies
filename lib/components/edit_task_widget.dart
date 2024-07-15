@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'edit_task_model.dart';
 export 'edit_task_model.dart';
@@ -26,8 +27,9 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
     super.initState();
     _model = createModel(context, () => EditTaskModel());
 
-    _model.textController ??=
-        TextEditingController(text: getCurrentTimestamp.toString());
+    _model.textController ??= TextEditingController(
+        text:
+            '${dateTimeFormat('yMd', getCurrentTimestamp)} ${dateTimeFormat('jms', getCurrentTimestamp)}');
     _model.textFieldFocusNode ??= FocusNode();
   }
 
@@ -48,7 +50,7 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
         borderRadius: BorderRadius.circular(20.0),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -63,75 +65,98 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                     children: [
                       Expanded(
                         flex: 1,
-                        child: Icon(
-                          Icons.calendar_today,
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          size: 24.0,
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            await showModalBottomSheet<bool>(
+                                context: context,
+                                builder: (context) {
+                                  return SizedBox(
+                                    height:
+                                        MediaQuery.of(context).size.height / 3,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: CupertinoDatePicker(
+                                      mode: CupertinoDatePickerMode.dateAndTime,
+                                      minimumDate: DateTime(1900),
+                                      initialDateTime: getCurrentTimestamp,
+                                      maximumDate: DateTime(2050),
+                                      use24hFormat: false,
+                                      onDateTimeChanged: (newDateTime) =>
+                                          safeSetState(() {
+                                        _model.datePicked = newDateTime;
+                                      }),
+                                    ),
+                                  );
+                                });
+                          },
+                          child: Icon(
+                            Icons.calendar_today,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            size: 24.0,
+                          ),
                         ),
                       ),
                       Expanded(
                         flex: 5,
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              8.0, 0.0, 8.0, 0.0),
-                          child: TextFormField(
-                            controller: _model.textController,
-                            focusNode: _model.textFieldFocusNode,
-                            autofocus: true,
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              labelText: 'Hello World',
-                              labelStyle: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Inter',
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                  ),
-                              hintStyle: FlutterFlowTheme.of(context)
-                                  .labelMedium
-                                  .override(
-                                    fontFamily: 'Inter',
-                                    letterSpacing: 0.0,
-                                  ),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).alternate,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              errorBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              focusedErrorBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                            ),
-                            style: FlutterFlowTheme.of(context)
+                        child: TextFormField(
+                          controller: _model.textController,
+                          focusNode: _model.textFieldFocusNode,
+                          autofocus: false,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            labelText: 'Start Time',
+                            labelStyle: FlutterFlowTheme.of(context)
                                 .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  fontSize: 16.0,
+                                  letterSpacing: 0.0,
+                                ),
+                            hintStyle: FlutterFlowTheme.of(context)
+                                .labelMedium
                                 .override(
                                   fontFamily: 'Inter',
                                   letterSpacing: 0.0,
                                 ),
-                            validator: _model.textControllerValidator
-                                .asValidator(context),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primary,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
                           ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
+                          validator: _model.textControllerValidator
+                              .asValidator(context),
                         ),
                       ),
                     ].divide(const SizedBox(width: 10.0)),
