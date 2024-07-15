@@ -210,7 +210,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                       .startDateFormat(_model.datePicked!);
                                   _model.endDate = functions
                                       .endTimeFormat(_model.datePicked!);
-                                  _model.isLoading = true;
+                                  _model.isDatePicked = false;
                                   setState(() {});
                                   _model.customDayResponse =
                                       await FetchTimelineAPICall.call(
@@ -287,7 +287,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                               ),
                               Expanded(
                                 child: Text(
-                                  !_model.isDatePicked
+                                  _model.isDatePicked
                                       ? dateTimeFormat(
                                           'yMMMd', _model.datePicked)
                                       : dateTimeFormat(
