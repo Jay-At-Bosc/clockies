@@ -72,3 +72,22 @@ String endTimeFormat(DateTime date) {
 
   return DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(endTime);
 }
+
+String calculateTImeDiff(
+  String startTime,
+  String stopTime,
+) {
+  // Parse the strings into DateTime objects
+  DateTime startDateTime = DateTime.parse(startTime);
+  DateTime stopDateTime = DateTime.parse(stopTime);
+
+  // Calculate the difference
+  Duration difference = stopDateTime.difference(startDateTime);
+
+  // Extract hours and minutes from the difference
+  int hours = difference.inHours;
+  int minutes = difference.inMinutes % 60;
+
+  // Format the result
+  return '${hours.toString().padLeft(2, '0')}h ${minutes.toString().padLeft(2, '0')}m';
+}
