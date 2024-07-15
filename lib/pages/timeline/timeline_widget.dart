@@ -338,7 +338,8 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                               Align(
                                 alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: Text(
-                                  dateTimeFormat('Hm', getCurrentTimestamp),
+                                  functions.calculateTotalTime(
+                                      _model.taskList.toList()),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
