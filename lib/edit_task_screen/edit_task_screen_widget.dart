@@ -26,9 +26,8 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
             '${dateTimeFormat('yMd', _model.startDate)} ${dateTimeFormat('jms', _model.startDate)}');
     _model.textFieldFocusNode1 ??= FocusNode();
 
-    _model.textController2 ??= TextEditingController(
-        text:
-            '${dateTimeFormat('yMd', _model.endDate)} ${dateTimeFormat('jms', _model.endDate)}');
+    _model.textController2 ??=
+        TextEditingController(text: dateTimeFormat('yMd', _model.endDate));
     _model.textFieldFocusNode2 ??= FocusNode();
   }
 
@@ -98,7 +97,8 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
                             child: TextFormField(
                               controller: _model.textController1,
                               focusNode: _model.textFieldFocusNode1,
-                              autofocus: true,
+                              autofocus: false,
+                              readOnly: true,
                               obscureText: false,
                               decoration: InputDecoration(
                                 labelText: 'From',
@@ -234,7 +234,8 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
                             child: TextFormField(
                               controller: _model.textController2,
                               focusNode: _model.textFieldFocusNode2,
-                              autofocus: true,
+                              autofocus: false,
+                              readOnly: true,
                               obscureText: false,
                               decoration: InputDecoration(
                                 labelText: 'To',
