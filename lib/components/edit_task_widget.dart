@@ -28,7 +28,7 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
 
     _model.textController1 ??= TextEditingController(
         text:
-            '${dateTimeFormat('yMd', _model.startDate)} ${dateTimeFormat('jms', _model.startDate)}');
+            '${dateTimeFormat('yMd', _model.startDate)} ${dateTimeFormat('jms', _model.startDate)}vsgvas');
     _model.textFieldFocusNode1 ??= FocusNode();
 
     _model.textController2 ??= TextEditingController(
@@ -75,7 +75,8 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                           child: TextFormField(
                             controller: _model.textController1,
                             focusNode: _model.textFieldFocusNode1,
-                            autofocus: true,
+                            autofocus: false,
+                            readOnly: true,
                             obscureText: false,
                             decoration: InputDecoration(
                               labelText: 'From',
@@ -261,7 +262,8 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
                           child: TextFormField(
                             controller: _model.textController2,
                             focusNode: _model.textFieldFocusNode2,
-                            autofocus: true,
+                            autofocus: false,
+                            readOnly: true,
                             obscureText: false,
                             decoration: InputDecoration(
                               labelText: 'To',
