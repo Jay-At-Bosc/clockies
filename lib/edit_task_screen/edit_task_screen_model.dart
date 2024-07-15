@@ -1,16 +1,17 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'edit_task_widget.dart' show EditTaskWidget;
+import 'edit_task_screen_widget.dart' show EditTaskScreenWidget;
 import 'package:flutter/material.dart';
 
-class EditTaskModel extends FlutterFlowModel<EditTaskWidget> {
-  ///  Local state fields for this component.
+class EditTaskScreenModel extends FlutterFlowModel<EditTaskScreenWidget> {
+  ///  Local state fields for this page.
 
   DateTime? startDate;
 
   DateTime? endDate;
 
-  ///  State fields for stateful widgets in this component.
+  ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode1;
@@ -22,13 +23,13 @@ class EditTaskModel extends FlutterFlowModel<EditTaskWidget> {
   TextEditingController? textController2;
   String? Function(BuildContext, String?)? textController2Validator;
   DateTime? datePicked2;
-  DateTime? datePicked3;
 
   @override
   void initState(BuildContext context) {}
 
   @override
   void dispose() {
+    unfocusNode.dispose();
     textFieldFocusNode1?.dispose();
     textController1?.dispose();
 

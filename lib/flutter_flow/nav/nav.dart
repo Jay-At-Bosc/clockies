@@ -167,6 +167,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               structBuilder: TaskModelStruct.fromSerializableMap,
             ),
           ),
+        ),
+        FFRoute(
+          name: 'editTaskScreen',
+          path: '/editTaskScreen',
+          builder: (context, params) => const EditTaskScreenWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
