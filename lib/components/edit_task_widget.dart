@@ -26,10 +26,14 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
     super.initState();
     _model = createModel(context, () => EditTaskModel());
 
-    _model.textController1 ??= TextEditingController();
+    _model.textController1 ??= TextEditingController(
+        text:
+            '${dateTimeFormat('yMd', _model.startDate)} ${dateTimeFormat('jms', _model.startDate)}');
     _model.textFieldFocusNode1 ??= FocusNode();
 
-    _model.textController2 ??= TextEditingController();
+    _model.textController2 ??= TextEditingController(
+        text:
+            '${dateTimeFormat('yMd', _model.endDate)} ${dateTimeFormat('jms', _model.endDate)}');
     _model.textFieldFocusNode2 ??= FocusNode();
   }
 
