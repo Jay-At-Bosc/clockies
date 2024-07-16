@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'edit_task_screen_model.dart';
 export 'edit_task_screen_model.dart';
@@ -28,7 +29,8 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
     _model.textController2 ??= TextEditingController(text: ' ');
     _model.textFieldFocusNode2 ??= FocusNode();
 
-    _model.textController3 ??= TextEditingController();
+    _model.textController3 ??= TextEditingController(
+        text: functions.calculateDuration(_model.startDate!, _model.endDate!));
     _model.textFieldFocusNode3 ??= FocusNode();
 
     _model.textController4 ??= TextEditingController(text: ' ');
@@ -275,14 +277,8 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
                                         offset: _model
                                             .textController1!.text.length);
                               });
-                              setState(() {
-                                _model.textController4?.text =
-                                    _model.datePicked2!.toString();
-                                _model.textController4?.selection =
-                                    TextSelection.collapsed(
-                                        offset: _model
-                                            .textController4!.text.length);
-                              });
+                              _model.startDate = _model.datePicked1;
+                              setState(() {});
                             },
                             child: Icon(
                               Icons.calendar_today,
@@ -466,14 +462,8 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
                                         offset: _model
                                             .textController2!.text.length);
                               });
-                              setState(() {
-                                _model.textController3?.text =
-                                    _model.datePicked1!.toString();
-                                _model.textController3?.selection =
-                                    TextSelection.collapsed(
-                                        offset: _model
-                                            .textController3!.text.length);
-                              });
+                              _model.endDate = _model.datePicked2;
+                              setState(() {});
                             },
                             child: Icon(
                               Icons.calendar_today,
