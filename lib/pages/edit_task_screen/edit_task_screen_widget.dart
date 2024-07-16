@@ -28,8 +28,7 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
     _model.textController2 ??= TextEditingController(text: ' ');
     _model.textFieldFocusNode2 ??= FocusNode();
 
-    _model.textController3 ??=
-        TextEditingController(text: _model.datePicked1?.toString());
+    _model.textController3 ??= TextEditingController();
     _model.textFieldFocusNode3 ??= FocusNode();
 
     _model.textController4 ??= TextEditingController(text: ' ');
@@ -276,8 +275,14 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
                                         offset: _model
                                             .textController1!.text.length);
                               });
-
-                              setState(() {});
+                              setState(() {
+                                _model.textController4?.text =
+                                    _model.datePicked2!.toString();
+                                _model.textController4?.selection =
+                                    TextSelection.collapsed(
+                                        offset: _model
+                                            .textController4!.text.length);
+                              });
                             },
                             child: Icon(
                               Icons.calendar_today,
@@ -461,8 +466,14 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
                                         offset: _model
                                             .textController2!.text.length);
                               });
-
-                              setState(() {});
+                              setState(() {
+                                _model.textController3?.text =
+                                    _model.datePicked1!.toString();
+                                _model.textController3?.selection =
+                                    TextSelection.collapsed(
+                                        offset: _model
+                                            .textController3!.text.length);
+                              });
                             },
                             child: Icon(
                               Icons.calendar_today,
