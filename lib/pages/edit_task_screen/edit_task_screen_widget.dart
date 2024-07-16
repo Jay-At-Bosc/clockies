@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'edit_task_screen_model.dart';
 export 'edit_task_screen_model.dart';
@@ -29,10 +28,8 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
     _model.textController2 ??= TextEditingController(text: ' ');
     _model.textFieldFocusNode2 ??= FocusNode();
 
-    _model.textController3 ??= TextEditingController(
-        text: functions.calculateDuration(
-            '${dateTimeFormat('yMd', _model.datePicked1)} ${dateTimeFormat('jms', _model.datePicked1)}',
-            '${dateTimeFormat('yMd', _model.datePicked2)} ${dateTimeFormat('jms', _model.datePicked2)}'));
+    _model.textController3 ??=
+        TextEditingController(text: _model.datePicked1?.toString());
     _model.textFieldFocusNode3 ??= FocusNode();
 
     _model.textController4 ??= TextEditingController(text: ' ');
@@ -279,6 +276,8 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
                                         offset: _model
                                             .textController1!.text.length);
                               });
+
+                              setState(() {});
                             },
                             child: Icon(
                               Icons.calendar_today,
@@ -462,6 +461,8 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
                                         offset: _model
                                             .textController2!.text.length);
                               });
+
+                              setState(() {});
                             },
                             child: Icon(
                               Icons.calendar_today,
