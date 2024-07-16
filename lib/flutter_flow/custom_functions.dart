@@ -120,3 +120,9 @@ String calculateDuration(
 
   return '${hours.toString().padLeft(2, '0')}h ${minutes.toString().padLeft(2, '0')}m';
 }
+
+DateTime convertUtcToLocal(String utcTime) {
+  DateTime utcDateTime = DateTime.parse(utcTime);
+  DateTime localDateTime = utcDateTime.toLocal();
+  return localDateTime;
+}

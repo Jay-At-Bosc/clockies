@@ -548,6 +548,25 @@ class _TimelineWidgetState extends State<TimelineWidget> {
                                                                 deleteId:
                                                                     timeLineTasksItem
                                                                         .id,
+                                                                projectName:
+                                                                    timeLineTasksItem
+                                                                        .tasks
+                                                                        .projects
+                                                                        .projectName,
+                                                                employeeName:
+                                                                    FFAppState()
+                                                                        .user
+                                                                        .userName,
+                                                                startTime:
+                                                                    timeLineTasksItem
+                                                                        .startTime,
+                                                                stopTime:
+                                                                    timeLineTasksItem
+                                                                        .stopTime,
+                                                                taskName:
+                                                                    timeLineTasksItem
+                                                                        .tasks
+                                                                        .taskName,
                                                               ),
                                                             ),
                                                           ),

@@ -171,7 +171,28 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'editTaskScreen',
           path: '/editTaskScreen',
-          builder: (context, params) => const EditTaskScreenWidget(),
+          builder: (context, params) => EditTaskScreenWidget(
+            startTime: params.getParam(
+              'startTime',
+              ParamType.DateTime,
+            ),
+            stopTime: params.getParam(
+              'stopTime',
+              ParamType.DateTime,
+            ),
+            employeeName: params.getParam(
+              'employeeName',
+              ParamType.String,
+            ),
+            projectName: params.getParam(
+              'projectName',
+              ParamType.String,
+            ),
+            taskName: params.getParam(
+              'taskName',
+              ParamType.String,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

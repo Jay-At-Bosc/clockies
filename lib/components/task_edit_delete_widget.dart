@@ -1,6 +1,7 @@
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'task_edit_delete_model.dart';
@@ -10,9 +11,19 @@ class TaskEditDeleteWidget extends StatefulWidget {
   const TaskEditDeleteWidget({
     super.key,
     int? deleteId,
+    required this.projectName,
+    required this.employeeName,
+    required this.startTime,
+    required this.stopTime,
+    required this.taskName,
   }) : deleteId = deleteId ?? 0;
 
   final int deleteId;
+  final String? projectName;
+  final String? employeeName;
+  final String? startTime;
+  final String? stopTime;
+  final String? taskName;
 
   @override
   State<TaskEditDeleteWidget> createState() => _TaskEditDeleteWidgetState();
@@ -86,7 +97,31 @@ class _TaskEditDeleteWidgetState extends State<TaskEditDeleteWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        context.pushNamed('editTaskScreen');
+                        context.pushNamed(
+                          'editTaskScreen',
+                          queryParameters: {
+                            'startTime': serializeParam(
+                              functions.convertUtcToLocal(widget.startTime!),
+                              ParamType.DateTime,
+                            ),
+                            'stopTime': serializeParam(
+                              functions.convertUtcToLocal(widget.stopTime!),
+                              ParamType.DateTime,
+                            ),
+                            'employeeName': serializeParam(
+                              widget.employeeName,
+                              ParamType.String,
+                            ),
+                            'projectName': serializeParam(
+                              widget.projectName,
+                              ParamType.String,
+                            ),
+                            'taskName': serializeParam(
+                              widget.taskName,
+                              ParamType.String,
+                            ),
+                          }.withoutNulls,
+                        );
                       },
                       child: Container(
                         width: double.infinity,
