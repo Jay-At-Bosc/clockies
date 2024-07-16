@@ -30,7 +30,8 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
     _model.textFieldFocusNode2 ??= FocusNode();
 
     _model.textController3 ??= TextEditingController(
-        text: functions.calculateDuration(_model.startDate!, _model.endDate!));
+        text: functions.calculateDuration(_model.startDate ?? DateTime.now(),
+            _model.endDate ?? DateTime.now()));
     _model.textFieldFocusNode3 ??= FocusNode();
 
     _model.textController4 ??= TextEditingController(text: ' ');
@@ -728,10 +729,10 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
                     options: FFButtonOptions(
                       width: double.infinity,
                       height: 40.0,
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                      iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          24.0, 0.0, 24.0, 0.0),
+                      iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
