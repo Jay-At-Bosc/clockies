@@ -7,9 +7,14 @@ import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'index.dart';
+import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   GoRouter.optionURLReflectsImperativeAPIs = true;
   usePathUrlStrategy();
 
