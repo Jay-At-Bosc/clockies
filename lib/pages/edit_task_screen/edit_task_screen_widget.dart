@@ -31,7 +31,8 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
 
     _model.textController3 ??= TextEditingController(
         text: functions.calculateDuration(
-            _model.textController1.text, _model.textController2.text));
+            '${dateTimeFormat('yMd', _model.datePicked1)} ${dateTimeFormat('jms', _model.datePicked1)}',
+            '${dateTimeFormat('yMd', _model.datePicked2)} ${dateTimeFormat('jms', _model.datePicked2)}'));
     _model.textFieldFocusNode3 ??= FocusNode();
 
     _model.textController4 ??= TextEditingController(text: ' ');
