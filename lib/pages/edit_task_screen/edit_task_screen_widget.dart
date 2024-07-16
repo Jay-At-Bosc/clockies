@@ -279,6 +279,15 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
                               });
                               _model.startDate = _model.datePicked1;
                               setState(() {});
+                              setState(() {
+                                _model.textController3?.text =
+                                    functions.calculateDuration(
+                                        _model.startDate!, _model.endDate!);
+                                _model.textController3?.selection =
+                                    TextSelection.collapsed(
+                                        offset: _model
+                                            .textController3!.text.length);
+                              });
                             },
                             child: Icon(
                               Icons.calendar_today,
@@ -464,6 +473,15 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
                               });
                               _model.endDate = _model.datePicked2;
                               setState(() {});
+                              setState(() {
+                                _model.textController3?.text =
+                                    functions.calculateDuration(
+                                        _model.startDate!, _model.endDate!);
+                                _model.textController3?.selection =
+                                    TextSelection.collapsed(
+                                        offset: _model
+                                            .textController3!.text.length);
+                              });
                             },
                             child: Icon(
                               Icons.calendar_today,
