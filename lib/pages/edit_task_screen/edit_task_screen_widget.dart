@@ -3,11 +3,25 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'edit_task_screen_model.dart';
 export 'edit_task_screen_model.dart';
 
 class EditTaskScreenWidget extends StatefulWidget {
-  const EditTaskScreenWidget({super.key});
+  const EditTaskScreenWidget({
+    super.key,
+    required this.startTime,
+    required this.stopTime,
+    required this.employeeName,
+    required this.projectName,
+    required this.taskName,
+  });
+
+  final DateTime? startTime;
+  final DateTime? stopTime;
+  final String? employeeName;
+  final String? projectName;
+  final String? taskName;
 
   @override
   State<EditTaskScreenWidget> createState() => _EditTaskScreenWidgetState();
@@ -23,10 +37,33 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
     super.initState();
     _model = createModel(context, () => EditTaskScreenModel());
 
-    _model.textController1 ??= TextEditingController(text: ' ');
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.startDate = widget.startTime;
+      _model.endDate = widget.stopTime;
+      setState(() {});
+      setState(() {
+        _model.textController1?.text =
+            '${dateTimeFormat('yMd', _model.startDate)} ${dateTimeFormat('jms', _model.startDate)}';
+        _model.textController1?.selection = TextSelection.collapsed(
+            offset: _model.textController1!.text.length);
+      });
+      setState(() {
+        _model.textController2?.text =
+            '${dateTimeFormat('yMd', _model.endDate)} ${dateTimeFormat('jms', _model.endDate)}';
+        _model.textController2?.selection = TextSelection.collapsed(
+            offset: _model.textController2!.text.length);
+      });
+    });
+
+    _model.textController1 ??= TextEditingController(
+        text:
+            '${dateTimeFormat('yMd', widget.startTime)} ${dateTimeFormat('jms', widget.stopTime)}');
     _model.textFieldFocusNode1 ??= FocusNode();
 
-    _model.textController2 ??= TextEditingController(text: ' ');
+    _model.textController2 ??= TextEditingController(
+        text:
+            '${dateTimeFormat('yMd', widget.stopTime)} ${dateTimeFormat('jms', widget.stopTime)}');
     _model.textFieldFocusNode2 ??= FocusNode();
 
     _model.textController3 ??= TextEditingController(
@@ -34,13 +71,14 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
             _model.endDate ?? DateTime.now()));
     _model.textFieldFocusNode3 ??= FocusNode();
 
-    _model.textController4 ??= TextEditingController(text: ' ');
+    _model.textController4 ??=
+        TextEditingController(text: widget.employeeName);
     _model.textFieldFocusNode4 ??= FocusNode();
 
-    _model.textController5 ??= TextEditingController(text: ' ');
+    _model.textController5 ??= TextEditingController(text: widget.projectName);
     _model.textFieldFocusNode5 ??= FocusNode();
 
-    _model.textController6 ??= TextEditingController(text: ' ');
+    _model.textController6 ??= TextEditingController(text: widget.taskName);
     _model.textFieldFocusNode6 ??= FocusNode();
   }
 
