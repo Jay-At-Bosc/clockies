@@ -110,15 +110,10 @@ String calculateTotalTime(List<TimelineModelStruct> dataList) {
 }
 
 String calculateDuration(
-  String dateTime1,
-  String dateTime2,
+  DateTime dateTime1,
+  DateTime dateTime2,
 ) {
-  DateFormat format = DateFormat("MM/dd/yyyy hh:mm:ss a");
-
-  DateTime dt1 = format.parse(dateTime1);
-  DateTime dt2 = format.parse(dateTime2);
-
-  Duration difference = dt2.difference(dt1);
+  Duration difference = dateTime2.difference(dateTime1);
 
   int hours = difference.inHours;
   int minutes = difference.inMinutes.remainder(60);
