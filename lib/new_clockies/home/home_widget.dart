@@ -106,7 +106,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                           children: [
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 4.0),
+                                  0.0, 0.0, 0.0, 18.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
@@ -124,16 +124,67 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 ],
                               ),
                             ),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 12.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Container(
+                                    width: 36.0,
+                                    height: 36.0,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .pinkColor,
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    child: Icon(
+                                      Icons.menu_sharp,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      size: 24.0,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Project Name',
+                                          style: FlutterFlowTheme.of(context)
+                                              .labelMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
+                                        Text(
+                                          '1 Member - My Company',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyLarge
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
+                                      ].divide(const SizedBox(height: 4.0)),
+                                    ),
+                                  ),
+                                ].divide(const SizedBox(width: 8.0)),
+                              ),
+                            ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Container(
-                                  width: 48.0,
-                                  height: 48.0,
+                                  width: 36.0,
+                                  height: 36.0,
                                   decoration: BoxDecoration(
                                     color:
                                         FlutterFlowTheme.of(context).pinkColor,
-                                    borderRadius: BorderRadius.circular(12.0),
+                                    borderRadius: BorderRadius.circular(8.0),
                                   ),
                                   child: Icon(
                                     Icons.menu_sharp,
@@ -151,7 +202,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                       Text(
                                         'Project Name',
                                         style: FlutterFlowTheme.of(context)
-                                            .labelLarge
+                                            .labelMedium
                                             .override(
                                               fontFamily: 'Inter',
                                               letterSpacing: 0.0,
@@ -160,13 +211,13 @@ class _HomeWidgetState extends State<HomeWidget> {
                                       Text(
                                         '1 Member - My Company',
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
+                                            .bodyLarge
                                             .override(
                                               fontFamily: 'Inter',
                                               letterSpacing: 0.0,
                                             ),
                                       ),
-                                    ],
+                                    ].divide(const SizedBox(height: 4.0)),
                                   ),
                                 ),
                               ].divide(const SizedBox(width: 8.0)),
