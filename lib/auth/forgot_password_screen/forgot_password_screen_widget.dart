@@ -250,7 +250,7 @@ class _ForgotPasswordScreenWidgetState
                                 ),
                                 duration: const Duration(milliseconds: 3000),
                                 backgroundColor:
-                                    FlutterFlowTheme.of(context).success1,
+                                    FlutterFlowTheme.of(context).borderColor,
                               ),
                             );
                           } else {

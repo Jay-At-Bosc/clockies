@@ -32,7 +32,7 @@ abstract class FlutterFlowTheme {
   late Color error;
   late Color info;
 
-  late Color success1;
+  late Color borderColor;
   late Color warning1;
   late Color error1;
   late Color backgroundColor;
@@ -136,7 +136,7 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color error = const Color(0xFFFF5963);
   late Color info = const Color(0xFFFFFFFF);
 
-  late Color success1 = const Color(0xFF54D62C);
+  late Color borderColor = const Color(0xFFFFD3D3);
   late Color warning1 = const Color(0xFFFFC107);
   late Color error1 = const Color(0xFFFF4842);
   late Color backgroundColor = const Color(0xFFEFF2F6);
@@ -212,9 +212,9 @@ class ThemeTypography extends Typography {
         fontWeight: FontWeight.w600,
         fontSize: 36.0,
       );
-  String get headlineLargeFamily => 'Inter';
-  TextStyle get headlineLarge => GoogleFonts.getFont(
-        'Inter',
+  String get headlineLargeFamily => 'Araboto';
+  TextStyle get headlineLarge => TextStyle(
+        fontFamily: 'Araboto',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 24.0,
@@ -226,9 +226,9 @@ class ThemeTypography extends Typography {
         fontWeight: FontWeight.normal,
         fontSize: 24.0,
       );
-  String get headlineSmallFamily => 'Inter';
-  TextStyle get headlineSmall => GoogleFonts.getFont(
-        'Inter',
+  String get headlineSmallFamily => 'Araboto';
+  TextStyle get headlineSmall => TextStyle(
+        fontFamily: 'Araboto',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 16.0,

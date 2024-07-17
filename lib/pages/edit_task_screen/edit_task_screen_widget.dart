@@ -241,10 +241,11 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
                                         FlutterFlowTheme.of(context)
                                             .headlineLarge
                                             .override(
-                                              fontFamily: 'Inter',
+                                              fontFamily: 'Araboto',
                                               fontSize: 32.0,
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.w600,
+                                              useGoogleFonts: false,
                                             ),
                                     pickerBackgroundColor:
                                         FlutterFlowTheme.of(context)
@@ -282,10 +283,11 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
                                           FlutterFlowTheme.of(context)
                                               .headlineLarge
                                               .override(
-                                                fontFamily: 'Inter',
+                                                fontFamily: 'Araboto',
                                                 fontSize: 32.0,
                                                 letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w600,
+                                                useGoogleFonts: false,
                                               ),
                                       pickerBackgroundColor:
                                           FlutterFlowTheme.of(context)
@@ -435,10 +437,11 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
                                         FlutterFlowTheme.of(context)
                                             .headlineLarge
                                             .override(
-                                              fontFamily: 'Inter',
+                                              fontFamily: 'Araboto',
                                               fontSize: 32.0,
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.w600,
+                                              useGoogleFonts: false,
                                             ),
                                     pickerBackgroundColor:
                                         FlutterFlowTheme.of(context)
@@ -476,10 +479,11 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
                                           FlutterFlowTheme.of(context)
                                               .headlineLarge
                                               .override(
-                                                fontFamily: 'Inter',
+                                                fontFamily: 'Araboto',
                                                 fontSize: 32.0,
                                                 letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w600,
+                                                useGoogleFonts: false,
                                               ),
                                       pickerBackgroundColor:
                                           FlutterFlowTheme.of(context)

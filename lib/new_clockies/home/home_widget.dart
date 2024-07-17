@@ -66,8 +66,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .headlineSmall
                                 .override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Araboto',
                                   letterSpacing: 0.0,
+                                  useGoogleFonts: false,
                                 ),
                           ),
                         ),
@@ -75,53 +76,39 @@ class _HomeWidgetState extends State<HomeWidget> {
                           alignment: const AlignmentDirectional(-1.0, 0.0),
                           child: Text(
                             '${functions.selectGreetings(getCurrentTimestamp)}${FFAppState().user.userName}',
+                            maxLines: 1,
                             style: FlutterFlowTheme.of(context)
                                 .headlineLarge
                                 .override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Araboto',
                                   letterSpacing: 0.0,
+                                  useGoogleFonts: false,
                                 ),
                           ),
                         ),
                       ].divide(const SizedBox(height: 16.0)),
                     ),
-                    Material(
-                      color: Colors.transparent,
-                      elevation: 1.0,
-                      shape: RoundedRectangleBorder(
+                    Container(
+                      width: double.infinity,
+                      height: 299.0,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
                         borderRadius: BorderRadius.circular(24.0),
-                      ),
-                      child: Container(
-                        width: double.infinity,
-                        height: 299.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(24.0),
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            width: 1.0,
-                          ),
+                        border: Border.all(
+                          color: FlutterFlowTheme.of(context).borderColor,
+                          width: 1.0,
                         ),
                       ),
                     ),
-                    Material(
-                      color: Colors.transparent,
-                      elevation: 1.0,
-                      shape: RoundedRectangleBorder(
+                    Container(
+                      width: double.infinity,
+                      height: 299.0,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
                         borderRadius: BorderRadius.circular(24.0),
-                      ),
-                      child: Container(
-                        width: double.infinity,
-                        height: 299.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(24.0),
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            width: 1.0,
-                          ),
+                        border: Border.all(
+                          color: FlutterFlowTheme.of(context).borderColor,
+                          width: 1.0,
                         ),
                       ),
                     ),

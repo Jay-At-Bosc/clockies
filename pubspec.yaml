@@ -112,6 +112,20 @@ flutter:
     - assets/rive_animations/
     - assets/pdfs/
   fonts:
+    - family: 'Araboto'
+      fonts:
+        - asset: assets/fonts/Araboto_Thin_400.ttf
+          weight: 100
+        - asset: assets/fonts/Araboto_Light_400.ttf
+          weight: 300
+        - asset: assets/fonts/Araboto_Normal_400.ttf
+        - asset: assets/fonts/Araboto_Medium_400.ttf
+          weight: 500
+        - asset: assets/fonts/Araboto_Bold_400.ttf
+          weight: 700
+        - asset: assets/fonts/Araboto_Black_400.ttf
+          weight: 900
+
     - family: MyFlutterApp
       fonts:
         - asset: assets/fonts/MyFlutterApp.ttf
