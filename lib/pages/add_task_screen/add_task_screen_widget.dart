@@ -1107,7 +1107,7 @@ class _AddTaskScreenWidgetState extends State<AddTaskScreenWidget> {
                                                                   .headlineLarge
                                                                   .override(
                                                                     fontFamily:
-                                                                        'Araboto',
+                                                                        'Inter',
                                                                     fontSize:
                                                                         32.0,
                                                                     letterSpacing:
@@ -1115,8 +1115,6 @@ class _AddTaskScreenWidgetState extends State<AddTaskScreenWidget> {
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w600,
-                                                                    useGoogleFonts:
-                                                                        false,
                                                                   ),
                                                           pickerBackgroundColor:
                                                               FlutterFlowTheme.of(
@@ -1353,7 +1351,7 @@ class _AddTaskScreenWidgetState extends State<AddTaskScreenWidget> {
                                                                   .headlineLarge
                                                                   .override(
                                                                     fontFamily:
-                                                                        'Araboto',
+                                                                        'Inter',
                                                                     fontSize:
                                                                         32.0,
                                                                     letterSpacing:
@@ -1361,8 +1359,6 @@ class _AddTaskScreenWidgetState extends State<AddTaskScreenWidget> {
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w600,
-                                                                    useGoogleFonts:
-                                                                        false,
                                                                   ),
                                                           pickerBackgroundColor:
                                                               FlutterFlowTheme.of(
