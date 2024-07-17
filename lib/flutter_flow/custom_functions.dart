@@ -156,3 +156,21 @@ String capitalizeFirstWord(String input) {
   // Return an empty string if no valid words are found
   return '';
 }
+
+Color getRandomColor() {
+  // Define a list of colors
+  List<Color> colors = [
+    Colors.red,
+    Colors.green,
+    Colors.blue,
+    Colors.yellow,
+    Colors.orange,
+    Colors.purple,
+  ];
+
+  // Generate a random number between 0 and 5
+  int randomIndex = math.Random().nextInt(6);
+
+  // Return the color corresponding to the random index
+  return colors[randomIndex];
+}
