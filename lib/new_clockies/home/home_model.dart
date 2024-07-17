@@ -7,13 +7,14 @@ import 'package:flutter/material.dart';
 class HomeModel extends FlutterFlowModel<HomeWidget> {
   ///  Local state fields for this page.
 
-  List<ProjectsStruct> projects = [];
-  void addToProjects(ProjectsStruct item) => projects.add(item);
-  void removeFromProjects(ProjectsStruct item) => projects.remove(item);
+  List<ProjectModelStruct> projects = [];
+  void addToProjects(ProjectModelStruct item) => projects.add(item);
+  void removeFromProjects(ProjectModelStruct item) => projects.remove(item);
   void removeAtIndexFromProjects(int index) => projects.removeAt(index);
-  void insertAtIndexInProjects(int index, ProjectsStruct item) =>
+  void insertAtIndexInProjects(int index, ProjectModelStruct item) =>
       projects.insert(index, item);
-  void updateProjectsAtIndex(int index, Function(ProjectsStruct) updateFn) =>
+  void updateProjectsAtIndex(
+          int index, Function(ProjectModelStruct) updateFn) =>
       projects[index] = updateFn(projects[index]);
 
   List<int> members = [];
@@ -31,7 +32,9 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
 
   final unfocusNode = FocusNode();
   // Stores action output result for [Backend Call - API (Fetch Assigned Project)] action in Home widget.
-  ApiCallResponse? projectList;
+  ApiCallResponse? project;
+  // Stores action output result for [Backend Call - API (Fetch Assigned Project)] action in Column widget.
+  ApiCallResponse? projectListCopy;
 
   @override
   void initState(BuildContext context) {}
