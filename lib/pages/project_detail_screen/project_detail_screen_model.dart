@@ -160,7 +160,7 @@ class ProjectDetailScreenModel
             ),
           ),
           duration: const Duration(milliseconds: 4000),
-          backgroundColor: FlutterFlowTheme.of(context).success1,
+          backgroundColor: FlutterFlowTheme.of(context).borderColor,
         ),
       );
     } else {

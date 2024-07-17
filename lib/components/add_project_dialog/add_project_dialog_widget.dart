@@ -420,10 +420,11 @@ class _AddProjectDialogWidgetState extends State<AddProjectDialogWidget> {
                                           FlutterFlowTheme.of(context)
                                               .headlineLarge
                                               .override(
-                                                fontFamily: 'Inter',
+                                                fontFamily: 'Araboto',
                                                 fontSize: 32.0,
                                                 letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w600,
+                                                useGoogleFonts: false,
                                               ),
                                       pickerBackgroundColor:
                                           FlutterFlowTheme.of(context)
@@ -587,10 +588,11 @@ class _AddProjectDialogWidgetState extends State<AddProjectDialogWidget> {
                                           FlutterFlowTheme.of(context)
                                               .headlineLarge
                                               .override(
-                                                fontFamily: 'Inter',
+                                                fontFamily: 'Araboto',
                                                 fontSize: 32.0,
                                                 letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w600,
+                                                useGoogleFonts: false,
                                               ),
                                       pickerBackgroundColor:
                                           FlutterFlowTheme.of(context)

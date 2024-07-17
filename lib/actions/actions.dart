@@ -153,7 +153,7 @@ Future createNewTask(
           ),
         ),
         duration: const Duration(milliseconds: 4000),
-        backgroundColor: FlutterFlowTheme.of(context).success1,
+        backgroundColor: FlutterFlowTheme.of(context).borderColor,
       ),
     );
   } else {
@@ -210,7 +210,7 @@ Future updateTask(
           ),
         ),
         duration: const Duration(milliseconds: 4000),
-        backgroundColor: FlutterFlowTheme.of(context).success1,
+        backgroundColor: FlutterFlowTheme.of(context).borderColor,
       ),
     );
   } else {
