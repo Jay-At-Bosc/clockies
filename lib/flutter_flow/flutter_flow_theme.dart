@@ -140,7 +140,7 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color warning1 = const Color(0xFFFFC107);
   late Color error1 = const Color(0xFFFF4842);
   late Color backgroundColor = const Color(0xFFEFF2F6);
-  late Color pinkColor = const Color(0xFFFF5E5E);
+  late Color pinkColor = const Color(0xFFF9A9EF);
   late Color blueColor = const Color(0xFF285EDE);
   late Color dashboard1 = const Color(0xFFD1E9FC);
   late Color dashboard2 = const Color(0xFFD0F2FF);
@@ -212,9 +212,9 @@ class ThemeTypography extends Typography {
         fontWeight: FontWeight.w600,
         fontSize: 36.0,
       );
-  String get headlineLargeFamily => 'Araboto';
-  TextStyle get headlineLarge => TextStyle(
-        fontFamily: 'Araboto',
+  String get headlineLargeFamily => 'Inter';
+  TextStyle get headlineLarge => GoogleFonts.getFont(
+        'Inter',
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
         fontSize: 24.0,
@@ -223,15 +223,15 @@ class ThemeTypography extends Typography {
   TextStyle get headlineMedium => GoogleFonts.getFont(
         'Inter',
         color: theme.primaryText,
-        fontWeight: FontWeight.normal,
-        fontSize: 24.0,
+        fontWeight: FontWeight.w600,
+        fontSize: 14.0,
       );
-  String get headlineSmallFamily => 'Araboto';
-  TextStyle get headlineSmall => TextStyle(
-        fontFamily: 'Araboto',
+  String get headlineSmallFamily => 'Inter';
+  TextStyle get headlineSmall => GoogleFonts.getFont(
+        'Inter',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
-        fontSize: 16.0,
+        fontSize: 14.0,
       );
   String get titleLargeFamily => 'Inter';
   TextStyle get titleLarge => GoogleFonts.getFont(
@@ -257,9 +257,9 @@ class ThemeTypography extends Typography {
   String get labelLargeFamily => 'Inter';
   TextStyle get labelLarge => GoogleFonts.getFont(
         'Inter',
-        color: theme.textGreyColor,
-        fontWeight: FontWeight.normal,
-        fontSize: 16.0,
+        color: theme.primaryText,
+        fontWeight: FontWeight.w600,
+        fontSize: 12.0,
       );
   String get labelMediumFamily => 'Inter';
   TextStyle get labelMedium => GoogleFonts.getFont(
@@ -280,14 +280,14 @@ class ThemeTypography extends Typography {
         'Inter',
         color: theme.textGreyColor,
         fontWeight: FontWeight.normal,
-        fontSize: 16.0,
+        fontSize: 12.0,
       );
   String get bodyMediumFamily => 'Inter';
   TextStyle get bodyMedium => GoogleFonts.getFont(
         'Inter',
         color: theme.textGreyColor,
         fontWeight: FontWeight.normal,
-        fontSize: 14.0,
+        fontSize: 10.0,
       );
   String get bodySmallFamily => 'Inter';
   TextStyle get bodySmall => GoogleFonts.getFont(
