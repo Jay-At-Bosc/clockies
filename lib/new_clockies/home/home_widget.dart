@@ -68,6 +68,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 .override(
                                   fontFamily: 'Araboto',
                                   letterSpacing: 0.0,
+                                  fontWeight: FontWeight.w900,
                                   useGoogleFonts: false,
                                 ),
                           ),
