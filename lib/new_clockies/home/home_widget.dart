@@ -63,27 +63,27 @@ class _HomeWidgetState extends State<HomeWidget> {
                           alignment: const AlignmentDirectional(-1.0, -1.0),
                           child: Text(
                             dateTimeFormat('MMMMEEEEd', getCurrentTimestamp),
+                            maxLines: 1,
                             style: FlutterFlowTheme.of(context)
                                 .headlineSmall
                                 .override(
-                                  fontFamily: 'Araboto',
+                                  fontFamily: 'Poppins',
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.w900,
-                                  useGoogleFonts: false,
                                 ),
                           ),
                         ),
                         Align(
                           alignment: const AlignmentDirectional(-1.0, 0.0),
                           child: Text(
-                            '${functions.selectGreetings(getCurrentTimestamp)}${FFAppState().user.userName}',
+                            '${functions.selectGreetings(getCurrentTimestamp)}${functions.capitalizeFirstWord(FFAppState().user.userName)}',
+                            textAlign: TextAlign.start,
                             maxLines: 1,
                             style: FlutterFlowTheme.of(context)
                                 .headlineLarge
                                 .override(
-                                  fontFamily: 'Araboto',
+                                  fontFamily: 'Poppins',
                                   letterSpacing: 0.0,
-                                  useGoogleFonts: false,
                                 ),
                           ),
                         ),
