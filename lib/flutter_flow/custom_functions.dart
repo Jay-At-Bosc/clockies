@@ -136,3 +136,23 @@ String selectGreetings(DateTime currentTime) {
     return "Good Evening, ";
   }
 }
+
+String capitalizeFirstWord(String input) {
+  // Trim the input to remove leading and trailing spaces
+  input = input.trim();
+
+  // Split the input string by spaces into a list of words
+  List<String> words = input.split(' ');
+
+  // Find the first non-empty word
+  String firstWord =
+      words.firstWhere((word) => word.isNotEmpty, orElse: () => '');
+
+  // Capitalize the first letter of the first non-empty word
+  if (firstWord.isNotEmpty) {
+    return firstWord[0].toUpperCase() + firstWord.substring(1).toLowerCase();
+  }
+
+  // Return an empty string if no valid words are found
+  return '';
+}
