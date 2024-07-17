@@ -311,7 +311,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         onPressed: () {
                                           print('Button pressed ...');
                                         },
-                                        text: 'Sell all',
+                                        text: 'See all',
                                         options: FFButtonOptions(
                                           width: double.infinity,
                                           height: 40.0,
