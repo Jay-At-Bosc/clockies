@@ -1,9 +1,12 @@
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import 'edit_task_screen_model.dart';
 export 'edit_task_screen_model.dart';
 
@@ -54,6 +57,12 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
         _model.textController2?.selection = TextSelection.collapsed(
             offset: _model.textController2!.text.length);
       });
+      setState(() {
+        _model.textController3?.text =
+            functions.calculateDuration(widget.startTime!, widget.stopTime!);
+        _model.textController3?.selection = TextSelection.collapsed(
+            offset: _model.textController3!.text.length);
+      });
     });
 
     _model.textController1 ??= TextEditingController(
@@ -91,6 +100,8 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -586,61 +597,115 @@ class _EditTaskScreenWidgetState extends State<EditTaskScreenWidget> {
                         validator: _model.textController3Validator
                             .asValidator(context),
                       ),
-                      TextFormField(
-                        controller: _model.textController4,
-                        focusNode: _model.textFieldFocusNode4,
-                        autofocus: false,
-                        readOnly: true,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          labelText: 'Employee',
-                          labelStyle:
-                              FlutterFlowTheme.of(context).labelMedium.override(
+                      Builder(
+                        builder: (context) {
+                          if ((FFAppState().user.userRoleId == 3) ||
+                              (FFAppState().user.userRoleId == 4)) {
+                            return TextFormField(
+                              controller: _model.textController4,
+                              focusNode: _model.textFieldFocusNode4,
+                              autofocus: false,
+                              readOnly: true,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                labelText: 'Employee',
+                                labelStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Inter',
+                                      fontSize: 16.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                hintStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Inter',
+                                      letterSpacing: 0.0,
+                                    ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color:
+                                        FlutterFlowTheme.of(context).alternate,
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context).error,
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context).error,
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
                                     fontFamily: 'Inter',
-                                    fontSize: 16.0,
+                                    letterSpacing: 0.0,
+                                  ),
+                              validator: _model.textController4Validator
+                                  .asValidator(context),
+                            );
+                          } else {
+                            return FlutterFlowDropDown<String>(
+                              controller: _model.dropDownValueController ??=
+                                  FormFieldController<String>(null),
+                              options: const ['Jay'],
+                              onChanged: (val) =>
+                                  setState(() => _model.dropDownValue = val),
+                              width: double.infinity,
+                              height: 50.0,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
+                              icon: const Icon(
+                                Icons.arrow_drop_down,
+                                size: 15.0,
+                              ),
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              elevation: 2.0,
+                              borderColor:
+                                  FlutterFlowTheme.of(context).alternate,
+                              borderWidth: 2.0,
+                              borderRadius: 8.0,
+                              margin: const EdgeInsetsDirectional.fromSTEB(
+                                  8.0, 4.0, 0.0, 0.0),
+                              hidesUnderline: true,
+                              isOverButton: true,
+                              isSearchable: false,
+                              isMultiSelect: false,
+                              labelText: 'Employee',
+                              labelTextStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    fontSize: 22.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w600,
                                   ),
-                          hintStyle:
-                              FlutterFlowTheme.of(context).labelMedium.override(
-                                    fontFamily: 'Inter',
-                                    letterSpacing: 0.0,
-                                  ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).alternate,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).primary,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
-                              letterSpacing: 0.0,
-                            ),
-                        validator: _model.textController4Validator
-                            .asValidator(context),
+                            );
+                          }
+                        },
                       ),
                       TextFormField(
                         controller: _model.textController5,

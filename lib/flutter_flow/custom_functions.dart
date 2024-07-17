@@ -126,3 +126,13 @@ DateTime convertUtcToLocal(String utcTime) {
   DateTime localDateTime = utcDateTime.toLocal();
   return localDateTime;
 }
+
+String selectGreetings(DateTime currentTime) {
+  if (currentTime.hour >= 5 && currentTime.hour < 12) {
+    return "Good Morning, ";
+  } else if (currentTime.hour >= 12 && currentTime.hour < 18) {
+    return "Good Afternoon, ";
+  } else {
+    return "Good Evening, ";
+  }
+}

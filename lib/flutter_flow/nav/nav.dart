@@ -70,9 +70,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'HomePage',
           path: '/homePage',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'HomePage')
-              : const HomePageWidget(),
+          builder: (context, params) => const HomePageWidget(),
         ),
         FFRoute(
           name: 'LoginScreen',
@@ -87,9 +85,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'ProjectScreen',
           path: '/projectScreen',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'ProjectScreen')
-              : const ProjectScreenWidget(),
+          builder: (context, params) => const ProjectScreenWidget(),
         ),
         FFRoute(
           name: 'SplashScreen',
@@ -109,9 +105,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'MyTaskScreen',
           path: '/myTaskScreen',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'MyTaskScreen')
-              : const MyTaskScreenWidget(),
+          builder: (context, params) => const MyTaskScreenWidget(),
         ),
         FFRoute(
           name: 'AddTaskScreen',
@@ -140,9 +134,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'timeline',
           path: '/timeline',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'timeline')
-              : const TimelineWidget(),
+          builder: (context, params) => const TimelineWidget(),
         ),
         FFRoute(
           name: 'AddTask',
@@ -193,6 +185,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.String,
             ),
           ),
+        ),
+        FFRoute(
+          name: 'Home',
+          path: '/home',
+          builder: (context, params) =>
+              params.isEmpty ? const NavBarPage(initialPage: 'Home') : const HomeWidget(),
+        ),
+        FFRoute(
+          name: 'MyTask',
+          path: '/myTask',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'MyTask')
+              : const MyTaskWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
