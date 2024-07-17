@@ -32,7 +32,7 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
         if (FFAppState().userToken == '') {
           context.goNamed('LoginScreen');
         } else {
-          context.goNamed('HomePage');
+          context.goNamed('Home');
         }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
