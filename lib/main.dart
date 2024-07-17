@@ -5,7 +5,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'index.dart';
 
 void main() async {
@@ -88,7 +87,7 @@ class NavBarPage extends StatefulWidget {
 
 /// This is the private State class that goes with NavBarPage.
 class _NavBarPageState extends State<NavBarPage> {
-  String _currentPageName = 'HomePage';
+  String _currentPageName = 'Home';
   late Widget? _currentPage;
 
   @override
@@ -101,10 +100,8 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'HomePage': const HomePageWidget(),
-      'ProjectScreen': const ProjectScreenWidget(),
-      'MyTaskScreen': const MyTaskScreenWidget(),
-      'timeline': const TimelineWidget(),
+      'Home': const HomeWidget(),
+      'MyTask': const MyTaskWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -124,35 +121,27 @@ class _NavBarPageState extends State<NavBarPage> {
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: FaIcon(
-              FontAwesomeIcons.home,
-              size: 20.0,
-            ),
-            label: '',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: FaIcon(
-              FontAwesomeIcons.solidFileAlt,
+            icon: Icon(
+              Icons.home_outlined,
               size: 24.0,
             ),
-            label: '',
+            activeIcon: Icon(
+              FFIcons.khome,
+              size: 24.0,
+            ),
+            label: 'Home',
             tooltip: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.task,
-              size: 28.0,
-            ),
-            label: '',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.timeline_sharp,
+              Icons.turned_in_not,
               size: 24.0,
             ),
-            label: 'Timeline',
+            activeIcon: Icon(
+              Icons.turned_in,
+              size: 24.0,
+            ),
+            label: 'Home',
             tooltip: '',
           )
         ],

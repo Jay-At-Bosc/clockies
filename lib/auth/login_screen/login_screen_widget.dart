@@ -403,7 +403,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
 
                             shouldSetState = true;
                             if ((_model.loginApiResult?.succeeded ?? true)) {
-                              context.goNamed('HomePage');
+                              context.goNamed('Home');
 
                               FFAppState().userToken = getJsonField(
                                 (_model.loginApiResult?.jsonBody ?? ''),

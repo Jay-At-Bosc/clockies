@@ -16,3 +16,5 @@ export '/pages/timeline/timeline_widget.dart' show TimelineWidget;
 export '/add_task/add_task_widget.dart' show AddTaskWidget;
 export '/pages/edit_task_screen/edit_task_screen_widget.dart'
     show EditTaskScreenWidget;
+export '/new_clockies/home/home_widget.dart' show HomeWidget;
+export '/new_clockies/my_task/my_task_widget.dart' show MyTaskWidget;
