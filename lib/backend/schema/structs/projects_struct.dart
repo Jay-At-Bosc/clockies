@@ -1,6 +1,5 @@
 // ignore_for_file: unnecessary_getters_setters
 
-import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -17,6 +16,7 @@ class ProjectsStruct extends BaseStruct {
     String? createdAt,
     String? updatedAt,
     int? clientId,
+    ClientsModelStruct? clients,
   })  : _id = id,
         _projectName = projectName,
         _totalHrs = totalHrs,
@@ -26,7 +26,8 @@ class ProjectsStruct extends BaseStruct {
         _description = description,
         _createdAt = createdAt,
         _updatedAt = updatedAt,
-        _clientId = clientId;
+        _clientId = clientId,
+        _clients = clients;
 
   // "id" field.
   int? _id;
@@ -104,6 +105,17 @@ class ProjectsStruct extends BaseStruct {
 
   bool hasClientId() => _clientId != null;
 
+  // "clients" field.
+  ClientsModelStruct? _clients;
+  ClientsModelStruct get clients => _clients ?? ClientsModelStruct();
+  set clients(ClientsModelStruct? val) => _clients = val;
+
+  void updateClients(Function(ClientsModelStruct) updateFn) {
+    updateFn(_clients ??= ClientsModelStruct());
+  }
+
+  bool hasClients() => _clients != null;
+
   static ProjectsStruct fromMap(Map<String, dynamic> data) => ProjectsStruct(
         id: castToType<int>(data['id']),
         projectName: data['projectName'] as String?,
@@ -115,6 +127,7 @@ class ProjectsStruct extends BaseStruct {
         createdAt: data['createdAt'] as String?,
         updatedAt: data['updatedAt'] as String?,
         clientId: castToType<int>(data['clientId']),
+        clients: ClientsModelStruct.maybeFromMap(data['clients']),
       );
 
   static ProjectsStruct? maybeFromMap(dynamic data) =>
@@ -131,6 +144,7 @@ class ProjectsStruct extends BaseStruct {
         'createdAt': _createdAt,
         'updatedAt': _updatedAt,
         'clientId': _clientId,
+        'clients': _clients?.toMap(),
       }.withoutNulls;
 
   @override
@@ -174,6 +188,10 @@ class ProjectsStruct extends BaseStruct {
         'clientId': serializeParam(
           _clientId,
           ParamType.int,
+        ),
+        'clients': serializeParam(
+          _clients,
+          ParamType.DataStruct,
         ),
       }.withoutNulls;
 
@@ -229,6 +247,12 @@ class ProjectsStruct extends BaseStruct {
           ParamType.int,
           false,
         ),
+        clients: deserializeStructParam(
+          data['clients'],
+          ParamType.DataStruct,
+          false,
+          structBuilder: ClientsModelStruct.fromSerializableMap,
+        ),
       );
 
   @override
@@ -246,7 +270,8 @@ class ProjectsStruct extends BaseStruct {
         description == other.description &&
         createdAt == other.createdAt &&
         updatedAt == other.updatedAt &&
-        clientId == other.clientId;
+        clientId == other.clientId &&
+        clients == other.clients;
   }
 
   @override
@@ -260,7 +285,8 @@ class ProjectsStruct extends BaseStruct {
         description,
         createdAt,
         updatedAt,
-        clientId
+        clientId,
+        clients
       ]);
 }
 
@@ -275,6 +301,7 @@ ProjectsStruct createProjectsStruct({
   String? createdAt,
   String? updatedAt,
   int? clientId,
+  ClientsModelStruct? clients,
 }) =>
     ProjectsStruct(
       id: id,
@@ -287,4 +314,5 @@ ProjectsStruct createProjectsStruct({
       createdAt: createdAt,
       updatedAt: updatedAt,
       clientId: clientId,
+      clients: clients ?? ClientsModelStruct(),
     );
