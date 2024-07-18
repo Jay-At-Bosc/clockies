@@ -62,7 +62,6 @@ class _HomeWidgetState extends State<HomeWidget> {
             backgroundColor: FlutterFlowTheme.of(context).secondary,
           ),
         );
-        return;
       }
 
       _model.taskList = await FetchMyTasksCall.call(
