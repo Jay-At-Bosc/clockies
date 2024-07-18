@@ -478,11 +478,21 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                   : FocusScope.of(
                                                                           context)
                                                                       .unfocus(),
-                                                              child:
-                                                                  TaskCompleteDialogueWidget(
-                                                                taskName:
-                                                                    taskDataItem
-                                                                        .taskName,
+                                                              child: SizedBox(
+                                                                height: MediaQuery.sizeOf(
+                                                                            context)
+                                                                        .height *
+                                                                    0.4,
+                                                                width: MediaQuery.sizeOf(
+                                                                            context)
+                                                                        .width *
+                                                                    0.8,
+                                                                child:
+                                                                    TaskCompleteDialogueWidget(
+                                                                  taskName:
+                                                                      taskDataItem
+                                                                          .taskName,
+                                                                ),
                                                               ),
                                                             ),
                                                           );
