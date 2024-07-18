@@ -38,4 +38,5 @@ abstract class FFAppConstants {
   static const String addTaskBtn = 'Add Task';
   static const String updateTask = 'Update Task';
   static const String editTask = 'Edit a Task';
+  static const List<String> emptyList = [''];
 }
