@@ -447,7 +447,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                 Colors
                                                                     .transparent,
                                                             alignment: const AlignmentDirectional(
-                                                                    -1.0, 0.0)
+                                                                    0.0, 0.0)
                                                                 .resolve(
                                                                     Directionality.of(
                                                                         context)),
@@ -468,11 +468,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                 height: MediaQuery.sizeOf(
                                                                             context)
                                                                         .height *
-                                                                    0.4,
+                                                                    0.2,
                                                                 width: MediaQuery.sizeOf(
                                                                             context)
                                                                         .width *
-                                                                    0.8,
+                                                                    1.0,
                                                                 child:
                                                                     const TaskCompleteDialogueWidget(
                                                                   taskName: '',
