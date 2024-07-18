@@ -409,7 +409,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                             width: 1.0,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(9.0),
+                                              BorderRadius.circular(24.0),
                                         ),
                                       ),
                                     ),
@@ -695,7 +695,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                     },
                                                     child: Icon(
                                                       Icons
-                                                          .check_circle_outline_sharp,
+                                                          .check_circle_outline,
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -722,8 +722,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  functions.getTaskStatus(
-                                                      taskDataItem.endDate),
+                                                  taskDataItem.status,
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyMedium
@@ -776,7 +775,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                             width: 1.0,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(10.0),
+                                              BorderRadius.circular(24.0),
                                         ),
                                       ),
                                     ),
