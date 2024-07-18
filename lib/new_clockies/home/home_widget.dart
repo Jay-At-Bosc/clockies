@@ -467,275 +467,298 @@ class _HomeWidgetState extends State<HomeWidget> {
                                               taskData.length, (taskDataIndex) {
                                             final taskDataItem =
                                                 taskData[taskDataIndex];
-                                            return Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Builder(
-                                                  builder: (context) => InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      var shouldSetState =
-                                                          false;
-                                                      await showDialog(
-                                                        barrierDismissible:
-                                                            false,
-                                                        context: context,
-                                                        builder:
-                                                            (dialogContext) {
-                                                          return Dialog(
-                                                            elevation: 0,
-                                                            insetPadding:
-                                                                EdgeInsets.zero,
-                                                            backgroundColor:
-                                                                Colors
-                                                                    .transparent,
-                                                            alignment: const AlignmentDirectional(
-                                                                    0.0, 0.0)
-                                                                .resolve(
-                                                                    Directionality.of(
-                                                                        context)),
-                                                            child:
-                                                                GestureDetector(
-                                                              onTap: () => _model
-                                                                      .unfocusNode
-                                                                      .canRequestFocus
-                                                                  ? FocusScope.of(
-                                                                          context)
-                                                                      .requestFocus(
-                                                                          _model
-                                                                              .unfocusNode)
-                                                                  : FocusScope.of(
-                                                                          context)
-                                                                      .unfocus(),
-                                                              child: SizedBox(
-                                                                height: MediaQuery.sizeOf(
+                                            return InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                  'detailedTask',
+                                                  queryParameters: {
+                                                    'task': serializeParam(
+                                                      taskDataItem,
+                                                      ParamType.DataStruct,
+                                                    ),
+                                                  }.withoutNulls,
+                                                );
+                                              },
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  Builder(
+                                                    builder: (context) =>
+                                                        InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        var shouldSetState =
+                                                            false;
+                                                        await showDialog(
+                                                          barrierDismissible:
+                                                              false,
+                                                          context: context,
+                                                          builder:
+                                                              (dialogContext) {
+                                                            return Dialog(
+                                                              elevation: 0,
+                                                              insetPadding:
+                                                                  EdgeInsets
+                                                                      .zero,
+                                                              backgroundColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              alignment: const AlignmentDirectional(
+                                                                      0.0, 0.0)
+                                                                  .resolve(
+                                                                      Directionality.of(
+                                                                          context)),
+                                                              child:
+                                                                  GestureDetector(
+                                                                onTap: () => _model
+                                                                        .unfocusNode
+                                                                        .canRequestFocus
+                                                                    ? FocusScope.of(
                                                                             context)
-                                                                        .height *
-                                                                    0.2,
-                                                                width: MediaQuery.sizeOf(
+                                                                        .requestFocus(_model
+                                                                            .unfocusNode)
+                                                                    : FocusScope.of(
                                                                             context)
-                                                                        .width *
-                                                                    0.8,
+                                                                        .unfocus(),
                                                                 child:
-                                                                    TaskCompleteDialogueWidget(
-                                                                  taskName:
-                                                                      valueOrDefault<
-                                                                          String>(
-                                                                    taskDataItem
-                                                                        .taskName,
-                                                                    'Task',
+                                                                    SizedBox(
+                                                                  height: MediaQuery.sizeOf(
+                                                                              context)
+                                                                          .height *
+                                                                      0.2,
+                                                                  width: MediaQuery.sizeOf(
+                                                                              context)
+                                                                          .width *
+                                                                      0.8,
+                                                                  child:
+                                                                      TaskCompleteDialogueWidget(
+                                                                    taskName:
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                      taskDataItem
+                                                                          .taskName,
+                                                                      'Task',
+                                                                    ),
+                                                                    id: taskDataItem
+                                                                        .id,
                                                                   ),
-                                                                  id: taskDataItem
-                                                                      .id,
                                                                 ),
                                                               ),
-                                                            ),
-                                                          );
-                                                        },
-                                                      ).then((value) =>
-                                                          safeSetState(() =>
-                                                              _model.isModify =
-                                                                  value));
+                                                            );
+                                                          },
+                                                        ).then((value) =>
+                                                            safeSetState(() =>
+                                                                _model.isModify =
+                                                                    value));
 
-                                                      shouldSetState = true;
-                                                      if (_model.isModify!) {
-                                                        _model.isInternetModify =
-                                                            await actions
-                                                                .checkInternet();
                                                         shouldSetState = true;
-                                                        if (_model
-                                                                .isInternetModify ==
-                                                            true) {
-                                                          _model.isLoading =
-                                                              true;
-                                                          setState(() {});
-                                                          _model.projectModify =
-                                                              await FetchAssignedProjectCall
-                                                                  .call(
-                                                            authToken:
-                                                                FFAppState()
-                                                                    .userToken,
-                                                          );
-
+                                                        if (_model.isModify!) {
+                                                          _model.isInternetModify =
+                                                              await actions
+                                                                  .checkInternet();
                                                           shouldSetState =
                                                               true;
-                                                          if ((_model
-                                                                  .projectModify
-                                                                  ?.succeeded ??
-                                                              true)) {
-                                                            _model
-                                                                .projects = FetchAssignedProjectCall
-                                                                    .allProjects(
-                                                              (_model.projectModify
-                                                                      ?.jsonBody ??
-                                                                  ''),
-                                                            )!
-                                                                .map((e) =>
-                                                                    ProjectModelStruct
-                                                                        .maybeFromMap(
-                                                                            e))
-                                                                .withoutNulls
-                                                                .toList()
-                                                                .cast<
-                                                                    ProjectModelStruct>();
+                                                          if (_model
+                                                                  .isInternetModify ==
+                                                              true) {
+                                                            _model.isLoading =
+                                                                true;
                                                             setState(() {});
-                                                            _model.tasksListModify =
-                                                                await FetchMyTasksCall
+                                                            _model.projectModify =
+                                                                await FetchAssignedProjectCall
                                                                     .call(
                                                               authToken:
                                                                   FFAppState()
                                                                       .userToken,
-                                                              pageSize: 10,
                                                             );
 
                                                             shouldSetState =
                                                                 true;
                                                             if ((_model
-                                                                    .tasksListModify
+                                                                    .projectModify
                                                                     ?.succeeded ??
                                                                 true)) {
                                                               _model
-                                                                  .tasks = FetchMyTasksCall
-                                                                      .myTasks(
-                                                                (_model.tasksListModify
+                                                                  .projects = FetchAssignedProjectCall
+                                                                      .allProjects(
+                                                                (_model.projectModify
                                                                         ?.jsonBody ??
                                                                     ''),
                                                               )!
                                                                   .map((e) =>
-                                                                      TaskModelStruct
+                                                                      ProjectModelStruct
                                                                           .maybeFromMap(
                                                                               e))
                                                                   .withoutNulls
                                                                   .toList()
                                                                   .cast<
-                                                                      TaskModelStruct>();
+                                                                      ProjectModelStruct>();
+                                                              setState(() {});
+                                                              _model.tasksListModify =
+                                                                  await FetchMyTasksCall
+                                                                      .call(
+                                                                authToken:
+                                                                    FFAppState()
+                                                                        .userToken,
+                                                                pageSize: 10,
+                                                              );
+
+                                                              shouldSetState =
+                                                                  true;
+                                                              if ((_model
+                                                                      .tasksListModify
+                                                                      ?.succeeded ??
+                                                                  true)) {
+                                                                _model
+                                                                    .tasks = FetchMyTasksCall
+                                                                        .myTasks(
+                                                                  (_model.tasksListModify
+                                                                          ?.jsonBody ??
+                                                                      ''),
+                                                                )!
+                                                                    .map((e) =>
+                                                                        TaskModelStruct
+                                                                            .maybeFromMap(
+                                                                                e))
+                                                                    .withoutNulls
+                                                                    .toList()
+                                                                    .cast<
+                                                                        TaskModelStruct>();
+                                                                setState(() {});
+                                                              } else {
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(
+                                                                  SnackBar(
+                                                                    content:
+                                                                        Text(
+                                                                      FetchMyTasksCall
+                                                                          .message(
+                                                                        (_model.tasksListModify?.jsonBody ??
+                                                                            ''),
+                                                                      )!,
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryText,
+                                                                      ),
+                                                                    ),
+                                                                    duration: const Duration(
+                                                                        milliseconds:
+                                                                            4000),
+                                                                    backgroundColor:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .secondary,
+                                                                  ),
+                                                                );
+                                                              }
+
+                                                              _model.isLoading =
+                                                                  false;
                                                               setState(() {});
                                                             } else {
-                                                              ScaffoldMessenger
-                                                                      .of(context)
-                                                                  .showSnackBar(
-                                                                SnackBar(
-                                                                  content: Text(
-                                                                    FetchMyTasksCall
-                                                                        .message(
-                                                                      (_model.tasksListModify
-                                                                              ?.jsonBody ??
-                                                                          ''),
-                                                                    )!,
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryText,
-                                                                    ),
-                                                                  ),
-                                                                  duration: const Duration(
-                                                                      milliseconds:
-                                                                          4000),
-                                                                  backgroundColor:
-                                                                      FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondary,
-                                                                ),
-                                                              );
+                                                              if (shouldSetState) {
+                                                                setState(() {});
+                                                              }
+                                                              return;
                                                             }
-
-                                                            _model.isLoading =
-                                                                false;
-                                                            setState(() {});
                                                           } else {
-                                                            if (shouldSetState) {
-                                                              setState(() {});
-                                                            }
-                                                            return;
+                                                            ScaffoldMessenger
+                                                                    .of(context)
+                                                                .showSnackBar(
+                                                              SnackBar(
+                                                                content: Text(
+                                                                  'No Internet Connection',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryText,
+                                                                  ),
+                                                                ),
+                                                                duration: const Duration(
+                                                                    milliseconds:
+                                                                        4000),
+                                                                backgroundColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondary,
+                                                              ),
+                                                            );
                                                           }
                                                         } else {
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .showSnackBar(
-                                                            SnackBar(
-                                                              content: Text(
-                                                                'No Internet Connection',
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryText,
-                                                                ),
-                                                              ),
-                                                              duration: const Duration(
-                                                                  milliseconds:
-                                                                      4000),
-                                                              backgroundColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondary,
-                                                            ),
-                                                          );
+                                                          if (shouldSetState) {
+                                                            setState(() {});
+                                                          }
+                                                          return;
                                                         }
-                                                      } else {
+
                                                         if (shouldSetState) {
                                                           setState(() {});
                                                         }
-                                                        return;
-                                                      }
-
-                                                      if (shouldSetState) {
-                                                        setState(() {});
-                                                      }
-                                                    },
-                                                    child: Icon(
-                                                      Icons
-                                                          .check_circle_outline,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondaryText,
-                                                      size: 24.0,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: Align(
-                                                    alignment:
-                                                        const AlignmentDirectional(
-                                                            -1.0, 0.0),
-                                                    child: Text(
-                                                      taskDataItem.taskName,
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .labelMedium
-                                                          .override(
-                                                            fontFamily: 'Inter',
-                                                            letterSpacing: 0.0,
-                                                          ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Text(
-                                                  taskDataItem.status,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Inter',
+                                                      },
+                                                      child: Icon(
+                                                        Icons
+                                                            .check_circle_outline,
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .checkedColor,
-                                                        letterSpacing: 0.0,
+                                                                .secondaryText,
+                                                        size: 24.0,
                                                       ),
-                                                ),
-                                              ].divide(const SizedBox(width: 8.0)),
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Align(
+                                                      alignment:
+                                                          const AlignmentDirectional(
+                                                              -1.0, 0.0),
+                                                      child: Text(
+                                                        taskDataItem.taskName,
+                                                        maxLines: 1,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .labelMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Inter',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    taskDataItem.status,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .checkedColor,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                ].divide(const SizedBox(width: 8.0)),
+                                              ),
                                             );
                                           }).divide(const SizedBox(height: 12.0)),
                                         );

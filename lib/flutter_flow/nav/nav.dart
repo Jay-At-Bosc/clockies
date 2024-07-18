@@ -198,6 +198,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? const NavBarPage(initialPage: 'MyTask')
               : const MyTaskWidget(),
+        ),
+        FFRoute(
+          name: 'detailedTask',
+          path: '/detailedTask',
+          builder: (context, params) => DetailedTaskWidget(
+            task: params.getParam(
+              'task',
+              ParamType.DataStruct,
+              isList: false,
+              structBuilder: TaskModelStruct.fromSerializableMap,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
