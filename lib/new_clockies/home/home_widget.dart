@@ -176,7 +176,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    'No Internet Connection',
+                                    FetchMyTasksCall.message(
+                                      (_model.tasksListCopy?.jsonBody ?? ''),
+                                    )!,
                                     style: TextStyle(
                                       color: FlutterFlowTheme.of(context)
                                           .primaryText,
@@ -627,7 +629,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                   content: Text(
                                                                     FetchMyTasksCall
                                                                         .message(
-                                                                      (_model.tasksList
+                                                                      (_model.tasksListModify
                                                                               ?.jsonBody ??
                                                                           ''),
                                                                     )!,
