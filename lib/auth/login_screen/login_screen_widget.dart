@@ -159,7 +159,8 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                   borderSide: BorderSide(
                                     color: _model.emailState
                                         ? FlutterFlowTheme.of(context).blueColor
-                                        : FlutterFlowTheme.of(context).error1,
+                                        : FlutterFlowTheme.of(context)
+                                            .checkedColor,
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(8.0),
@@ -210,7 +211,8 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Inter',
-                                    color: FlutterFlowTheme.of(context).error1,
+                                    color: FlutterFlowTheme.of(context)
+                                        .checkedColor,
                                     letterSpacing: 0.0,
                                   ),
                             ),
@@ -266,7 +268,8 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                 borderSide: BorderSide(
                                   color: _model.passwordState
                                       ? FlutterFlowTheme.of(context).primary
-                                      : FlutterFlowTheme.of(context).error1,
+                                      : FlutterFlowTheme.of(context)
+                                          .checkedColor,
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(8.0),
@@ -331,8 +334,8 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                     .bodyMedium
                                     .override(
                                       fontFamily: 'Inter',
-                                      color:
-                                          FlutterFlowTheme.of(context).error1,
+                                      color: FlutterFlowTheme.of(context)
+                                          .checkedColor,
                                       letterSpacing: 0.0,
                                     ),
                               ),
@@ -451,7 +454,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                 ),
                                 duration: const Duration(milliseconds: 4000),
                                 backgroundColor:
-                                    FlutterFlowTheme.of(context).error1,
+                                    FlutterFlowTheme.of(context).checkedColor,
                               ),
                             );
                             if (shouldSetState) setState(() {});

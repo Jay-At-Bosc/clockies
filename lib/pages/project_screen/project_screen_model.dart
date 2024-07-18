@@ -93,7 +93,7 @@ class ProjectScreenModel extends FlutterFlowModel<ProjectScreenWidget> {
             ),
           ),
           duration: const Duration(milliseconds: 4000),
-          backgroundColor: FlutterFlowTheme.of(context).error1,
+          backgroundColor: FlutterFlowTheme.of(context).checkedColor,
         ),
       );
     }

@@ -21,9 +21,12 @@ class TaskModelStruct extends BaseStruct {
     String? updatedAt,
     int? projectId,
     int? userId,
-    UserModelStruct? user,
     int? consumedHours,
     ProjectModelStruct? projects,
+    DateTime? completedAt,
+    String? issueType,
+    double? earnedPoints,
+    TaskUserStruct? user,
   })  : _id = id,
         _taskName = taskName,
         _startDate = startDate,
@@ -39,9 +42,12 @@ class TaskModelStruct extends BaseStruct {
         _updatedAt = updatedAt,
         _projectId = projectId,
         _userId = userId,
-        _user = user,
         _consumedHours = consumedHours,
-        _projects = projects;
+        _projects = projects,
+        _completedAt = completedAt,
+        _issueType = issueType,
+        _earnedPoints = earnedPoints,
+        _user = user;
 
   // "id" field.
   int? _id;
@@ -164,17 +170,6 @@ class TaskModelStruct extends BaseStruct {
 
   bool hasUserId() => _userId != null;
 
-  // "user" field.
-  UserModelStruct? _user;
-  UserModelStruct get user => _user ?? UserModelStruct();
-  set user(UserModelStruct? val) => _user = val;
-
-  void updateUser(Function(UserModelStruct) updateFn) {
-    updateFn(_user ??= UserModelStruct());
-  }
-
-  bool hasUser() => _user != null;
-
   // "consumedHours" field.
   int? _consumedHours;
   int get consumedHours => _consumedHours ?? 0;
@@ -196,6 +191,41 @@ class TaskModelStruct extends BaseStruct {
 
   bool hasProjects() => _projects != null;
 
+  // "completedAt" field.
+  DateTime? _completedAt;
+  DateTime? get completedAt => _completedAt;
+  set completedAt(DateTime? val) => _completedAt = val;
+
+  bool hasCompletedAt() => _completedAt != null;
+
+  // "issueType" field.
+  String? _issueType;
+  String get issueType => _issueType ?? '';
+  set issueType(String? val) => _issueType = val;
+
+  bool hasIssueType() => _issueType != null;
+
+  // "earnedPoints" field.
+  double? _earnedPoints;
+  double get earnedPoints => _earnedPoints ?? 0.0;
+  set earnedPoints(double? val) => _earnedPoints = val;
+
+  void incrementEarnedPoints(double amount) =>
+      earnedPoints = earnedPoints + amount;
+
+  bool hasEarnedPoints() => _earnedPoints != null;
+
+  // "user" field.
+  TaskUserStruct? _user;
+  TaskUserStruct get user => _user ?? TaskUserStruct();
+  set user(TaskUserStruct? val) => _user = val;
+
+  void updateUser(Function(TaskUserStruct) updateFn) {
+    updateFn(_user ??= TaskUserStruct());
+  }
+
+  bool hasUser() => _user != null;
+
   static TaskModelStruct fromMap(Map<String, dynamic> data) => TaskModelStruct(
         id: castToType<int>(data['id']),
         taskName: data['taskName'] as String?,
@@ -212,9 +242,12 @@ class TaskModelStruct extends BaseStruct {
         updatedAt: data['updatedAt'] as String?,
         projectId: castToType<int>(data['projectId']),
         userId: castToType<int>(data['userId']),
-        user: UserModelStruct.maybeFromMap(data['user']),
         consumedHours: castToType<int>(data['consumedHours']),
         projects: ProjectModelStruct.maybeFromMap(data['projects']),
+        completedAt: data['completedAt'] as DateTime?,
+        issueType: data['issueType'] as String?,
+        earnedPoints: castToType<double>(data['earnedPoints']),
+        user: TaskUserStruct.maybeFromMap(data['user']),
       );
 
   static TaskModelStruct? maybeFromMap(dynamic data) => data is Map
@@ -237,9 +270,12 @@ class TaskModelStruct extends BaseStruct {
         'updatedAt': _updatedAt,
         'projectId': _projectId,
         'userId': _userId,
-        'user': _user?.toMap(),
         'consumedHours': _consumedHours,
         'projects': _projects?.toMap(),
+        'completedAt': _completedAt,
+        'issueType': _issueType,
+        'earnedPoints': _earnedPoints,
+        'user': _user?.toMap(),
       }.withoutNulls;
 
   @override
@@ -304,16 +340,28 @@ class TaskModelStruct extends BaseStruct {
           _userId,
           ParamType.int,
         ),
-        'user': serializeParam(
-          _user,
-          ParamType.DataStruct,
-        ),
         'consumedHours': serializeParam(
           _consumedHours,
           ParamType.int,
         ),
         'projects': serializeParam(
           _projects,
+          ParamType.DataStruct,
+        ),
+        'completedAt': serializeParam(
+          _completedAt,
+          ParamType.DateTime,
+        ),
+        'issueType': serializeParam(
+          _issueType,
+          ParamType.String,
+        ),
+        'earnedPoints': serializeParam(
+          _earnedPoints,
+          ParamType.double,
+        ),
+        'user': serializeParam(
+          _user,
           ParamType.DataStruct,
         ),
       }.withoutNulls;
@@ -395,12 +443,6 @@ class TaskModelStruct extends BaseStruct {
           ParamType.int,
           false,
         ),
-        user: deserializeStructParam(
-          data['user'],
-          ParamType.DataStruct,
-          false,
-          structBuilder: UserModelStruct.fromSerializableMap,
-        ),
         consumedHours: deserializeParam(
           data['consumedHours'],
           ParamType.int,
@@ -411,6 +453,27 @@ class TaskModelStruct extends BaseStruct {
           ParamType.DataStruct,
           false,
           structBuilder: ProjectModelStruct.fromSerializableMap,
+        ),
+        completedAt: deserializeParam(
+          data['completedAt'],
+          ParamType.DateTime,
+          false,
+        ),
+        issueType: deserializeParam(
+          data['issueType'],
+          ParamType.String,
+          false,
+        ),
+        earnedPoints: deserializeParam(
+          data['earnedPoints'],
+          ParamType.double,
+          false,
+        ),
+        user: deserializeStructParam(
+          data['user'],
+          ParamType.DataStruct,
+          false,
+          structBuilder: TaskUserStruct.fromSerializableMap,
         ),
       );
 
@@ -435,9 +498,12 @@ class TaskModelStruct extends BaseStruct {
         updatedAt == other.updatedAt &&
         projectId == other.projectId &&
         userId == other.userId &&
-        user == other.user &&
         consumedHours == other.consumedHours &&
-        projects == other.projects;
+        projects == other.projects &&
+        completedAt == other.completedAt &&
+        issueType == other.issueType &&
+        earnedPoints == other.earnedPoints &&
+        user == other.user;
   }
 
   @override
@@ -457,9 +523,12 @@ class TaskModelStruct extends BaseStruct {
         updatedAt,
         projectId,
         userId,
-        user,
         consumedHours,
-        projects
+        projects,
+        completedAt,
+        issueType,
+        earnedPoints,
+        user
       ]);
 }
 
@@ -479,9 +548,12 @@ TaskModelStruct createTaskModelStruct({
   String? updatedAt,
   int? projectId,
   int? userId,
-  UserModelStruct? user,
   int? consumedHours,
   ProjectModelStruct? projects,
+  DateTime? completedAt,
+  String? issueType,
+  double? earnedPoints,
+  TaskUserStruct? user,
 }) =>
     TaskModelStruct(
       id: id,
@@ -499,7 +571,10 @@ TaskModelStruct createTaskModelStruct({
       updatedAt: updatedAt,
       projectId: projectId,
       userId: userId,
-      user: user ?? UserModelStruct(),
       consumedHours: consumedHours,
       projects: projects ?? ProjectModelStruct(),
+      completedAt: completedAt,
+      issueType: issueType,
+      earnedPoints: earnedPoints,
+      user: user ?? TaskUserStruct(),
     );

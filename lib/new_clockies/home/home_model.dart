@@ -28,11 +28,22 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
 
   bool isLoading = true;
 
+  List<TaskModelStruct> tasks = [];
+  void addToTasks(TaskModelStruct item) => tasks.add(item);
+  void removeFromTasks(TaskModelStruct item) => tasks.remove(item);
+  void removeAtIndexFromTasks(int index) => tasks.removeAt(index);
+  void insertAtIndexInTasks(int index, TaskModelStruct item) =>
+      tasks.insert(index, item);
+  void updateTasksAtIndex(int index, Function(TaskModelStruct) updateFn) =>
+      tasks[index] = updateFn(tasks[index]);
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
   // Stores action output result for [Backend Call - API (Fetch Assigned Project)] action in Home widget.
   ApiCallResponse? project;
+  // Stores action output result for [Backend Call - API (Fetch My Tasks)] action in Home widget.
+  ApiCallResponse? tasksList;
   // Stores action output result for [Backend Call - API (Fetch Assigned Project)] action in Column widget.
   ApiCallResponse? projectListCopy;
 

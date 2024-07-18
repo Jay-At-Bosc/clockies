@@ -68,7 +68,7 @@ class _CustomErrorSnackBarWidgetState extends State<CustomErrorSnackBarWidget> {
               children: [
                 Icon(
                   Icons.error_outline,
-                  color: FlutterFlowTheme.of(context).error1,
+                  color: FlutterFlowTheme.of(context).checkedColor,
                   size: 24.0,
                 ),
                 Text(

@@ -337,12 +337,13 @@ class FetchProjectByIDCall {
 class FetchMyTasksCall {
   static Future<ApiCallResponse> call({
     String? authToken = '',
-    int? pageNumber,
     int? pageSize,
-    String? search = '',
-    String? order = '',
-    String? orderBy = '',
+    List<String>? filtersList,
+    List<String>? sortingList,
   }) async {
+    final filters = _serializeList(filtersList);
+    final sorting = _serializeList(sortingList);
+
     return ApiManager.instance.makeApiCall(
       callName: 'Fetch My Tasks',
       apiUrl: 'http://3.144.249.140:5000/api/task/myTask',
@@ -351,11 +352,9 @@ class FetchMyTasksCall {
         'Authorization': '$authToken',
       },
       params: {
-        'pageNumber': pageNumber,
         'pageSize': pageSize,
-        'search': search,
-        'order': order,
-        'orderBy': orderBy,
+        'filters': filters,
+        'sorting': sorting,
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -371,6 +370,10 @@ class FetchMyTasksCall {
         r'''$.data.rows''',
         true,
       ) as List?;
+  static String? message(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
 }
 
 class FetchMyTaskCall {
