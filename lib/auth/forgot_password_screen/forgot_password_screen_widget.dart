@@ -154,7 +154,8 @@ class _ForgotPasswordScreenWidgetState
                                 borderSide: BorderSide(
                                   color: _model.forgotPasswordState
                                       ? FlutterFlowTheme.of(context).primary
-                                      : FlutterFlowTheme.of(context).error1,
+                                      : FlutterFlowTheme.of(context)
+                                          .checkedColor,
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(8.0),
@@ -205,8 +206,8 @@ class _ForgotPasswordScreenWidgetState
                                     .bodyMedium
                                     .override(
                                       fontFamily: 'Inter',
-                                      color:
-                                          FlutterFlowTheme.of(context).error1,
+                                      color: FlutterFlowTheme.of(context)
+                                          .checkedColor,
                                       letterSpacing: 0.0,
                                     ),
                               ),

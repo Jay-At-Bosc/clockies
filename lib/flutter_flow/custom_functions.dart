@@ -174,3 +174,33 @@ Color getRandomColor() {
   // Return the color corresponding to the random index
   return colors[randomIndex];
 }
+
+String getTaskStatus(String endDateString) {
+  DateTime endDate = DateTime.parse(endDateString);
+  DateTime today = DateTime.now();
+  DateTime tomorrow = today.add(Duration(days: 1));
+  DateTime nextFriday;
+
+  // Set times to 00:00:00 for date comparison
+  endDate = DateTime(endDate.year, endDate.month, endDate.day);
+  today = DateTime(today.year, today.month, today.day);
+  tomorrow = DateTime(tomorrow.year, tomorrow.month, tomorrow.day);
+
+  // Calculate the next Friday
+  int dayOfWeek = today.weekday;
+  int daysUntilFriday = (DateTime.friday - dayOfWeek + 7) % 7;
+  nextFriday = today.add(Duration(days: daysUntilFriday));
+  nextFriday = DateTime(nextFriday.year, nextFriday.month, nextFriday.day);
+
+  if (endDate.isAtSameMomentAs(today)) {
+    return "status - today";
+  } else if (endDate.isBefore(today)) {
+    return "status - pending";
+  } else if (endDate.isAtSameMomentAs(tomorrow)) {
+    return "status - tomorrow";
+  } else if (endDate.isAtSameMomentAs(nextFriday)) {
+    return "status - this week";
+  } else {
+    return "status - future";
+  }
+}

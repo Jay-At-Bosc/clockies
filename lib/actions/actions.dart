@@ -69,7 +69,7 @@ Future fetchSections(
           ),
         ),
         duration: const Duration(milliseconds: 4000),
-        backgroundColor: FlutterFlowTheme.of(context).error1,
+        backgroundColor: FlutterFlowTheme.of(context).checkedColor,
       ),
     );
   }
@@ -113,7 +113,7 @@ Future fetchProjectById(
           ),
         ),
         duration: const Duration(milliseconds: 4000),
-        backgroundColor: FlutterFlowTheme.of(context).error1,
+        backgroundColor: FlutterFlowTheme.of(context).checkedColor,
       ),
     );
   }
@@ -169,7 +169,7 @@ Future createNewTask(
           ),
         ),
         duration: const Duration(milliseconds: 4000),
-        backgroundColor: FlutterFlowTheme.of(context).error1,
+        backgroundColor: FlutterFlowTheme.of(context).checkedColor,
       ),
     );
   }
@@ -226,7 +226,7 @@ Future updateTask(
           ),
         ),
         duration: const Duration(milliseconds: 4000),
-        backgroundColor: FlutterFlowTheme.of(context).error1,
+        backgroundColor: FlutterFlowTheme.of(context).checkedColor,
       ),
     );
   }

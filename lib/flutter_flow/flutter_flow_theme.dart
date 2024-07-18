@@ -34,7 +34,7 @@ abstract class FlutterFlowTheme {
 
   late Color borderColor;
   late Color warning1;
-  late Color error1;
+  late Color checkedColor;
   late Color backgroundColor;
   late Color pinkColor;
   late Color blueColor;
@@ -138,7 +138,7 @@ class LightModeTheme extends FlutterFlowTheme {
 
   late Color borderColor = const Color(0xFFCECECD);
   late Color warning1 = const Color(0xFFFFC107);
-  late Color error1 = const Color(0xFFFF4842);
+  late Color checkedColor = const Color(0xFF5BA081);
   late Color backgroundColor = const Color(0xFFEFF2F6);
   late Color pinkColor = const Color(0xFFF9A9EF);
   late Color blueColor = const Color(0xFF285EDE);

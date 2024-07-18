@@ -140,7 +140,7 @@ class _MyTaskScreenWidgetState extends State<MyTaskScreenWidget> {
                     ),
                   ),
                   duration: const Duration(milliseconds: 4000),
-                  backgroundColor: FlutterFlowTheme.of(context).error1,
+                  backgroundColor: FlutterFlowTheme.of(context).checkedColor,
                 ),
               );
             }
