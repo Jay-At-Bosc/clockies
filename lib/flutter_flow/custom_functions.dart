@@ -193,14 +193,14 @@ String getTaskStatus(String endDateString) {
   nextFriday = DateTime(nextFriday.year, nextFriday.month, nextFriday.day);
 
   if (endDate.isAtSameMomentAs(today)) {
-    return "status - today";
+    return "Today";
   } else if (endDate.isBefore(today)) {
-    return "status - pending";
+    return "Pending";
   } else if (endDate.isAtSameMomentAs(tomorrow)) {
-    return "status - tomorrow";
+    return "Tomorrow";
   } else if (endDate.isAtSameMomentAs(nextFriday)) {
-    return "status - this week";
+    return "This week";
   } else {
-    return "status - future";
+    return "Future";
   }
 }
