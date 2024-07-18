@@ -346,10 +346,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                                               .secondaryBackground,
                                           textStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .labelLarge
+                                                  .titleSmall
                                                   .override(
                                                     fontFamily: 'Inter',
                                                     letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w600,
                                                   ),
                                           elevation: 0.0,
                                           borderSide: BorderSide(
