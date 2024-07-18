@@ -53,8 +53,6 @@ class _HomeWidgetState extends State<HomeWidget> {
         _model.tasksList = await FetchMyTasksCall.call(
           authToken: FFAppState().userToken,
           pageSize: 10,
-          filtersList: FFAppConstants.emptyList,
-          sortingList: FFAppConstants.emptyList,
         );
 
         if ((_model.tasksList?.succeeded ?? true)) {
