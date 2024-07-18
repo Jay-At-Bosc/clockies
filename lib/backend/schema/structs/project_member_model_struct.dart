@@ -16,7 +16,9 @@ class ProjectMemberModelStruct extends BaseStruct {
     int? userId,
     ProjectRolesModelStruct? projectRoles,
     String? totalTime,
-    UserModelStruct? user,
+    int? isActive,
+    String? startDate,
+    String? endDate,
   })  : _id = id,
         _userHours = userHours,
         _projectRoleId = projectRoleId,
@@ -27,7 +29,9 @@ class ProjectMemberModelStruct extends BaseStruct {
         _userId = userId,
         _projectRoles = projectRoles,
         _totalTime = totalTime,
-        _user = user;
+        _isActive = isActive,
+        _startDate = startDate,
+        _endDate = endDate;
 
   // "id" field.
   int? _id;
@@ -117,16 +121,28 @@ class ProjectMemberModelStruct extends BaseStruct {
 
   bool hasTotalTime() => _totalTime != null;
 
-  // "user" field.
-  UserModelStruct? _user;
-  UserModelStruct get user => _user ?? UserModelStruct();
-  set user(UserModelStruct? val) => _user = val;
+  // "isActive" field.
+  int? _isActive;
+  int get isActive => _isActive ?? 0;
+  set isActive(int? val) => _isActive = val;
 
-  void updateUser(Function(UserModelStruct) updateFn) {
-    updateFn(_user ??= UserModelStruct());
-  }
+  void incrementIsActive(int amount) => isActive = isActive + amount;
 
-  bool hasUser() => _user != null;
+  bool hasIsActive() => _isActive != null;
+
+  // "startDate" field.
+  String? _startDate;
+  String get startDate => _startDate ?? '';
+  set startDate(String? val) => _startDate = val;
+
+  bool hasStartDate() => _startDate != null;
+
+  // "endDate" field.
+  String? _endDate;
+  String get endDate => _endDate ?? '';
+  set endDate(String? val) => _endDate = val;
+
+  bool hasEndDate() => _endDate != null;
 
   static ProjectMemberModelStruct fromMap(Map<String, dynamic> data) =>
       ProjectMemberModelStruct(
@@ -141,7 +157,9 @@ class ProjectMemberModelStruct extends BaseStruct {
         projectRoles:
             ProjectRolesModelStruct.maybeFromMap(data['projectRoles']),
         totalTime: data['totalTime'] as String?,
-        user: UserModelStruct.maybeFromMap(data['user']),
+        isActive: castToType<int>(data['isActive']),
+        startDate: data['startDate'] as String?,
+        endDate: data['endDate'] as String?,
       );
 
   static ProjectMemberModelStruct? maybeFromMap(dynamic data) => data is Map
@@ -159,7 +177,9 @@ class ProjectMemberModelStruct extends BaseStruct {
         'userId': _userId,
         'projectRoles': _projectRoles?.toMap(),
         'totalTime': _totalTime,
-        'user': _user?.toMap(),
+        'isActive': _isActive,
+        'startDate': _startDate,
+        'endDate': _endDate,
       }.withoutNulls;
 
   @override
@@ -204,9 +224,17 @@ class ProjectMemberModelStruct extends BaseStruct {
           _totalTime,
           ParamType.String,
         ),
-        'user': serializeParam(
-          _user,
-          ParamType.DataStruct,
+        'isActive': serializeParam(
+          _isActive,
+          ParamType.int,
+        ),
+        'startDate': serializeParam(
+          _startDate,
+          ParamType.String,
+        ),
+        'endDate': serializeParam(
+          _endDate,
+          ParamType.String,
         ),
       }.withoutNulls;
 
@@ -264,11 +292,20 @@ class ProjectMemberModelStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
-        user: deserializeStructParam(
-          data['user'],
-          ParamType.DataStruct,
+        isActive: deserializeParam(
+          data['isActive'],
+          ParamType.int,
           false,
-          structBuilder: UserModelStruct.fromSerializableMap,
+        ),
+        startDate: deserializeParam(
+          data['startDate'],
+          ParamType.String,
+          false,
+        ),
+        endDate: deserializeParam(
+          data['endDate'],
+          ParamType.String,
+          false,
         ),
       );
 
@@ -288,7 +325,9 @@ class ProjectMemberModelStruct extends BaseStruct {
         userId == other.userId &&
         projectRoles == other.projectRoles &&
         totalTime == other.totalTime &&
-        user == other.user;
+        isActive == other.isActive &&
+        startDate == other.startDate &&
+        endDate == other.endDate;
   }
 
   @override
@@ -303,7 +342,9 @@ class ProjectMemberModelStruct extends BaseStruct {
         userId,
         projectRoles,
         totalTime,
-        user
+        isActive,
+        startDate,
+        endDate
       ]);
 }
 
@@ -318,7 +359,9 @@ ProjectMemberModelStruct createProjectMemberModelStruct({
   int? userId,
   ProjectRolesModelStruct? projectRoles,
   String? totalTime,
-  UserModelStruct? user,
+  int? isActive,
+  String? startDate,
+  String? endDate,
 }) =>
     ProjectMemberModelStruct(
       id: id,
@@ -331,5 +374,7 @@ ProjectMemberModelStruct createProjectMemberModelStruct({
       userId: userId,
       projectRoles: projectRoles ?? ProjectRolesModelStruct(),
       totalTime: totalTime,
-      user: user ?? UserModelStruct(),
+      isActive: isActive,
+      startDate: startDate,
+      endDate: endDate,
     );

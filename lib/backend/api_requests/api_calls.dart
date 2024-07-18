@@ -601,6 +601,10 @@ class UpdateTaskCall {
           .map((x) => castToType<int>(x))
           .withoutNulls
           .toList();
+  static String? message(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
 }
 
 class TimelineFetchManualLogsAPICall {

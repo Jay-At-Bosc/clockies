@@ -1,7 +1,10 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'task_complete_dialogue_model.dart';
 export 'task_complete_dialogue_model.dart';
 
@@ -9,9 +12,11 @@ class TaskCompleteDialogueWidget extends StatefulWidget {
   const TaskCompleteDialogueWidget({
     super.key,
     String? taskName,
+    required this.id,
   }) : taskName = taskName ?? 'Task';
 
   final String taskName;
+  final int? id;
 
   @override
   State<TaskCompleteDialogueWidget> createState() =>
@@ -43,6 +48,8 @@ class _TaskCompleteDialogueWidgetState
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Align(
       alignment: const AlignmentDirectional(0.0, 0.0),
       child: Container(
@@ -107,8 +114,8 @@ class _TaskCompleteDialogueWidgetState
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      Navigator.pop(context, false);
                     },
                     text: 'Cancel',
                     options: FFButtonOptions(
@@ -129,8 +136,79 @@ class _TaskCompleteDialogueWidgetState
                     ),
                   ),
                   FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      var shouldSetState = false;
+                      _model.isInternet = await actions.checkInternet();
+                      shouldSetState = true;
+                      if (_model.isInternet == true) {
+                        _model.taskUpdateResponse = await UpdateTaskCall.call(
+                          authToken: FFAppState().userToken,
+                          id: widget.id,
+                          status: 'Completed',
+                        );
+
+                        shouldSetState = true;
+                        if ((_model.taskUpdateResponse?.succeeded ?? true)) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                UpdateTaskCall.message(
+                                  (_model.taskUpdateResponse?.jsonBody ?? ''),
+                                )!,
+                                style: TextStyle(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
+                              ),
+                              duration: const Duration(milliseconds: 4000),
+                              backgroundColor:
+                                  FlutterFlowTheme.of(context).success,
+                            ),
+                          );
+                          Navigator.pop(context, true);
+                          if (shouldSetState) setState(() {});
+                          return;
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                UpdateTaskCall.message(
+                                  (_model.taskUpdateResponse?.jsonBody ?? ''),
+                                )!,
+                                style: TextStyle(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
+                              ),
+                              duration: const Duration(milliseconds: 4000),
+                              backgroundColor:
+                                  FlutterFlowTheme.of(context).error,
+                            ),
+                          );
+                          Navigator.pop(context, false);
+                          if (shouldSetState) setState(() {});
+                          return;
+                        }
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'No Internet Connection',
+                              style: TextStyle(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                              ),
+                            ),
+                            duration: const Duration(milliseconds: 4000),
+                            backgroundColor:
+                                FlutterFlowTheme.of(context).secondary,
+                          ),
+                        );
+                        Navigator.pop(context, false);
+                        if (shouldSetState) setState(() {});
+                        return;
+                      }
+
+                      if (shouldSetState) setState(() {});
                     },
                     text: 'Completed',
                     options: FFButtonOptions(
