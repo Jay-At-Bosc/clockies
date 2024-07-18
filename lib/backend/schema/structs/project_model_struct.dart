@@ -20,6 +20,12 @@ class ProjectModelStruct extends BaseStruct {
     String? totalTime,
     bool? allowOverSpent,
     bool? allowManualTask,
+    String? actualStartDate,
+    String? actualEndDate,
+    String? startDate,
+    String? endDate,
+    String? holdStarDate,
+    String? holdEndDate,
   })  : _id = id,
         _projectName = projectName,
         _totalHrs = totalHrs,
@@ -33,7 +39,13 @@ class ProjectModelStruct extends BaseStruct {
         _projectmember = projectmember,
         _totalTime = totalTime,
         _allowOverSpent = allowOverSpent,
-        _allowManualTask = allowManualTask;
+        _allowManualTask = allowManualTask,
+        _actualStartDate = actualStartDate,
+        _actualEndDate = actualEndDate,
+        _startDate = startDate,
+        _endDate = endDate,
+        _holdStarDate = holdStarDate,
+        _holdEndDate = holdEndDate;
 
   // "id" field.
   int? _id;
@@ -150,6 +162,48 @@ class ProjectModelStruct extends BaseStruct {
 
   bool hasAllowManualTask() => _allowManualTask != null;
 
+  // "actualStartDate" field.
+  String? _actualStartDate;
+  String get actualStartDate => _actualStartDate ?? '';
+  set actualStartDate(String? val) => _actualStartDate = val;
+
+  bool hasActualStartDate() => _actualStartDate != null;
+
+  // "actualEndDate" field.
+  String? _actualEndDate;
+  String get actualEndDate => _actualEndDate ?? '';
+  set actualEndDate(String? val) => _actualEndDate = val;
+
+  bool hasActualEndDate() => _actualEndDate != null;
+
+  // "startDate" field.
+  String? _startDate;
+  String get startDate => _startDate ?? '';
+  set startDate(String? val) => _startDate = val;
+
+  bool hasStartDate() => _startDate != null;
+
+  // "endDate" field.
+  String? _endDate;
+  String get endDate => _endDate ?? '';
+  set endDate(String? val) => _endDate = val;
+
+  bool hasEndDate() => _endDate != null;
+
+  // "holdStarDate" field.
+  String? _holdStarDate;
+  String get holdStarDate => _holdStarDate ?? '';
+  set holdStarDate(String? val) => _holdStarDate = val;
+
+  bool hasHoldStarDate() => _holdStarDate != null;
+
+  // "holdEndDate" field.
+  String? _holdEndDate;
+  String get holdEndDate => _holdEndDate ?? '';
+  set holdEndDate(String? val) => _holdEndDate = val;
+
+  bool hasHoldEndDate() => _holdEndDate != null;
+
   static ProjectModelStruct fromMap(Map<String, dynamic> data) =>
       ProjectModelStruct(
         id: castToType<int>(data['id']),
@@ -167,6 +221,12 @@ class ProjectModelStruct extends BaseStruct {
         totalTime: data['total_time'] as String?,
         allowOverSpent: data['allowOverSpent'] as bool?,
         allowManualTask: data['allowManualTask'] as bool?,
+        actualStartDate: data['actualStartDate'] as String?,
+        actualEndDate: data['actualEndDate'] as String?,
+        startDate: data['startDate'] as String?,
+        endDate: data['endDate'] as String?,
+        holdStarDate: data['holdStarDate'] as String?,
+        holdEndDate: data['holdEndDate'] as String?,
       );
 
   static ProjectModelStruct? maybeFromMap(dynamic data) => data is Map
@@ -188,6 +248,12 @@ class ProjectModelStruct extends BaseStruct {
         'total_time': _totalTime,
         'allowOverSpent': _allowOverSpent,
         'allowManualTask': _allowManualTask,
+        'actualStartDate': _actualStartDate,
+        'actualEndDate': _actualEndDate,
+        'startDate': _startDate,
+        'endDate': _endDate,
+        'holdStarDate': _holdStarDate,
+        'holdEndDate': _holdEndDate,
       }.withoutNulls;
 
   @override
@@ -247,6 +313,30 @@ class ProjectModelStruct extends BaseStruct {
         'allowManualTask': serializeParam(
           _allowManualTask,
           ParamType.bool,
+        ),
+        'actualStartDate': serializeParam(
+          _actualStartDate,
+          ParamType.String,
+        ),
+        'actualEndDate': serializeParam(
+          _actualEndDate,
+          ParamType.String,
+        ),
+        'startDate': serializeParam(
+          _startDate,
+          ParamType.String,
+        ),
+        'endDate': serializeParam(
+          _endDate,
+          ParamType.String,
+        ),
+        'holdStarDate': serializeParam(
+          _holdStarDate,
+          ParamType.String,
+        ),
+        'holdEndDate': serializeParam(
+          _holdEndDate,
+          ParamType.String,
         ),
       }.withoutNulls;
 
@@ -324,6 +414,36 @@ class ProjectModelStruct extends BaseStruct {
           ParamType.bool,
           false,
         ),
+        actualStartDate: deserializeParam(
+          data['actualStartDate'],
+          ParamType.String,
+          false,
+        ),
+        actualEndDate: deserializeParam(
+          data['actualEndDate'],
+          ParamType.String,
+          false,
+        ),
+        startDate: deserializeParam(
+          data['startDate'],
+          ParamType.String,
+          false,
+        ),
+        endDate: deserializeParam(
+          data['endDate'],
+          ParamType.String,
+          false,
+        ),
+        holdStarDate: deserializeParam(
+          data['holdStarDate'],
+          ParamType.String,
+          false,
+        ),
+        holdEndDate: deserializeParam(
+          data['holdEndDate'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -345,7 +465,13 @@ class ProjectModelStruct extends BaseStruct {
         projectmember == other.projectmember &&
         totalTime == other.totalTime &&
         allowOverSpent == other.allowOverSpent &&
-        allowManualTask == other.allowManualTask;
+        allowManualTask == other.allowManualTask &&
+        actualStartDate == other.actualStartDate &&
+        actualEndDate == other.actualEndDate &&
+        startDate == other.startDate &&
+        endDate == other.endDate &&
+        holdStarDate == other.holdStarDate &&
+        holdEndDate == other.holdEndDate;
   }
 
   @override
@@ -363,7 +489,13 @@ class ProjectModelStruct extends BaseStruct {
         projectmember,
         totalTime,
         allowOverSpent,
-        allowManualTask
+        allowManualTask,
+        actualStartDate,
+        actualEndDate,
+        startDate,
+        endDate,
+        holdStarDate,
+        holdEndDate
       ]);
 }
 
@@ -382,6 +514,12 @@ ProjectModelStruct createProjectModelStruct({
   String? totalTime,
   bool? allowOverSpent,
   bool? allowManualTask,
+  String? actualStartDate,
+  String? actualEndDate,
+  String? startDate,
+  String? endDate,
+  String? holdStarDate,
+  String? holdEndDate,
 }) =>
     ProjectModelStruct(
       id: id,
@@ -398,4 +536,10 @@ ProjectModelStruct createProjectModelStruct({
       totalTime: totalTime,
       allowOverSpent: allowOverSpent,
       allowManualTask: allowManualTask,
+      actualStartDate: actualStartDate,
+      actualEndDate: actualEndDate,
+      startDate: startDate,
+      endDate: endDate,
+      holdStarDate: holdStarDate,
+      holdEndDate: holdEndDate,
     );

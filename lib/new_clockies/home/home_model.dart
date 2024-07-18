@@ -40,12 +40,26 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // Stores action output result for [Custom Action - checkInternet] action in Home widget.
+  bool? isInternet;
   // Stores action output result for [Backend Call - API (Fetch Assigned Project)] action in Home widget.
   ApiCallResponse? project;
   // Stores action output result for [Backend Call - API (Fetch My Tasks)] action in Home widget.
   ApiCallResponse? tasksList;
+  // Stores action output result for [Custom Action - checkInternet] action in Column widget.
+  bool? isInternetCopy;
   // Stores action output result for [Backend Call - API (Fetch Assigned Project)] action in Column widget.
-  ApiCallResponse? projectListCopy;
+  ApiCallResponse? projectCopy;
+  // Stores action output result for [Backend Call - API (Fetch My Tasks)] action in Column widget.
+  ApiCallResponse? tasksListCopy;
+  // Stores action output result for [Alert Dialog - Custom Dialog] action in Icon widget.
+  bool? isModify;
+  // Stores action output result for [Custom Action - checkInternet] action in Icon widget.
+  bool? isInternetModify;
+  // Stores action output result for [Backend Call - API (Fetch Assigned Project)] action in Icon widget.
+  ApiCallResponse? projectModify;
+  // Stores action output result for [Backend Call - API (Fetch My Tasks)] action in Icon widget.
+  ApiCallResponse? tasksListModify;
 
   @override
   void initState(BuildContext context) {}

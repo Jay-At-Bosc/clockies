@@ -720,52 +720,8 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                                               controller: _model
                                                       .assignToDropDownValueController ??=
                                                   FormFieldController<String>(
-                                                _model.assignToDropDownValue ??= FFAppState()
-                                                            .user
-                                                            .userRoleId !=
-                                                        1
-                                                    ? (widget.isEdit!
-                                                        ? FFAppState()
-                                                            .memberList
-                                                            .where((e) =>
-                                                                e.userId ==
-                                                                widget
-                                                                    .taskDetail
-                                                                    ?.userId)
-                                                            .toList()
-                                                            .first
-                                                            .user
-                                                            .userName
-                                                        : FFAppState()
-                                                            .memberList
-                                                            .where((e) =>
-                                                                e.user
-                                                                    .userName ==
-                                                                FFAppState()
-                                                                    .user
-                                                                    .userName)
-                                                            .toList()
-                                                            .first
-                                                            .user
-                                                            .userName)
-                                                    : (widget.isEdit!
-                                                        ? FFAppState()
-                                                            .memberList
-                                                            .where((e) =>
-                                                                e.userId ==
-                                                                widget
-                                                                    .taskDetail
-                                                                    ?.userId)
-                                                            .toList()
-                                                            .first
-                                                            .user
-                                                            .userName
-                                                        : ''),
-                                              ),
-                                              options: FFAppState()
-                                                  .memberList
-                                                  .map((e) => e.user.userName)
-                                                  .toList(),
+                                                      null),
+                                              options: const ['Option 1'],
                                               onChanged: (val) => setState(() =>
                                                   _model.assignToDropDownValue =
                                                       val),
@@ -800,10 +756,6 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                                                   .fromSTEB(
                                                       16.0, 4.0, 16.0, 4.0),
                                               hidesUnderline: true,
-                                              disabled: FFAppState()
-                                                      .user
-                                                      .userRoleId !=
-                                                  1,
                                               isOverButton: true,
                                               isSearchable: false,
                                               isMultiSelect: false,

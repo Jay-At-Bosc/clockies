@@ -4,6 +4,7 @@ import '/components/task_complete_dialogue_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
@@ -32,60 +33,74 @@ class _HomeWidgetState extends State<HomeWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.isLoading = true;
-      setState(() {});
-      _model.project = await FetchAssignedProjectCall.call(
-        authToken: FFAppState().userToken,
-      );
-
-      _model.isLoading = false;
-      setState(() {});
-      if ((_model.project?.succeeded ?? true)) {
-        _model.projects = FetchAssignedProjectCall.allProjects(
-          (_model.project?.jsonBody ?? ''),
-        )!
-            .map((e) => ProjectModelStruct.maybeFromMap(e))
-            .withoutNulls
-            .toList()
-            .toList()
-            .cast<ProjectModelStruct>();
+      _model.isInternet = await actions.checkInternet();
+      if (_model.isInternet == true) {
+        _model.isLoading = true;
         setState(() {});
-        _model.tasksList = await FetchMyTasksCall.call(
+        _model.project = await FetchAssignedProjectCall.call(
           authToken: FFAppState().userToken,
-          pageSize: 10,
         );
 
-        if ((_model.tasksList?.succeeded ?? true)) {
-          _model.tasks = FetchMyTasksCall.myTasks(
-            (_model.tasksList?.jsonBody ?? ''),
+        if ((_model.project?.succeeded ?? true)) {
+          _model.projects = FetchAssignedProjectCall.allProjects(
+            (_model.project?.jsonBody ?? ''),
           )!
-              .map((e) => TaskModelStruct.maybeFromMap(e))
+              .map((e) => ProjectModelStruct.maybeFromMap(e))
               .withoutNulls
               .toList()
               .toList()
-              .cast<TaskModelStruct>();
+              .cast<ProjectModelStruct>();
+          setState(() {});
+          _model.tasksList = await FetchMyTasksCall.call(
+            authToken: FFAppState().userToken,
+            pageSize: 10,
+          );
+
+          if ((_model.tasksList?.succeeded ?? true)) {
+            _model.tasks = FetchMyTasksCall.myTasks(
+              (_model.tasksList?.jsonBody ?? ''),
+            )!
+                .map((e) => TaskModelStruct.maybeFromMap(e))
+                .withoutNulls
+                .toList()
+                .toList()
+                .cast<TaskModelStruct>();
+            setState(() {});
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  FetchMyTasksCall.message(
+                    (_model.tasksList?.jsonBody ?? ''),
+                  )!,
+                  style: TextStyle(
+                    color: FlutterFlowTheme.of(context).primaryText,
+                  ),
+                ),
+                duration: const Duration(milliseconds: 4000),
+                backgroundColor: FlutterFlowTheme.of(context).secondary,
+              ),
+            );
+          }
+
+          _model.isLoading = false;
           setState(() {});
         } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                FetchMyTasksCall.message(
-                  (_model.tasksList?.jsonBody ?? ''),
-                )!,
-                style: TextStyle(
-                  color: FlutterFlowTheme.of(context).primaryText,
-                ),
-              ),
-              duration: const Duration(milliseconds: 4000),
-              backgroundColor: FlutterFlowTheme.of(context).secondary,
-            ),
-          );
+          return;
         }
-
-        _model.isLoading = false;
-        setState(() {});
       } else {
-        return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'No Internet Connection',
+              style: TextStyle(
+                color: FlutterFlowTheme.of(context).primaryText,
+              ),
+            ),
+            duration: const Duration(milliseconds: 4000),
+            backgroundColor: FlutterFlowTheme.of(context).secondary,
+          ),
+        );
       }
     });
   }
@@ -124,28 +139,66 @@ class _HomeWidgetState extends State<HomeWidget> {
                     child: RefreshIndicator(
                       key: const Key('RefreshIndicator_q6l8xaux'),
                       onRefresh: () async {
-                        _model.isLoading = true;
-                        setState(() {});
-                        _model.projectListCopy =
-                            await FetchAssignedProjectCall.call();
-
-                        if ((_model.projectListCopy?.succeeded ?? true)) {
-                          _model
-                              .projects = FetchAssignedProjectCall.allProjects(
-                            (_model.projectListCopy?.jsonBody ?? ''),
-                          )!
-                              .map((e) => ProjectModelStruct.maybeFromMap(e))
-                              .withoutNulls
-                              .toList()
-                              .cast<ProjectModelStruct>();
+                        _model.isInternetCopy = await actions.checkInternet();
+                        if (_model.isInternetCopy == true) {
+                          _model.isLoading = true;
                           setState(() {});
+                          _model.projectCopy =
+                              await FetchAssignedProjectCall.call(
+                            authToken: FFAppState().userToken,
+                          );
+
+                          if ((_model.projectCopy?.succeeded ?? true)) {
+                            _model.projects = FetchAssignedProjectCall
+                                    .allProjects(
+                              (_model.projectCopy?.jsonBody ?? ''),
+                            )!
+                                .map((e) => ProjectModelStruct.maybeFromMap(e))
+                                .withoutNulls
+                                .toList()
+                                .cast<ProjectModelStruct>();
+                            setState(() {});
+                            _model.tasksListCopy = await FetchMyTasksCall.call(
+                              authToken: FFAppState().userToken,
+                              pageSize: 10,
+                            );
+
+                            if ((_model.tasksListCopy?.succeeded ?? true)) {
+                              _model.tasks = FetchMyTasksCall.myTasks(
+                                (_model.tasksListCopy?.jsonBody ?? ''),
+                              )!
+                                  .map((e) => TaskModelStruct.maybeFromMap(e))
+                                  .withoutNulls
+                                  .toList()
+                                  .cast<TaskModelStruct>();
+                              setState(() {});
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'No Internet Connection',
+                                    style: TextStyle(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                    ),
+                                  ),
+                                  duration: const Duration(milliseconds: 4000),
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).secondary,
+                                ),
+                              );
+                            }
+
+                            _model.isLoading = false;
+                            setState(() {});
+                          } else {
+                            return;
+                          }
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
-                                FetchAssignedProjectCall.message(
-                                  (_model.projectListCopy?.jsonBody ?? ''),
-                                )!,
+                                'No Internet Connection',
                                 style: TextStyle(
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
@@ -157,9 +210,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                             ),
                           );
                         }
-
-                        _model.isLoading = false;
-                        setState(() {});
                       },
                       child: SingleChildScrollView(
                         physics: const AlwaysScrollableScrollPhysics(),
@@ -433,6 +483,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                     highlightColor:
                                                         Colors.transparent,
                                                     onTap: () async {
+                                                      var shouldSetState =
+                                                          false;
                                                       await showDialog(
                                                         barrierDismissible:
                                                             false,
@@ -482,13 +534,164 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                         .taskName,
                                                                     'Task',
                                                                   ),
+                                                                  id: taskDataItem
+                                                                      .id,
                                                                 ),
                                                               ),
                                                             ),
                                                           );
                                                         },
                                                       ).then((value) =>
-                                                          setState(() {}));
+                                                          safeSetState(() =>
+                                                              _model.isModify =
+                                                                  value));
+
+                                                      shouldSetState = true;
+                                                      if (_model.isModify!) {
+                                                        _model.isInternetModify =
+                                                            await actions
+                                                                .checkInternet();
+                                                        shouldSetState = true;
+                                                        if (_model
+                                                                .isInternetModify ==
+                                                            true) {
+                                                          _model.isLoading =
+                                                              true;
+                                                          setState(() {});
+                                                          _model.projectModify =
+                                                              await FetchAssignedProjectCall
+                                                                  .call(
+                                                            authToken:
+                                                                FFAppState()
+                                                                    .userToken,
+                                                          );
+
+                                                          shouldSetState =
+                                                              true;
+                                                          if ((_model
+                                                                  .projectModify
+                                                                  ?.succeeded ??
+                                                              true)) {
+                                                            _model
+                                                                .projects = FetchAssignedProjectCall
+                                                                    .allProjects(
+                                                              (_model.projectModify
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                            )!
+                                                                .map((e) =>
+                                                                    ProjectModelStruct
+                                                                        .maybeFromMap(
+                                                                            e))
+                                                                .withoutNulls
+                                                                .toList()
+                                                                .cast<
+                                                                    ProjectModelStruct>();
+                                                            setState(() {});
+                                                            _model.tasksListModify =
+                                                                await FetchMyTasksCall
+                                                                    .call(
+                                                              authToken:
+                                                                  FFAppState()
+                                                                      .userToken,
+                                                              pageSize: 10,
+                                                            );
+
+                                                            shouldSetState =
+                                                                true;
+                                                            if ((_model
+                                                                    .tasksListModify
+                                                                    ?.succeeded ??
+                                                                true)) {
+                                                              _model
+                                                                  .tasks = FetchMyTasksCall
+                                                                      .myTasks(
+                                                                (_model.tasksListModify
+                                                                        ?.jsonBody ??
+                                                                    ''),
+                                                              )!
+                                                                  .map((e) =>
+                                                                      TaskModelStruct
+                                                                          .maybeFromMap(
+                                                                              e))
+                                                                  .withoutNulls
+                                                                  .toList()
+                                                                  .cast<
+                                                                      TaskModelStruct>();
+                                                              setState(() {});
+                                                            } else {
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .showSnackBar(
+                                                                SnackBar(
+                                                                  content: Text(
+                                                                    FetchMyTasksCall
+                                                                        .message(
+                                                                      (_model.tasksList
+                                                                              ?.jsonBody ??
+                                                                          ''),
+                                                                    )!,
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryText,
+                                                                    ),
+                                                                  ),
+                                                                  duration: const Duration(
+                                                                      milliseconds:
+                                                                          4000),
+                                                                  backgroundColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondary,
+                                                                ),
+                                                              );
+                                                            }
+
+                                                            _model.isLoading =
+                                                                false;
+                                                            setState(() {});
+                                                          } else {
+                                                            if (shouldSetState) {
+                                                              setState(() {});
+                                                            }
+                                                            return;
+                                                          }
+                                                        } else {
+                                                          ScaffoldMessenger.of(
+                                                                  context)
+                                                              .showSnackBar(
+                                                            SnackBar(
+                                                              content: Text(
+                                                                'No Internet Connection',
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
+                                                                ),
+                                                              ),
+                                                              duration: const Duration(
+                                                                  milliseconds:
+                                                                      4000),
+                                                              backgroundColor:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondary,
+                                                            ),
+                                                          );
+                                                        }
+                                                      } else {
+                                                        if (shouldSetState) {
+                                                          setState(() {});
+                                                        }
+                                                        return;
+                                                      }
+
+                                                      if (shouldSetState) {
+                                                        setState(() {});
+                                                      }
                                                     },
                                                     child: Icon(
                                                       Icons
