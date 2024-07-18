@@ -337,12 +337,13 @@ class FetchProjectByIDCall {
 class FetchMyTasksCall {
   static Future<ApiCallResponse> call({
     String? authToken = '',
-    int? pageNumber,
     int? pageSize,
-    String? search = '',
-    String? order = '',
-    String? orderBy = '',
+    List<String>? filtersList,
+    List<String>? sortingList,
   }) async {
+    final filters = _serializeList(filtersList);
+    final sorting = _serializeList(sortingList);
+
     return ApiManager.instance.makeApiCall(
       callName: 'Fetch My Tasks',
       apiUrl: 'http://3.144.249.140:5000/api/task/myTask',
@@ -351,11 +352,9 @@ class FetchMyTasksCall {
         'Authorization': '$authToken',
       },
       params: {
-        'pageNumber': pageNumber,
         'pageSize': pageSize,
-        'search': search,
-        'order': order,
-        'orderBy': orderBy,
+        'filters': filters,
+        'sorting': sorting,
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -371,17 +370,31 @@ class FetchMyTasksCall {
         r'''$.data.rows''',
         true,
       ) as List?;
+  static List<String>? endDate(dynamic response) => (getJsonField(
+        response,
+        r'''$.data.rows[:].endDate''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static String? message(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
 }
 
 class FetchMyTaskCall {
   static Future<ApiCallResponse> call({
     String? authToken = '',
-    int? pageNumber,
     int? pageSize,
-    String? search = '',
-    String? order = '',
-    String? orderBy = '',
+    List<String>? sortingList,
+    List<String>? filtersList,
   }) async {
+    final sorting = _serializeList(sortingList);
+    final filters = _serializeList(filtersList);
+
     return ApiManager.instance.makeApiCall(
       callName: 'Fetch My Task',
       apiUrl: 'http://3.144.249.140:5000/api/task/myTask',
@@ -390,11 +403,9 @@ class FetchMyTaskCall {
         'Authorization': '$authToken',
       },
       params: {
-        'pageNumber': pageNumber,
         'pageSize': pageSize,
-        'search': search,
-        'order': order,
-        'orderBy': orderBy,
+        'filters': filters,
+        'sorting': sorting,
       },
       returnBody: true,
       encodeBodyUtf8: false,

@@ -1,5 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
+import '/components/task_complete_dialogue_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -62,6 +63,36 @@ class _HomeWidgetState extends State<HomeWidget> {
             backgroundColor: FlutterFlowTheme.of(context).secondary,
           ),
         );
+        return;
+      }
+
+      _model.taskList = await FetchMyTasksCall.call();
+
+      if ((_model.taskList?.succeeded ?? true)) {
+        _model.tasks = FetchMyTasksCall.myTasks(
+          (_model.taskList?.jsonBody ?? ''),
+        )!
+            .map((e) => TaskModelStruct.maybeFromMap(e))
+            .withoutNulls
+            .toList()
+            .toList()
+            .cast<TaskModelStruct>();
+        setState(() {});
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              FetchMyTasksCall.message(
+                (_model.taskList?.jsonBody ?? ''),
+              )!,
+              style: TextStyle(
+                color: FlutterFlowTheme.of(context).primaryText,
+              ),
+            ),
+            duration: const Duration(milliseconds: 4000),
+            backgroundColor: FlutterFlowTheme.of(context).secondary,
+          ),
+        );
       }
 
       _model.isLoading = false;
@@ -99,7 +130,7 @@ class _HomeWidgetState extends State<HomeWidget> {
               builder: (context) {
                 if (_model.isLoading == false) {
                   return Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: RefreshIndicator(
                       key: const Key('RefreshIndicator_q6l8xaux'),
                       onRefresh: () async {
@@ -178,12 +209,181 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 ),
                               ].divide(const SizedBox(height: 4.0)),
                             ),
+                            Flexible(
+                              child: Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  border: Border.all(
+                                    color: FlutterFlowTheme.of(context)
+                                        .borderColor,
+                                    width: 1.0,
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 18.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              'Projects',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelLarge
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Builder(
+                                        builder: (context) {
+                                          final projectData = _model.projects
+                                              .map((e) => e)
+                                              .toList()
+                                              .take(5)
+                                              .toList()
+                                              .take(10)
+                                              .toList();
+
+                                          return Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: List.generate(
+                                                projectData.length,
+                                                (projectDataIndex) {
+                                              final projectDataItem =
+                                                  projectData[projectDataIndex];
+                                              return Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Container(
+                                                    width: 36.0,
+                                                    height: 36.0,
+                                                    decoration: BoxDecoration(
+                                                      color:
+                                                          valueOrDefault<Color>(
+                                                        functions
+                                                            .getRandomColor(),
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .pinkColor,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                    ),
+                                                    child: Icon(
+                                                      Icons.menu_sharp,
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .primaryBackground,
+                                                      size: 24.0,
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          projectDataItem
+                                                              .projectName,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .labelMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Inter',
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
+                                                        ),
+                                                        Text(
+                                                          '${random_data.randomInteger(0, 10).toString()} Member - ${projectDataItem.clients.clientName}',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyLarge
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Inter',
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
+                                                        ),
+                                                      ].divide(const SizedBox(
+                                                          height: 4.0)),
+                                                    ),
+                                                  ),
+                                                ].divide(const SizedBox(width: 8.0)),
+                                              );
+                                            }).divide(const SizedBox(height: 12.0)),
+                                          );
+                                        },
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 8.0, 0.0, 0.0),
+                                        child: FFButtonWidget(
+                                          onPressed: () {
+                                            print('Button pressed ...');
+                                          },
+                                          text: 'See all',
+                                          options: FFButtonOptions(
+                                            width: double.infinity,
+                                            height: 40.0,
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            iconPadding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelLarge
+                                                    .override(
+                                                      fontFamily: 'Inter',
+                                                      letterSpacing: 0.0,
+                                                    ),
+                                            elevation: 0.0,
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .borderColor,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
                             Container(
                               width: double.infinity,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
-                                borderRadius: BorderRadius.circular(24.0),
+                                borderRadius: BorderRadius.circular(20.0),
                                 border: Border.all(
                                   color:
                                       FlutterFlowTheme.of(context).borderColor,
@@ -204,7 +404,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            'Projects',
+                                            'My Tasks',
                                             style: FlutterFlowTheme.of(context)
                                                 .labelLarge
                                                 .override(
@@ -217,86 +417,116 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     ),
                                     Builder(
                                       builder: (context) {
-                                        final projectData = _model.projects
+                                        final taskData = _model.tasks
                                             .map((e) => e)
                                             .toList()
                                             .take(5)
                                             .toList()
-                                            .take(10)
+                                            .take(5)
                                             .toList();
 
                                         return Column(
                                           mainAxisSize: MainAxisSize.max,
-                                          children:
-                                              List.generate(projectData.length,
-                                                  (projectDataIndex) {
-                                            final projectDataItem =
-                                                projectData[projectDataIndex];
+                                          children: List.generate(
+                                              taskData.length, (taskDataIndex) {
+                                            final taskDataItem =
+                                                taskData[taskDataIndex];
                                             return Row(
                                               mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
                                               children: [
-                                                Container(
-                                                  width: 36.0,
-                                                  height: 36.0,
-                                                  decoration: BoxDecoration(
-                                                    color:
-                                                        valueOrDefault<Color>(
-                                                      functions
-                                                          .getRandomColor(),
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .pinkColor,
+                                                Builder(
+                                                  builder: (context) => InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      await showDialog(
+                                                        barrierDismissible:
+                                                            false,
+                                                        context: context,
+                                                        builder:
+                                                            (dialogContext) {
+                                                          return Dialog(
+                                                            elevation: 0,
+                                                            insetPadding:
+                                                                EdgeInsets.zero,
+                                                            backgroundColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            alignment: const AlignmentDirectional(
+                                                                    0.0, 0.0)
+                                                                .resolve(
+                                                                    Directionality.of(
+                                                                        context)),
+                                                            child:
+                                                                GestureDetector(
+                                                              onTap: () => _model
+                                                                      .unfocusNode
+                                                                      .canRequestFocus
+                                                                  ? FocusScope.of(
+                                                                          context)
+                                                                      .requestFocus(
+                                                                          _model
+                                                                              .unfocusNode)
+                                                                  : FocusScope.of(
+                                                                          context)
+                                                                      .unfocus(),
+                                                              child:
+                                                                  TaskCompleteDialogueWidget(
+                                                                taskName:
+                                                                    taskDataItem
+                                                                        .taskName,
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      ).then((value) =>
+                                                          setState(() {}));
+                                                    },
+                                                    child: Icon(
+                                                      Icons
+                                                          .check_circle_outline_sharp,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                      size: 24.0,
                                                     ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                  ),
-                                                  child: Icon(
-                                                    Icons.menu_sharp,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryBackground,
-                                                    size: 24.0,
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        projectDataItem
-                                                            .projectName,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Inter',
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
-                                                      ),
-                                                      Text(
-                                                        '${random_data.randomInteger(0, 10).toString()} Member - ${projectDataItem.clients.clientName}',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyLarge
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Inter',
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
-                                                      ),
-                                                    ].divide(
-                                                        const SizedBox(height: 4.0)),
+                                                  child: Text(
+                                                    taskDataItem.taskName,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                                   ),
+                                                ),
+                                                Text(
+                                                  functions.getTaskStatus(
+                                                      taskDataItem.endDate),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .checkedColor,
+                                                        letterSpacing: 0.0,
+                                                      ),
                                                 ),
                                               ].divide(const SizedBox(width: 8.0)),
                                             );
@@ -308,8 +538,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                                       padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 8.0, 0.0, 0.0),
                                       child: FFButtonWidget(
-                                        onPressed: () {
-                                          print('Button pressed ...');
+                                        onPressed: () async {
+                                          context.pushNamed('MyTask');
                                         },
                                         text: 'See all',
                                         options: FFButtonOptions(
@@ -330,13 +560,14 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                     fontFamily: 'Inter',
                                                     letterSpacing: 0.0,
                                                   ),
+                                          elevation: 0.0,
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
                                                 .borderColor,
                                             width: 1.0,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(20.0),
+                                              BorderRadius.circular(10.0),
                                         ),
                                       ),
                                     ),
@@ -355,9 +586,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                     child: Container(
                       width: 100.0,
                       height: 100.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
+                      decoration: const BoxDecoration(),
                       child: Lottie.asset(
                         'assets/lottie_animations/Animation_-_1718873537938.json',
                         width: 150.0,
