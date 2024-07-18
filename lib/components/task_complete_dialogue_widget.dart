@@ -76,7 +76,10 @@ class _TaskCompleteDialogueWidgetState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.taskName,
+                    valueOrDefault<String>(
+                      widget.taskName,
+                      'Task',
+                    ),
                     textAlign: TextAlign.start,
                     style: FlutterFlowTheme.of(context).headlineMedium.override(
                           fontFamily: 'Inter',

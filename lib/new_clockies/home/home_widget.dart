@@ -472,10 +472,16 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                 width: MediaQuery.sizeOf(
                                                                             context)
                                                                         .width *
-                                                                    1.0,
+                                                                    0.8,
                                                                 child:
-                                                                    const TaskCompleteDialogueWidget(
-                                                                  taskName: '',
+                                                                    TaskCompleteDialogueWidget(
+                                                                  taskName:
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                    taskDataItem
+                                                                        .taskName,
+                                                                    'Task',
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ),
