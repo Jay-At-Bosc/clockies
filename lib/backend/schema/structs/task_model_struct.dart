@@ -25,8 +25,8 @@ class TaskModelStruct extends BaseStruct {
     ProjectModelStruct? projects,
     DateTime? completedAt,
     String? issueType,
-    double? earnedPoints,
     TaskUserStruct? user,
+    String? earnedPoints,
   })  : _id = id,
         _taskName = taskName,
         _startDate = startDate,
@@ -46,8 +46,8 @@ class TaskModelStruct extends BaseStruct {
         _projects = projects,
         _completedAt = completedAt,
         _issueType = issueType,
-        _earnedPoints = earnedPoints,
-        _user = user;
+        _user = user,
+        _earnedPoints = earnedPoints;
 
   // "id" field.
   int? _id;
@@ -205,16 +205,6 @@ class TaskModelStruct extends BaseStruct {
 
   bool hasIssueType() => _issueType != null;
 
-  // "earnedPoints" field.
-  double? _earnedPoints;
-  double get earnedPoints => _earnedPoints ?? 0.0;
-  set earnedPoints(double? val) => _earnedPoints = val;
-
-  void incrementEarnedPoints(double amount) =>
-      earnedPoints = earnedPoints + amount;
-
-  bool hasEarnedPoints() => _earnedPoints != null;
-
   // "user" field.
   TaskUserStruct? _user;
   TaskUserStruct get user => _user ?? TaskUserStruct();
@@ -225,6 +215,13 @@ class TaskModelStruct extends BaseStruct {
   }
 
   bool hasUser() => _user != null;
+
+  // "earnedPoints" field.
+  String? _earnedPoints;
+  String get earnedPoints => _earnedPoints ?? '';
+  set earnedPoints(String? val) => _earnedPoints = val;
+
+  bool hasEarnedPoints() => _earnedPoints != null;
 
   static TaskModelStruct fromMap(Map<String, dynamic> data) => TaskModelStruct(
         id: castToType<int>(data['id']),
@@ -246,8 +243,8 @@ class TaskModelStruct extends BaseStruct {
         projects: ProjectModelStruct.maybeFromMap(data['projects']),
         completedAt: data['completedAt'] as DateTime?,
         issueType: data['issueType'] as String?,
-        earnedPoints: castToType<double>(data['earnedPoints']),
         user: TaskUserStruct.maybeFromMap(data['user']),
+        earnedPoints: data['earnedPoints'] as String?,
       );
 
   static TaskModelStruct? maybeFromMap(dynamic data) => data is Map
@@ -274,8 +271,8 @@ class TaskModelStruct extends BaseStruct {
         'projects': _projects?.toMap(),
         'completedAt': _completedAt,
         'issueType': _issueType,
-        'earnedPoints': _earnedPoints,
         'user': _user?.toMap(),
+        'earnedPoints': _earnedPoints,
       }.withoutNulls;
 
   @override
@@ -356,13 +353,13 @@ class TaskModelStruct extends BaseStruct {
           _issueType,
           ParamType.String,
         ),
-        'earnedPoints': serializeParam(
-          _earnedPoints,
-          ParamType.double,
-        ),
         'user': serializeParam(
           _user,
           ParamType.DataStruct,
+        ),
+        'earnedPoints': serializeParam(
+          _earnedPoints,
+          ParamType.String,
         ),
       }.withoutNulls;
 
@@ -464,16 +461,16 @@ class TaskModelStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
-        earnedPoints: deserializeParam(
-          data['earnedPoints'],
-          ParamType.double,
-          false,
-        ),
         user: deserializeStructParam(
           data['user'],
           ParamType.DataStruct,
           false,
           structBuilder: TaskUserStruct.fromSerializableMap,
+        ),
+        earnedPoints: deserializeParam(
+          data['earnedPoints'],
+          ParamType.String,
+          false,
         ),
       );
 
@@ -502,8 +499,8 @@ class TaskModelStruct extends BaseStruct {
         projects == other.projects &&
         completedAt == other.completedAt &&
         issueType == other.issueType &&
-        earnedPoints == other.earnedPoints &&
-        user == other.user;
+        user == other.user &&
+        earnedPoints == other.earnedPoints;
   }
 
   @override
@@ -527,8 +524,8 @@ class TaskModelStruct extends BaseStruct {
         projects,
         completedAt,
         issueType,
-        earnedPoints,
-        user
+        user,
+        earnedPoints
       ]);
 }
 
@@ -552,8 +549,8 @@ TaskModelStruct createTaskModelStruct({
   ProjectModelStruct? projects,
   DateTime? completedAt,
   String? issueType,
-  double? earnedPoints,
   TaskUserStruct? user,
+  String? earnedPoints,
 }) =>
     TaskModelStruct(
       id: id,
@@ -575,6 +572,6 @@ TaskModelStruct createTaskModelStruct({
       projects: projects ?? ProjectModelStruct(),
       completedAt: completedAt,
       issueType: issueType,
-      earnedPoints: earnedPoints,
       user: user ?? TaskUserStruct(),
+      earnedPoints: earnedPoints,
     );
