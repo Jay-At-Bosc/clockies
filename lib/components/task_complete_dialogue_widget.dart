@@ -144,7 +144,7 @@ class _TaskCompleteDialogueWidgetState
                         _model.taskUpdateResponse = await UpdateTaskCall.call(
                           authToken: FFAppState().userToken,
                           id: widget.id,
-                          status: 'Completed',
+                          status: FFAppConstants.Completed,
                         );
 
                         shouldSetState = true;

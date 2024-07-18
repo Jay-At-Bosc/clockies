@@ -561,17 +561,8 @@ class UpdateTaskCall {
     int? id,
   }) async {
     final ffApiRequestBody = '''
-{
-  "taskName": "$taskName",
-  "userId": $userId,
-  "sectionId": $sectionId,
-  "endDate": "$endDate",
-  "startDate": "$startDate",
-  "description": "$description",
-  "status": "$status",
-  "taskType": "$taskType",
-  "plannedHours": $plannedHours,
-  "projectId": $projectId
+{ 
+  "status": "$status"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Update Task ',
