@@ -50,7 +50,10 @@ class _HomeWidgetState extends State<HomeWidget> {
             .toList()
             .cast<ProjectModelStruct>();
         setState(() {});
-        _model.tasksList = await FetchMyTasksCall.call();
+        _model.tasksList = await FetchMyTasksCall.call(
+          authToken: FFAppState().userToken,
+          pageSize: 10,
+        );
 
         if ((_model.tasksList?.succeeded ?? true)) {
           _model.tasks = FetchMyTasksCall.myTasks(
@@ -355,7 +358,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                             width: 1.0,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(20.0),
+                                              BorderRadius.circular(9.0),
                                         ),
                                       ),
                                     ),
