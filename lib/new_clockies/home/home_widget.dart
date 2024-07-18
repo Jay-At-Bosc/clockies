@@ -53,6 +53,8 @@ class _HomeWidgetState extends State<HomeWidget> {
         _model.tasksList = await FetchMyTasksCall.call(
           authToken: FFAppState().userToken,
           pageSize: 10,
+          filtersList: FFAppConstants.emptyList,
+          sortingList: FFAppConstants.emptyList,
         );
 
         if ((_model.tasksList?.succeeded ?? true)) {
@@ -577,9 +579,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                     child: Container(
                       width: 100.0,
                       height: 100.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
+                      decoration: const BoxDecoration(),
                       child: Lottie.asset(
                         'assets/lottie_animations/Animation_-_1718873537938.json',
                         width: 150.0,
