@@ -447,7 +447,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                 Colors
                                                                     .transparent,
                                                             alignment: const AlignmentDirectional(
-                                                                    0.0, 0.0)
+                                                                    -1.0, 0.0)
                                                                 .resolve(
                                                                     Directionality.of(
                                                                         context)),
@@ -495,15 +495,22 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                     ),
                                                   ),
                                                 ),
-                                                Text(
-                                                  taskDataItem.taskName,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .labelMedium
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        letterSpacing: 0.0,
-                                                      ),
+                                                Expanded(
+                                                  child: Align(
+                                                    alignment:
+                                                        const AlignmentDirectional(
+                                                            -1.0, 0.0),
+                                                    child: Text(
+                                                      taskDataItem.taskName,
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .labelMedium
+                                                          .override(
+                                                            fontFamily: 'Inter',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                  ),
                                                 ),
                                                 Text(
                                                   functions.getTaskStatus(
