@@ -12,9 +12,11 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 class PopupMenuWidget extends StatefulWidget {
-  final ValueChanged<String> onItemSelected;
+  final Future Function(String value) onItemSelected;
+  final double? height;
+  final double? width;
 
-  PopupMenuWidget({required this.onItemSelected});
+  PopupMenuWidget({this.height, this.width, required this.onItemSelected});
 
   @override
   _PopupMenuWidgetState createState() => _PopupMenuWidgetState();

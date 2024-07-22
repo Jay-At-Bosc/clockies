@@ -49,7 +49,7 @@ class _MyTaskWidgetState extends State<MyTaskWidget> {
               color: FlutterFlowTheme.of(context).secondaryBackground,
             ),
             child: Column(
-              mainAxisSize: MainAxisSize.max,
+              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Row(
@@ -82,7 +82,7 @@ class _MyTaskWidgetState extends State<MyTaskWidget> {
                           child: custom_widgets.PopupMenuWidget(
                             width: 100.0,
                             height: 40.0,
-                            onItemSelected: () async {},
+                            onItemSelected: (value) async {},
                           ),
                         ),
                       ],
@@ -120,6 +120,10 @@ class _MyTaskWidgetState extends State<MyTaskWidget> {
                       ),
                     );
                   },
+                ),
+                Divider(
+                  thickness: 3.0,
+                  color: FlutterFlowTheme.of(context).secondaryText,
                 ),
               ],
             ),
