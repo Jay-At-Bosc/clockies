@@ -23,7 +23,7 @@ class PopupMenuWidget extends StatefulWidget {
 }
 
 class _PopupMenuWidgetState extends State<PopupMenuWidget> {
-  String _selectedItem = 'Default Item';
+  String _selectedItem = "List";
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +31,8 @@ class _PopupMenuWidgetState extends State<PopupMenuWidget> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text(_selectedItem),
-        Icon(Icons.arrow_drop_down),
         PopupMenuButton<String>(
-          icon: Icon(Icons.more_vert),
+          icon: Icon(Icons.arrow_drop_down),
           onSelected: (String value) {
             setState(() {
               _selectedItem = value;
@@ -43,16 +42,16 @@ class _PopupMenuWidgetState extends State<PopupMenuWidget> {
           itemBuilder: (BuildContext context) {
             return <PopupMenuEntry<String>>[
               const PopupMenuItem<String>(
-                value: 'Item 1',
-                child: Text('Item 1'),
+                value: 'List',
+                child: Text('List'),
               ),
               const PopupMenuItem<String>(
-                value: 'Item 2',
-                child: Text('Item 2'),
+                value: 'Board',
+                child: Text('Board'),
               ),
               const PopupMenuItem<String>(
-                value: 'Item 3',
-                child: Text('Item 3'),
+                value: 'Calender',
+                child: Text('Calender'),
               ),
             ];
           },
