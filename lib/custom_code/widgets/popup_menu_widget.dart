@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 class PopupMenuWidget extends StatefulWidget {
-  final Future Function(String value) onItemSelected;
+  final Future Function(int index) onItemSelected;
   final double? height;
   final double? width;
 
@@ -23,40 +23,38 @@ class PopupMenuWidget extends StatefulWidget {
 }
 
 class _PopupMenuWidgetState extends State<PopupMenuWidget> {
-  String _selectedItem = "List";
+  int _selectedIndex = 0;
+  List<String> _items = ['List', 'Board', 'Calendar'];
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(_selectedItem),
-        PopupMenuButton<String>(
-          icon: Icon(Icons.arrow_drop_down),
-          onSelected: (String value) {
-            setState(() {
-              _selectedItem = value;
-            });
-            widget.onItemSelected(value); // Call the callback function
-          },
-          itemBuilder: (BuildContext context) {
-            return <PopupMenuEntry<String>>[
-              const PopupMenuItem<String>(
-                value: 'List',
-                child: Text('List'),
-              ),
-              const PopupMenuItem<String>(
-                value: 'Board',
-                child: Text('Board'),
-              ),
-              const PopupMenuItem<String>(
-                value: 'Calender',
-                child: Text('Calender'),
-              ),
-            ];
-          },
-        ),
-      ],
+    return Container(
+      child: Row(
+        children: <Widget>[
+          PopupMenuButton<int>(
+            child: Row(
+              children: [
+                Text(_items[_selectedIndex]),
+                Icon(Icons.arrow_drop_down),
+              ],
+            ),
+            onSelected: (int index) {
+              setState(() {
+                _selectedIndex = index;
+              });
+              widget.onItemSelected(index);
+            },
+            itemBuilder: (BuildContext context) {
+              return List.generate(_items.length, (index) {
+                return PopupMenuItem<int>(
+                  value: index,
+                  child: Text(_items[index]),
+                );
+              });
+            },
+          ),
+        ],
+      ),
     );
   }
 }

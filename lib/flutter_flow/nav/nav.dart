@@ -210,6 +210,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               structBuilder: TaskModelStruct.fromSerializableMap,
             ),
           ),
+        ),
+        FFRoute(
+          name: 'BoardScreen',
+          path: '/boardScreen',
+          builder: (context, params) => const BoardScreenWidget(),
+        ),
+        FFRoute(
+          name: 'CalenderScreen',
+          path: '/calenderScreen',
+          builder: (context, params) => const CalenderScreenWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
