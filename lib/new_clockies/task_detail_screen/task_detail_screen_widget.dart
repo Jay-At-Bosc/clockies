@@ -105,17 +105,22 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                   ),
                 ),
               ),
-              Expanded(
-                child: Text(
-                  valueOrDefault<String>(
-                    widget.task?.taskName,
-                    'Task',
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Icon(
+                    Icons.lock_sharp,
+                    color: FlutterFlowTheme.of(context).secondaryText,
+                    size: 16.0,
                   ),
-                  style: FlutterFlowTheme.of(context).headlineLarge.override(
-                        fontFamily: 'Inter',
-                        letterSpacing: 0.0,
-                      ),
-                ),
+                  Text(
+                    'Private to members of its projects',
+                    style: FlutterFlowTheme.of(context).headlineLarge.override(
+                          fontFamily: 'Inter',
+                          letterSpacing: 0.0,
+                        ),
+                  ),
+                ],
               ),
             ],
           ),
