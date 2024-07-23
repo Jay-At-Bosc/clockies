@@ -214,7 +214,7 @@ class _MyTaskWidgetState extends State<MyTaskWidget> {
                               parameter1: taskCategoryListItemItem,
                               parameter2: _model.pendingTaskList,
                             );
-                          }),
+                          }).divide(const SizedBox(height: 8.0)),
                         ),
                       );
                     },

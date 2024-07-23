@@ -42,10 +42,19 @@ class _BackButtonWidgetState extends State<BackButtonWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Icon(
-      Icons.arrow_back,
-      color: widget.color,
-      size: widget.size.toDouble(),
+    return InkWell(
+      splashColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      hoverColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      onTap: () async {
+        context.safePop();
+      },
+      child: Icon(
+        Icons.arrow_back,
+        color: widget.color,
+        size: widget.size.toDouble(),
+      ),
     );
   }
 }
