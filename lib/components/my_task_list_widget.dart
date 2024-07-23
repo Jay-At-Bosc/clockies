@@ -46,103 +46,112 @@ class _MyTaskListWidgetState extends State<MyTaskListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryBackground,
-      ),
-      child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-        child: Container(
-          width: double.infinity,
-          color: Colors.white,
-          child: ExpandableNotifier(
-            controller: _model.expandableExpandableController,
-            child: ExpandablePanel(
-              header: Text(
-                widget.parameter1!,
-                style: FlutterFlowTheme.of(context).headlineLarge.override(
-                      fontFamily: 'Inter',
-                      letterSpacing: 0.0,
-                    ),
-              ),
-              collapsed: Container(),
-              expanded: Builder(
-                builder: (context) {
-                  final pendingTask = widget.parameter2!.toList();
+    return InkWell(
+      splashColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      hoverColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      onTap: () async {
+        context.pushNamed('TaskDetailScreen');
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: FlutterFlowTheme.of(context).secondaryBackground,
+        ),
+        child: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          child: Container(
+            width: double.infinity,
+            color: Colors.white,
+            child: ExpandableNotifier(
+              controller: _model.expandableExpandableController,
+              child: ExpandablePanel(
+                header: Text(
+                  widget.parameter1!,
+                  style: FlutterFlowTheme.of(context).headlineLarge.override(
+                        fontFamily: 'Inter',
+                        letterSpacing: 0.0,
+                      ),
+                ),
+                collapsed: Container(),
+                expanded: Builder(
+                  builder: (context) {
+                    final pendingTask = widget.parameter2!.toList();
 
-                  return Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children:
-                        List.generate(pendingTask.length, (pendingTaskIndex) {
-                      final pendingTaskItem = pendingTask[pendingTaskIndex];
-                      return Container(
-                        decoration: const BoxDecoration(),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Icon(
-                                    Icons.check_circle_outline_sharp,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    size: 24.0,
-                                  ),
-                                  Text(
-                                    pendingTaskItem,
+                    return Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children:
+                          List.generate(pendingTask.length, (pendingTaskIndex) {
+                        final pendingTaskItem = pendingTask[pendingTaskIndex];
+                        return Container(
+                          decoration: const BoxDecoration(),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Icon(
+                                      Icons.check_circle_outline_sharp,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      size: 24.0,
+                                    ),
+                                    Text(
+                                      pendingTaskItem,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            fontSize: 14.0,
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ].divide(const SizedBox(width: 16.0)),
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  borderRadius: BorderRadius.circular(16.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      6.0, 4.0, 6.0, 4.0),
+                                  child: Text(
+                                    'Status',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
                                           fontFamily: 'Inter',
                                           color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          fontSize: 14.0,
+                                              .secondaryBackground,
+                                          fontSize: 12.0,
                                           letterSpacing: 0.0,
                                         ),
                                   ),
-                                ].divide(const SizedBox(width: 16.0)),
-                              ),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context).primary,
-                                borderRadius: BorderRadius.circular(16.0),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    6.0, 4.0, 6.0, 4.0),
-                                child: Text(
-                                  'Status',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        fontSize: 12.0,
-                                        letterSpacing: 0.0,
-                                      ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      );
-                    }),
-                  );
-                },
-              ),
-              theme: const ExpandableThemeData(
-                tapHeaderToExpand: true,
-                tapBodyToExpand: false,
-                tapBodyToCollapse: false,
-                headerAlignment: ExpandablePanelHeaderAlignment.center,
-                hasIcon: true,
-                expandIcon: Icons.arrow_drop_down,
-                collapseIcon: Icons.arrow_drop_up,
+                            ],
+                          ),
+                        );
+                      }),
+                    );
+                  },
+                ),
+                theme: const ExpandableThemeData(
+                  tapHeaderToExpand: true,
+                  tapBodyToExpand: false,
+                  tapBodyToCollapse: false,
+                  headerAlignment: ExpandablePanelHeaderAlignment.center,
+                  hasIcon: true,
+                  expandIcon: Icons.arrow_drop_down,
+                  collapseIcon: Icons.arrow_drop_up,
+                ),
               ),
             ),
           ),

@@ -367,7 +367,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .titleSmall
+                                                                .titleMedium
                                                                 .override(
                                                                   fontFamily:
                                                                       'Inter',
@@ -429,6 +429,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .primaryText,
                                                 letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w600,
                                               ),
                                           elevation: 0.0,
                                           borderSide: BorderSide(
@@ -483,7 +484,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Text(
-                                                'Hello World',
+                                                'Due soon',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .labelSmall
@@ -526,14 +527,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                   Colors.transparent,
                                               onTap: () async {
                                                 context.pushNamed(
-                                                  'TaskDetailScreen',
-                                                  queryParameters: {
-                                                    'task': serializeParam(
-                                                      taskDataItem,
-                                                      ParamType.DataStruct,
-                                                    ),
-                                                  }.withoutNulls,
-                                                );
+                                                    'TaskDetailScreen');
                                               },
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
@@ -785,7 +779,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .titleSmall
+                                                                .titleMedium
                                                                 .override(
                                                                   fontFamily:
                                                                       'Inter',
@@ -846,6 +840,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .primaryText,
                                                 letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w600,
                                               ),
                                           elevation: 0.0,
                                           borderSide: BorderSide(

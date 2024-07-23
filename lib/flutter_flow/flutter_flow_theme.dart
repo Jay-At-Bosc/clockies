@@ -142,7 +142,7 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color backgroundColor = const Color(0xFFEFF2F6);
   late Color pinkColor = const Color(0xFFF9A9EF);
   late Color blueColor = const Color(0xFF285EDE);
-  late Color dashboard1 = const Color(0xFFD1E9FC);
+  late Color dashboard1 = const Color(0xFF6A6A6A);
   late Color dashboard2 = const Color(0xFFD0F2FF);
   late Color dashboard3 = const Color(0xFFFFF7CD);
   late Color dashboard4 = const Color(0xFFFFE7D9);
