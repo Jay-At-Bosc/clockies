@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/new_component/button/back_button/back_button_widget.dart';
+import '/new_component/circular_profile_image/circular_profile_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'task_detail_screen_model.dart';
@@ -107,16 +108,15 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                     const Icon(
                       Icons.lock_sharp,
                       color: Color(0xFF6F6F6F),
-                      size: 16.0,
+                      size: 14.0,
                     ),
                     Text(
                       'Private to members of its projects',
-                      style:
-                          FlutterFlowTheme.of(context).headlineMedium.override(
-                                fontFamily: 'Inter',
-                                color: const Color(0xFF6F6F6F),
-                                letterSpacing: 0.0,
-                              ),
+                      style: FlutterFlowTheme.of(context).titleMedium.override(
+                            fontFamily: 'Inter',
+                            color: const Color(0xFF6A6A6A),
+                            letterSpacing: 0.0,
+                          ),
                     ),
                   ].divide(const SizedBox(width: 8.0)),
                 ),
@@ -125,22 +125,130 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).secondaryBackground,
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Task Name',
-                      style: FlutterFlowTheme.of(context).displayLarge.override(
-                            fontFamily: 'Inter',
-                            letterSpacing: 0.0,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Task Name',
+                        style:
+                            FlutterFlowTheme.of(context).displayLarge.override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              wrapWithModel(
+                                model: _model.circularProfileImageModel1,
+                                updateCallback: () => setState(() {}),
+                                child: const CircularProfileImageWidget(
+                                  diameter: 28,
+                                ),
+                              ),
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Assigned to',
+                                    style: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: const Color(0xFF6A6A6A),
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                  Text(
+                                    'Jeel',
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ].divide(const SizedBox(width: 8.0)),
                           ),
-                    ),
-                    const Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [],
-                    ),
-                  ],
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              wrapWithModel(
+                                model: _model.circularProfileImageModel2,
+                                updateCallback: () => setState(() {}),
+                                child: const CircularProfileImageWidget(
+                                  diameter: 28,
+                                ),
+                              ),
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Due date',
+                                    style: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: const Color(0xFF6A6A6A),
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                  Text(
+                                    'Today',
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: FlutterFlowTheme.of(context)
+                                              .success,
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ].divide(const SizedBox(width: 8.0)),
+                          ),
+                        ].divide(const SizedBox(width: 64.0)),
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Text(
+                            'My tasks',
+                            style: FlutterFlowTheme.of(context)
+                                .titleLarge
+                                .override(
+                                  fontFamily: 'Poppins',
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  letterSpacing: 0.0,
+                                ),
+                          ),
+                        ],
+                      ),
+                      Text(
+                        'Projects',
+                        style: FlutterFlowTheme.of(context).labelLarge.override(
+                              fontFamily: 'Poppins',
+                              color: const Color(0xFF6A6A6A),
+                              letterSpacing: 0.0,
+                            ),
+                      ),
+                    ].divide(const SizedBox(height: 16.0)),
+                  ),
                 ),
               ),
             ],
