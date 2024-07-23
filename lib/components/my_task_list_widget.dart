@@ -59,7 +59,7 @@ class _MyTaskListWidgetState extends State<MyTaskListWidget> {
           color: FlutterFlowTheme.of(context).secondaryBackground,
         ),
         child: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 8.0),
           child: Container(
             width: double.infinity,
             color: Colors.white,
@@ -68,7 +68,7 @@ class _MyTaskListWidgetState extends State<MyTaskListWidget> {
               child: ExpandablePanel(
                 header: Text(
                   widget.parameter1!,
-                  style: FlutterFlowTheme.of(context).headlineLarge.override(
+                  style: FlutterFlowTheme.of(context).headlineSmall.override(
                         fontFamily: 'Inter',
                         letterSpacing: 0.0,
                       ),
