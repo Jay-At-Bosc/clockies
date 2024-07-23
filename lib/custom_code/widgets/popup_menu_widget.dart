@@ -43,6 +43,9 @@ class _PopupMenuWidgetState extends State<PopupMenuWidget> {
                 _selectedIndex = index;
               });
               widget.onItemSelected(index);
+              setState(() {
+                _selectedIndex = 0;
+              });
             },
             itemBuilder: (BuildContext context) {
               return List.generate(_items.length, (index) {

@@ -42,18 +42,52 @@ class _CalenderScreenWidgetState extends State<CalenderScreenWidget> {
           top: true,
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Align(
-                alignment: const AlignmentDirectional(0.0, 0.0),
-                child: Text(
-                  'Calender Screen',
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Inter',
-                        fontSize: 20.0,
-                        letterSpacing: 0.0,
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.safePop();
+                      },
+                      child: Icon(
+                        Icons.arrow_back,
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        size: 24.0,
                       ),
+                    ),
+                    Text(
+                      'Calender Screen',
+                      style:
+                          FlutterFlowTheme.of(context).headlineLarge.override(
+                                fontFamily: 'Inter',
+                                letterSpacing: 0.0,
+                              ),
+                    ),
+                  ].divide(const SizedBox(width: 16.0)),
+                ),
+              ),
+              Expanded(
+                child: Align(
+                  alignment: const AlignmentDirectional(0.0, 0.0),
+                  child: Container(
+                    decoration: const BoxDecoration(),
+                    child: Text(
+                      'Calender View',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Inter',
+                            fontSize: 20.0,
+                            letterSpacing: 0.0,
+                          ),
+                    ),
+                  ),
                 ),
               ),
             ],

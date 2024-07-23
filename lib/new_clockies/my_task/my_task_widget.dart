@@ -1,6 +1,7 @@
 import '/components/my_task_list_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/new_component/bottom_sheet/filter_option/filter_option_widget.dart';
 import '/new_component/circular_profile_image/circular_profile_image_widget.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
@@ -91,12 +92,8 @@ class _MyTaskWidgetState extends State<MyTaskWidget> {
                                   onItemSelected: (index) async {
                                     if ((index == 1) && (index != 0)) {
                                       context.pushNamed('BoardScreen');
-
-                                      return;
                                     } else {
                                       context.pushNamed('CalenderScreen');
-
-                                      return;
                                     }
                                   },
                                 ),
@@ -115,40 +112,68 @@ class _MyTaskWidgetState extends State<MyTaskWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: List.generate(item.length, (itemIndex) {
                                 final itemItem = item[itemIndex];
-                                return Container(
-                                  decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    borderRadius: BorderRadius.circular(16.0),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        10.0, 5.0, 10.0, 5.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.filter_list,
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          size: 14.0,
-                                        ),
-                                        Text(
-                                          itemItem,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Inter',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                fontSize: 14.0,
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                      ].divide(const SizedBox(width: 4.0)),
+                                return InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      enableDrag: false,
+                                      context: context,
+                                      builder: (context) {
+                                        return GestureDetector(
+                                          onTap: () => _model
+                                                  .unfocusNode.canRequestFocus
+                                              ? FocusScope.of(context)
+                                                  .requestFocus(
+                                                      _model.unfocusNode)
+                                              : FocusScope.of(context)
+                                                  .unfocus(),
+                                          child: Padding(
+                                            padding: MediaQuery.viewInsetsOf(
+                                                context),
+                                            child: const FilterOptionWidget(),
+                                          ),
+                                        );
+                                      },
+                                    ).then((value) => safeSetState(() {}));
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: const Color(0x65E0E3E7),
+                                      borderRadius: BorderRadius.circular(16.0),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          10.0, 5.0, 10.0, 5.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.filter_list,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 14.0,
+                                          ),
+                                          Text(
+                                            itemItem,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  color: const Color(0xE657636C),
+                                                  fontSize: 14.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          ),
+                                        ].divide(const SizedBox(width: 4.0)),
+                                      ),
                                     ),
                                   ),
                                 );
@@ -166,8 +191,10 @@ class _MyTaskWidgetState extends State<MyTaskWidget> {
                 color: FlutterFlowTheme.of(context).secondaryText,
               ),
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).borderColor,
+                  ),
                   child: Builder(
                     builder: (context) {
                       final taskCategoryListItem =
