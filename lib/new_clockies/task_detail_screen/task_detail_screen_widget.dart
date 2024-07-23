@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/new_component/button/back_button/back_button_widget.dart';
 import '/new_component/circular_profile_image/circular_profile_image_widget.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'task_detail_screen_model.dart';
@@ -197,7 +198,7 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Due date',
+                                    'Planned hours',
                                     style: FlutterFlowTheme.of(context)
                                         .labelMedium
                                         .override(
@@ -207,13 +208,13 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                                         ),
                                   ),
                                   Text(
-                                    'Today',
+                                    '2 hour',
                                     style: FlutterFlowTheme.of(context)
                                         .titleMedium
                                         .override(
                                           fontFamily: 'Inter',
                                           color: FlutterFlowTheme.of(context)
-                                              .success,
+                                              .primaryText,
                                           letterSpacing: 0.0,
                                         ),
                                   ),
@@ -223,29 +224,189 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                           ),
                         ].divide(const SizedBox(width: 64.0)),
                       ),
-                      Row(
+                      Column(
                         mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'My tasks',
+                            'Project',
                             style: FlutterFlowTheme.of(context)
                                 .titleLarge
                                 .override(
-                                  fontFamily: 'Poppins',
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
+                                  fontFamily: 'Inter',
+                                  color: FlutterFlowTheme.of(context).iconColor,
+                                  letterSpacing: 0.0,
+                                ),
+                          ),
+                          Text(
+                            'Clockies',
+                            style: FlutterFlowTheme.of(context)
+                                .headlineLarge
+                                .override(
+                                  fontFamily: 'Inter',
                                   letterSpacing: 0.0,
                                 ),
                           ),
                         ],
                       ),
-                      Text(
-                        'Projects',
-                        style: FlutterFlowTheme.of(context).labelLarge.override(
-                              fontFamily: 'Poppins',
-                              color: const Color(0xFF6A6A6A),
-                              letterSpacing: 0.0,
-                            ),
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Section',
+                            style: FlutterFlowTheme.of(context)
+                                .titleLarge
+                                .override(
+                                  fontFamily: 'Inter',
+                                  color: FlutterFlowTheme.of(context).iconColor,
+                                  letterSpacing: 0.0,
+                                ),
+                          ),
+                          Text(
+                            'To Do',
+                            style: FlutterFlowTheme.of(context)
+                                .headlineLarge
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Container(
+                                width: 28.0,
+                                height: 28.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  borderRadius: BorderRadius.circular(28.0),
+                                  border: Border.all(
+                                    color:
+                                        FlutterFlowTheme.of(context).iconColor,
+                                  ),
+                                ),
+                                child: Icon(
+                                  Icons.calendar_today,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 16.0,
+                                ),
+                              ),
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Start date',
+                                    style: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: const Color(0xFF6A6A6A),
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                  Text(
+                                    '23th July, 2024',
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ].divide(const SizedBox(width: 8.0)),
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Container(
+                                width: 28.0,
+                                height: 28.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  borderRadius: BorderRadius.circular(28.0),
+                                  border: Border.all(
+                                    color:
+                                        FlutterFlowTheme.of(context).iconColor,
+                                  ),
+                                ),
+                                child: Icon(
+                                  Icons.calendar_today,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 16.0,
+                                ),
+                              ),
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'End date',
+                                    style: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: const Color(0xFF6A6A6A),
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                  Text(
+                                    '25th July, 2024',
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ].divide(const SizedBox(width: 8.0)),
+                          ),
+                        ].divide(const SizedBox(width: 64.0)),
+                      ),
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Description',
+                            style: FlutterFlowTheme.of(context)
+                                .titleLarge
+                                .override(
+                                  fontFamily: 'Inter',
+                                  color: FlutterFlowTheme.of(context).iconColor,
+                                  letterSpacing: 0.0,
+                                ),
+                          ),
+                          Text(
+                            functions.removePTagsAndFormatParagraph(
+                                '\'<p>Header with different screen view and filter Header with different screen view and filter  badges</p><p>dbg ggdfgidfg fgsdigfidgsg gigg</p><p>bdhgbsdgbdgbdb</p>\'')!,
+                            style: FlutterFlowTheme.of(context)
+                                .headlineLarge
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
+                          ),
+                        ],
                       ),
                     ].divide(const SizedBox(height: 16.0)),
                   ),
