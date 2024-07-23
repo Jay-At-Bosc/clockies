@@ -383,7 +383,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .bodyMedium
+                                                                .labelSmall
                                                                 .override(
                                                                   fontFamily:
                                                                       'Inter',
@@ -403,7 +403,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 8.0, 0.0, 0.0),
+                                          0.0, 16.0, 0.0, 0.0),
                                       child: FFButtonWidget(
                                         onPressed: () {
                                           print('Button pressed ...');
@@ -814,7 +814,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 8.0, 0.0, 0.0),
+                                          0.0, 16.0, 0.0, 0.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
                                           context.pushNamed('MyTask');

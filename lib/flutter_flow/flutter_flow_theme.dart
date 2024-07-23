@@ -39,8 +39,8 @@ abstract class FlutterFlowTheme {
   late Color pinkColor;
   late Color blueColor;
   late Color dashboard1;
-  late Color dashboard2;
-  late Color dashboard3;
+  late Color darkGray;
+  late Color lightGray;
   late Color dashboard4;
   late Color dashboardText1;
   late Color dashboardText2;
@@ -143,8 +143,8 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color pinkColor = const Color(0xFFF9A9EF);
   late Color blueColor = const Color(0xFF285EDE);
   late Color dashboard1 = const Color(0xFF6A6A6A);
-  late Color dashboard2 = const Color(0xFFD0F2FF);
-  late Color dashboard3 = const Color(0xFFFFF7CD);
+  late Color darkGray = const Color(0xFF1F2937);
+  late Color lightGray = const Color(0xFFF3F4F6);
   late Color dashboard4 = const Color(0xFFFFE7D9);
   late Color dashboardText1 = const Color(0xFF0B2068);
   late Color dashboardText2 = const Color(0xFF04297A);

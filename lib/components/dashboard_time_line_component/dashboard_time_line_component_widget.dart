@@ -199,7 +199,7 @@ class _DashboardTimeLineComponentWidgetState
                 width: double.infinity,
                 height: 100.0,
                 decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).dashboard2,
+                  color: FlutterFlowTheme.of(context).darkGray,
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: Column(
@@ -238,7 +238,7 @@ class _DashboardTimeLineComponentWidgetState
                 width: double.infinity,
                 height: 100.0,
                 decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).dashboard3,
+                  color: FlutterFlowTheme.of(context).lightGray,
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: Column(
