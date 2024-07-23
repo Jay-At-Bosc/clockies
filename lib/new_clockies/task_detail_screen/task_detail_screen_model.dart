@@ -11,16 +11,12 @@ class TaskDetailScreenModel extends FlutterFlowModel<TaskDetailScreenWidget> {
   // Model for BackButton component.
   late BackButtonModel backButtonModel;
   // Model for CircularProfileImage component.
-  late CircularProfileImageModel circularProfileImageModel1;
-  // Model for CircularProfileImage component.
-  late CircularProfileImageModel circularProfileImageModel2;
+  late CircularProfileImageModel circularProfileImageModel;
 
   @override
   void initState(BuildContext context) {
     backButtonModel = createModel(context, () => BackButtonModel());
-    circularProfileImageModel1 =
-        createModel(context, () => CircularProfileImageModel());
-    circularProfileImageModel2 =
+    circularProfileImageModel =
         createModel(context, () => CircularProfileImageModel());
   }
 
@@ -28,7 +24,6 @@ class TaskDetailScreenModel extends FlutterFlowModel<TaskDetailScreenWidget> {
   void dispose() {
     unfocusNode.dispose();
     backButtonModel.dispose();
-    circularProfileImageModel1.dispose();
-    circularProfileImageModel2.dispose();
+    circularProfileImageModel.dispose();
   }
 }

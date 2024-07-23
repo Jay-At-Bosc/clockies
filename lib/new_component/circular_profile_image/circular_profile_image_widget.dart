@@ -44,7 +44,7 @@ class _CircularProfileImageWidgetState
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryText,
+        color: FlutterFlowTheme.of(context).primaryBackground,
         borderRadius: BorderRadius.circular(100.0),
       ),
       child: Padding(
@@ -52,13 +52,21 @@ class _CircularProfileImageWidgetState
         child: Container(
           width: widget.diameter?.toDouble(),
           height: widget.diameter?.toDouble(),
-          clipBehavior: Clip.antiAlias,
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
+          decoration: BoxDecoration(
+            color: FlutterFlowTheme.of(context).secondary,
+            borderRadius: BorderRadius.circular(100.0),
           ),
-          child: Image.network(
-            'https://picsum.photos/seed/741/600',
-            fit: BoxFit.cover,
+          child: Align(
+            alignment: const AlignmentDirectional(0.0, 0.0),
+            child: Text(
+              'JL',
+              style: FlutterFlowTheme.of(context).displayLarge.override(
+                    fontFamily: 'Inter',
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    fontSize: 14.0,
+                    letterSpacing: 0.0,
+                  ),
+            ),
           ),
         ),
       ),
