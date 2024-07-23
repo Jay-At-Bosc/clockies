@@ -230,6 +230,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         .override(
                                           fontFamily: 'Inter',
                                           letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w500,
                                         ),
                                   ),
                                 ),
@@ -258,7 +259,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 border: Border.all(
                                   color:
                                       FlutterFlowTheme.of(context).borderColor,
-                                  width: 1.0,
+                                  width: 0.5,
                                 ),
                               ),
                               child: Padding(
@@ -382,7 +383,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         onPressed: () {
                                           print('Button pressed ...');
                                         },
-                                        text: 'See all',
+                                        text: 'See all ',
                                         options: FFButtonOptions(
                                           width: double.infinity,
                                           height: 40.0,
@@ -406,7 +407,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
                                                 .borderColor,
-                                            width: 1.0,
+                                            width: 0.5,
                                           ),
                                           borderRadius:
                                               BorderRadius.circular(24.0),
@@ -475,7 +476,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                   Colors.transparent,
                                               onTap: () async {
                                                 context.pushNamed(
-                                                  'detailedTask',
+                                                  'TaskDetailScreen',
                                                   queryParameters: {
                                                     'task': serializeParam(
                                                       taskDataItem,

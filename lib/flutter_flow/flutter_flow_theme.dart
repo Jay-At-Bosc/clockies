@@ -259,7 +259,7 @@ class ThemeTypography extends Typography {
         'Inter',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
-        fontSize: 18.0,
+        fontSize: 16.0,
       );
   String get labelMediumFamily => 'Inter';
   TextStyle get labelMedium => GoogleFonts.getFont(

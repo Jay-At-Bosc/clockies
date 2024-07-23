@@ -46,51 +46,24 @@ class _MyTaskListWidgetState extends State<MyTaskListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      splashColor: Colors.transparent,
-      focusColor: Colors.transparent,
-      hoverColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      onTap: () async {
-        _model.selected = !_model.selected;
-        setState(() {});
-      },
-      child: Container(
-        decoration: const BoxDecoration(),
+    return Container(
+      decoration: BoxDecoration(
+        color: FlutterFlowTheme.of(context).secondaryBackground,
+      ),
+      child: Padding(
+        padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
         child: Container(
           width: double.infinity,
           color: Colors.white,
           child: ExpandableNotifier(
             controller: _model.expandableExpandableController,
             child: ExpandablePanel(
-              header: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Builder(
-                    builder: (context) {
-                      if (_model.selected) {
-                        return Icon(
-                          Icons.arrow_drop_up_sharp,
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          size: 24.0,
-                        );
-                      } else {
-                        return Icon(
-                          Icons.arrow_drop_down_sharp,
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          size: 24.0,
-                        );
-                      }
-                    },
-                  ),
-                  Text(
-                    widget.parameter1!,
-                    style: FlutterFlowTheme.of(context).headlineLarge.override(
-                          fontFamily: 'Inter',
-                          letterSpacing: 0.0,
-                        ),
-                  ),
-                ],
+              header: Text(
+                widget.parameter1!,
+                style: FlutterFlowTheme.of(context).headlineLarge.override(
+                      fontFamily: 'Inter',
+                      letterSpacing: 0.0,
+                    ),
               ),
               collapsed: Container(),
               expanded: Builder(
@@ -167,7 +140,9 @@ class _MyTaskListWidgetState extends State<MyTaskListWidget> {
                 tapBodyToExpand: false,
                 tapBodyToCollapse: false,
                 headerAlignment: ExpandablePanelHeaderAlignment.center,
-                hasIcon: false,
+                hasIcon: true,
+                expandIcon: Icons.arrow_drop_down,
+                collapseIcon: Icons.arrow_drop_up,
               ),
             ),
           ),
