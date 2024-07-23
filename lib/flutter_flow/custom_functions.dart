@@ -204,3 +204,18 @@ String getTaskStatus(String endDateString) {
     return "Future";
   }
 }
+
+String? removePTagsAndFormatParagraph(String? text) {
+  if (text == '') {
+    return '';
+  }
+  String input = text ?? '';
+
+  // Remove <p> and </p> tags
+  String cleanedText = input.replaceAll(RegExp(r'<\/?p>'), '\n');
+
+  // Join the remaining text into a single paragraph
+  String paragraph = cleanedText.split(' ').join(' ');
+
+  return paragraph;
+}

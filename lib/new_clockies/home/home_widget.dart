@@ -329,8 +329,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 Container(
-                                                  width: 36.0,
-                                                  height: 36.0,
+                                                  width: 38.0,
+                                                  height: 38.0,
                                                   decoration: BoxDecoration(
                                                     color:
                                                         valueOrDefault<Color>(
@@ -391,8 +391,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                       0.0,
                                                                 ),
                                                       ),
-                                                    ].divide(
-                                                        const SizedBox(height: 4.0)),
+                                                    ],
                                                   ),
                                                 ),
                                               ].divide(const SizedBox(width: 8.0)),

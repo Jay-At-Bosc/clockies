@@ -160,7 +160,7 @@ class _DashboardTimeLineComponentWidgetState
                 width: double.infinity,
                 height: 100.0,
                 decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).dashboard1,
+                  color: FlutterFlowTheme.of(context).iconColor,
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: Column(
