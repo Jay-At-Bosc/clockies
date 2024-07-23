@@ -230,7 +230,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         .override(
                                           fontFamily: 'Inter',
                                           letterSpacing: 0.0,
-                                          fontWeight: FontWeight.w500,
                                         ),
                                   ),
                                 ),
@@ -241,7 +240,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     textAlign: TextAlign.start,
                                     maxLines: 1,
                                     style: FlutterFlowTheme.of(context)
-                                        .headlineLarge
+                                        .displayLarge
                                         .override(
                                           fontFamily: 'Inter',
                                           letterSpacing: 0.0,
@@ -278,11 +277,33 @@ class _HomeWidgetState extends State<HomeWidget> {
                                           Text(
                                             'Projects',
                                             style: FlutterFlowTheme.of(context)
-                                                .labelLarge
+                                                .headlineMedium
                                                 .override(
                                                   fontFamily: 'Inter',
                                                   letterSpacing: 0.0,
                                                 ),
+                                          ),
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Text(
+                                                'Recents',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelSmall
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                              Icon(
+                                                Icons.keyboard_arrow_down,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                size: 16.0,
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
@@ -395,14 +416,17 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                   0.0, 0.0, 0.0, 0.0),
                                           color: FlutterFlowTheme.of(context)
                                               .secondaryBackground,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .override(
-                                                    fontFamily: 'Inter',
-                                                    letterSpacing: 0.0,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .titleSmall
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w600,
+                                              ),
                                           elevation: 0.0,
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
@@ -427,7 +451,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 border: Border.all(
                                   color:
                                       FlutterFlowTheme.of(context).borderColor,
-                                  width: 1.0,
+                                  width: 0.5,
                                 ),
                               ),
                               child: Padding(
@@ -784,19 +808,22 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                   0.0, 0.0, 0.0, 0.0),
                                           color: FlutterFlowTheme.of(context)
                                               .secondaryBackground,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .override(
-                                                    fontFamily: 'Inter',
-                                                    letterSpacing: 0.0,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .titleSmall
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w600,
+                                              ),
                                           elevation: 0.0,
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
                                                 .borderColor,
-                                            width: 1.0,
+                                            width: 0.5,
                                           ),
                                           borderRadius:
                                               BorderRadius.circular(24.0),
