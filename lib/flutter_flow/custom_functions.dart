@@ -263,8 +263,14 @@ bool checkDateTimeLine(
   DateTime now = DateTime.now();
   DateTime today = DateTime(now.year, now.month, now.day);
   DateTime tomorrow = today.add(Duration(days: 1));
-  DateTime startOfWeek = today.subtract(Duration(days: today.weekday));
-  DateTime endOfWeek = startOfWeek.add(Duration(days: 6));
+// Current Week
+  // DateTime startOfWeek = today.subtract(Duration(days: today.weekday));
+  // DateTime endOfWeek = startOfWeek.add(Duration(days: 6));
+  // DateTime yesterday = today.subtract(Duration(days: 1));
+
+// Mon to Fri
+  DateTime startOfWeek = today.subtract(Duration(days: today.weekday - 1));
+  DateTime endOfWeek = startOfWeek.add(Duration(days: 4));
   DateTime yesterday = today.subtract(Duration(days: 1));
 
   switch (condition ?? 'today'.toLowerCase()) {
@@ -280,7 +286,7 @@ bool checkDateTimeLine(
       return localDateTime.year == yesterday.year &&
           localDateTime.month == yesterday.month &&
           localDateTime.day == yesterday.day;
-    case 'this week':
+    case 'currentweek':
       return localDateTime.isAfter(startOfWeek.subtract(Duration(days: 1))) &&
           localDateTime.isBefore(endOfWeek.add(Duration(days: 1)));
     default:
@@ -289,20 +295,20 @@ bool checkDateTimeLine(
 }
 
 dynamic checkDateTimelines(String? utcDateString) {
-  Color hexToColor(String hexString) {
-    final buffer = StringBuffer();
-    if (hexString.length == 7)
-      buffer.write('ff'); // Add full opacity if hex is 6 chars
-    buffer.write(hexString.replaceFirst('#', ''));
-    return Color(int.parse(buffer.toString(), radix: 16));
-  }
+// Color hexToColor(String hexString) {
+  //   final buffer = StringBuffer();
+  //   if (hexString.length == 7)
+  //     buffer.write('ff'); // Add full opacity if hex is 6 chars
+  //   buffer.write(hexString.replaceFirst('#', ''));
+  //   return Color(int.parse(buffer.toString(), radix: 16));
+  // }
 
   if (utcDateString == null || utcDateString.isEmpty) {
     // Handle null or empty date string
     return {
       'type': 'invalid',
       'string': 'Invalid date',
-      'color': hexToColor('#000000').toString(), // Black for invalid date
+      'color': '#000000', // Black for invalid date
     };
   }
 
@@ -322,35 +328,35 @@ dynamic checkDateTimelines(String? utcDateString) {
 
   String type;
   String displayString;
-  Color color;
+  String color;
 
   if (localDateTime.year == today.year &&
       localDateTime.month == today.month &&
       localDateTime.day == today.day) {
     type = 'today';
     displayString = 'Today';
-    color = hexToColor('#FF0000'); // Red for today
+    color = '#FF0000'; // Red for today
   } else if (localDateTime.year == tomorrow.year &&
       localDateTime.month == tomorrow.month &&
       localDateTime.day == tomorrow.day) {
     type = 'tomorrow';
     displayString = 'Tomorrow';
-    color = hexToColor('#00FF00'); // Green for tomorrow
+    color = '#00FF00'; // Green for tomorrow
   } else if (localDateTime.year == yesterday.year &&
       localDateTime.month == yesterday.month &&
       localDateTime.day == yesterday.day) {
     type = 'yesterday';
     displayString = 'Yesterday';
-    color = hexToColor('#0000FF'); // Blue for yesterday
+    color = '#0000FF'; // Blue for yesterday
   } else if (localDateTime.isAfter(today) &&
       localDateTime.isBefore(endOfWeek.add(Duration(days: 1)))) {
     type = 'currentWeek';
     displayString = formattedDate;
-    color = hexToColor('#FFFF00'); // Yellow for this week
+    color = '#FFFF00'; // Yellow for this week
   } else {
     type = 'date';
     displayString = formattedDate;
-    color = hexToColor('#808080'); // Grey for other dates
+    color = '#808080'; // Grey for other dates
   }
 
   Map<String, dynamic> datesTimeline = {

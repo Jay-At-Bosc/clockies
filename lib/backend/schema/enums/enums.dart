@@ -6,6 +6,13 @@ enum Status {
   complete,
 }
 
+enum DateTimelines {
+  today,
+  tomorrow,
+  yesterday,
+  currentweek,
+}
+
 extension FFEnumExtensions<T extends Enum> on T {
   String serialize() => name;
 }
@@ -19,6 +26,8 @@ T? deserializeEnum<T>(String? value) {
   switch (T) {
     case (Status):
       return Status.values.deserialize(value) as T?;
+    case (DateTimelines):
+      return DateTimelines.values.deserialize(value) as T?;
     default:
       return null;
   }

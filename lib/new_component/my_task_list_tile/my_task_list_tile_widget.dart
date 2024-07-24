@@ -1,3 +1,4 @@
+import '/backend/schema/enums/enums.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -43,15 +44,18 @@ class _MyTaskListTileWidgetState extends State<MyTaskListTileWidget> {
       _model.displayList = () {
         if (widget.index == 1) {
           return widget.myAllTaskList!
-              .where((e) => functions.checkDateTimeLine(e.endDate, 'today'))
+              .where((e) => functions.checkDateTimeLine(
+                  e.endDate, DateTimelines.today.name))
               .toList();
         } else if (widget.index == 2) {
           return widget.myAllTaskList!
-              .where((e) => functions.checkDateTimeLine(e.endDate, 'tomorrow'))
+              .where((e) => functions.checkDateTimeLine(
+                  e.endDate, DateTimelines.tomorrow.name))
               .toList();
         } else if (widget.index == 3) {
           return widget.myAllTaskList!
-              .where((e) => functions.checkDateTimeLine(e.endDate, 'this week'))
+              .where((e) => functions.checkDateTimeLine(
+                  e.endDate, DateTimelines.currentweek.name))
               .toList();
         } else {
           return widget.myAllTaskList!;
@@ -158,12 +162,31 @@ class _MyTaskListTileWidgetState extends State<MyTaskListTileWidget> {
                                     ),
                                     Container(
                                       decoration: BoxDecoration(
-                                        color: DateTimelineModelStruct
-                                            .maybeFromMap(getJsonField(
-                                          functions.checkDateTimelines(
-                                              pendingTaskItem.endDate),
-                                          r'''$.color''',
-                                        ))?.color,
+                                        color: () {
+                                          if (functions.checkDateTimeLine(
+                                              pendingTaskItem.endDate,
+                                              DateTimelines.today.name)) {
+                                            return FlutterFlowTheme.of(context)
+                                                .tertiary;
+                                          } else if (functions
+                                              .checkDateTimeLine(
+                                                  pendingTaskItem.endDate,
+                                                  DateTimelines
+                                                      .tomorrow.name)) {
+                                            return FlutterFlowTheme.of(context)
+                                                .error;
+                                          } else if (functions
+                                              .checkDateTimeLine(
+                                                  pendingTaskItem.endDate,
+                                                  DateTimelines
+                                                      .yesterday.name)) {
+                                            return FlutterFlowTheme.of(context)
+                                                .success;
+                                          } else {
+                                            return FlutterFlowTheme.of(context)
+                                                .primaryBackground;
+                                          }
+                                        }(),
                                         borderRadius:
                                             BorderRadius.circular(16.0),
                                       ),

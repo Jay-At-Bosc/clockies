@@ -72,75 +72,78 @@ class _SearchWidgetState extends State<SearchWidget>
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Expanded(
-                              child: TextFormField(
-                                controller: _model.textController1,
-                                focusNode: _model.textFieldFocusNode,
-                                onFieldSubmitted: (_) async {
-                                  _model.isShowCancel = false;
-                                  setState(() {});
-                                },
-                                textCapitalization: TextCapitalization.words,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  isDense: false,
-                                  hintText: 'Search...',
-                                  hintStyle: FlutterFlowTheme.of(context)
-                                      .headlineSmall
+                              child: SizedBox(
+                                width: double.infinity,
+                                child: TextFormField(
+                                  controller: _model.textController1,
+                                  focusNode: _model.textFieldFocusNode,
+                                  onFieldSubmitted: (_) async {
+                                    _model.isShowCancel = false;
+                                    setState(() {});
+                                  },
+                                  textCapitalization: TextCapitalization.words,
+                                  obscureText: false,
+                                  decoration: InputDecoration(
+                                    isDense: true,
+                                    hintText: 'Search...',
+                                    hintStyle: FlutterFlowTheme.of(context)
+                                        .headlineSmall
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: const Color(0x9957636C),
+                                          letterSpacing: 0.0,
+                                        ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: FlutterFlowTheme.of(context)
+                                            .borderColor,
+                                        width: 0.5,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: FlutterFlowTheme.of(context)
+                                            .borderColor,
+                                        width: 0.5,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 0.5,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 0.5,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    filled: true,
+                                    fillColor: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    prefixIcon: const Icon(
+                                      Icons.search_outlined,
+                                      color: Color(0x7F57636C),
+                                    ),
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelSmall
                                       .override(
                                         fontFamily: 'Inter',
-                                        color: const Color(0x9957636C),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
                                         letterSpacing: 0.0,
                                       ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context)
-                                          .borderColor,
-                                      width: 0.5,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context)
-                                          .borderColor,
-                                      width: 0.5,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 0.5,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 0.5,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  filled: true,
-                                  fillColor: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  prefixIcon: const Icon(
-                                    Icons.search_outlined,
-                                    color: Color(0x7F57636C),
-                                  ),
+                                  maxLines: null,
+                                  minLines: 1,
+                                  validator: _model.textController1Validator
+                                      .asValidator(context),
                                 ),
-                                style: FlutterFlowTheme.of(context)
-                                    .labelSmall
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      letterSpacing: 0.0,
-                                    ),
-                                maxLines: null,
-                                minLines: 1,
-                                validator: _model.textController1Validator
-                                    .asValidator(context),
                               ),
                             ),
                             if ((_model.textFieldFocusNode?.hasFocus ?? false))
@@ -230,8 +233,9 @@ class _SearchWidgetState extends State<SearchWidget>
                             filled: true,
                             fillColor:
                                 FlutterFlowTheme.of(context).primaryBackground,
-                            prefixIcon: const Icon(
+                            prefixIcon: Icon(
                               Icons.search_sharp,
+                              color: FlutterFlowTheme.of(context).borderColor,
                             ),
                           ),
                           style:
