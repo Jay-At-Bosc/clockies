@@ -26,6 +26,7 @@ class _SearchWidgetState extends State<SearchWidget>
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
+    _model.textFieldFocusNode!.addListener(() => setState(() {}));
   }
 
   @override
@@ -72,18 +73,19 @@ class _SearchWidgetState extends State<SearchWidget>
                                 controller: _model.textController,
                                 focusNode: _model.textFieldFocusNode,
                                 onFieldSubmitted: (_) async {
-                                  _model.isShowCancel = !_model.isShowCancel;
+                                  _model.isShowCancel = false;
                                   setState(() {});
                                 },
+                                textCapitalization: TextCapitalization.words,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   isDense: false,
-                                  labelText: 'Search...',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .labelMedium
+                                  hintText: 'Search...',
+                                  hintStyle: FlutterFlowTheme.of(context)
+                                      .headlineSmall
                                       .override(
                                         fontFamily: 'Inter',
-                                        color: const Color(0x8057636C),
+                                        color: const Color(0x9957636C),
                                         letterSpacing: 0.0,
                                       ),
                                   enabledBorder: OutlineInputBorder(
@@ -138,52 +140,36 @@ class _SearchWidgetState extends State<SearchWidget>
                                     .asValidator(context),
                               ),
                             ),
-                            Builder(
-                              builder: (context) {
-                                if (!_model.isShowCancel) {
-                                  return FFButtonWidget(
-                                    onPressed: () async {
-                                      _model.isShowCancel =
-                                          !_model.isShowCancel;
-                                      setState(() {});
-                                      await actions.hideKeyboard();
-                                    },
-                                    text: 'Cancel',
-                                    options: FFButtonOptions(
-                                      height: 40.0,
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          24.0, 0.0, 24.0, 0.0),
-                                      iconPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 0.0),
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .headlineSmall
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            letterSpacing: 0.0,
-                                          ),
-                                      elevation: 0.0,
-                                      borderSide: const BorderSide(
-                                        color: Colors.transparent,
-                                        width: 1.0,
+                            if ((_model.textFieldFocusNode?.hasFocus ?? false))
+                              FFButtonWidget(
+                                onPressed: () async {
+                                  _model.isShowCancel = false;
+                                  setState(() {});
+                                  await actions.hideKeyboard();
+                                },
+                                text: 'Cancel',
+                                options: FFButtonOptions(
+                                  height: 40.0,
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      24.0, 0.0, 24.0, 0.0),
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .headlineSmall
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0.0,
                                       ),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                  );
-                                } else {
-                                  return Container(
-                                    width: 0.0,
-                                    height: 0.0,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                    ),
-                                  );
-                                }
-                              },
-                            ),
+                                  elevation: 0.0,
+                                  borderSide: const BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                              ),
                           ],
                         ),
                         Builder(
@@ -223,7 +209,7 @@ class _SearchWidgetState extends State<SearchWidget>
                                       decoration: BoxDecoration(
                                         color: _model.selectedSearchTypes
                                                 .contains(searchTypeItemsItem)
-                                            ? const Color(0x7F2065D1)
+                                            ? const Color(0x344574CF)
                                             : FlutterFlowTheme.of(context)
                                                 .primaryBackground,
                                         borderRadius:
@@ -237,9 +223,16 @@ class _SearchWidgetState extends State<SearchWidget>
                                               .bodyMedium
                                               .override(
                                                 fontFamily: 'Inter',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .iconColor,
+                                                color: _model
+                                                        .selectedSearchTypes
+                                                        .contains(
+                                                            _model.selectSearch)
+                                                    ? FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary
+                                                    : FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
                                                 fontSize: 14.0,
                                                 letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w500,
