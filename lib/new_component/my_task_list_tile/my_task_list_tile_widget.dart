@@ -2,11 +2,12 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'my_task_list_model.dart';
-export 'my_task_list_model.dart';
+import 'package:flutter/scheduler.dart';
+import 'my_task_list_tile_model.dart';
+export 'my_task_list_tile_model.dart';
 
-class MyTaskListWidget extends StatefulWidget {
-  const MyTaskListWidget({
+class MyTaskListTileWidget extends StatefulWidget {
+  const MyTaskListTileWidget({
     super.key,
     required this.parameter1,
     required this.parameter2,
@@ -16,11 +17,11 @@ class MyTaskListWidget extends StatefulWidget {
   final List<String>? parameter2;
 
   @override
-  State<MyTaskListWidget> createState() => _MyTaskListWidgetState();
+  State<MyTaskListTileWidget> createState() => _MyTaskListTileWidgetState();
 }
 
-class _MyTaskListWidgetState extends State<MyTaskListWidget> {
-  late MyTaskListModel _model;
+class _MyTaskListTileWidgetState extends State<MyTaskListTileWidget> {
+  late MyTaskListTileModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -31,7 +32,10 @@ class _MyTaskListWidgetState extends State<MyTaskListWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => MyTaskListModel());
+    _model = createModel(context, () => MyTaskListTileModel());
+
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {});
 
     _model.expandableExpandableController =
         ExpandableController(initialExpanded: false);
