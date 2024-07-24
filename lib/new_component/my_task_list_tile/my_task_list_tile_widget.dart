@@ -43,7 +43,10 @@ class _MyTaskListTileWidgetState extends State<MyTaskListTileWidget> {
       _model.displayList = () {
         if (widget.index == 1) {
           return widget.myAllTaskList!
-              .where((e) => functions.checkDateTimeLine(e.endDate, 'today'))
+              .where((e) => getJsonField(
+                    functions.checkDateTimelines(e.endDate),
+                    r'''$.type''',
+                  ))
               .toList();
         } else if (widget.index == 2) {
           return widget.myAllTaskList!

@@ -287,3 +287,72 @@ bool checkDateTimeLine(
       return false;
   }
 }
+
+dynamic checkDateTimelines(String? utcDateString) {
+  if (utcDateString == null || utcDateString.isEmpty) {
+    // Handle null or empty date string
+    return {
+      'type': 'invalid',
+      'string': 'Invalid date',
+      'color': '#000000', // Black for invalid date
+    };
+  }
+
+  DateTime utcDateTime = DateTime.parse(utcDateString);
+  DateTime localDateTime = utcDateTime.toLocal();
+  DateTime now = DateTime.now();
+  DateTime today = DateTime(now.year, now.month, now.day);
+  DateTime tomorrow = today.add(Duration(days: 1));
+  DateTime startOfWeek = today.subtract(Duration(days: today.weekday - 1));
+  DateTime endOfWeek = startOfWeek.add(Duration(days: 6));
+  DateTime yesterday = today.subtract(Duration(days: 1));
+
+  String formattedDate = DateFormat('d MMMM').format(localDateTime);
+  if (localDateTime.year != today.year) {
+    formattedDate += ', ${localDateTime.year}';
+  }
+
+  String type;
+  String displayString;
+  String color;
+
+  if (localDateTime.year == today.year &&
+      localDateTime.month == today.month &&
+      localDateTime.day == today.day) {
+    type = 'today';
+    displayString = 'Today';
+    color = '#FF0000'; // Red for today
+  } else if (localDateTime.year == tomorrow.year &&
+      localDateTime.month == tomorrow.month &&
+      localDateTime.day == tomorrow.day) {
+    type = 'tomorrow';
+    displayString = 'Tomorrow';
+    color = '#00FF00'; // Green for tomorrow
+  } else if (localDateTime.year == yesterday.year &&
+      localDateTime.month == yesterday.month &&
+      localDateTime.day == yesterday.day) {
+    type = 'yesterday';
+    displayString = 'Yesterday';
+    color = '#0000FF'; // Blue for yesterday
+  } else if (localDateTime.isAfter(today) &&
+      localDateTime.isBefore(endOfWeek.add(Duration(days: 1)))) {
+    type = 'currentWeek';
+    displayString = formattedDate;
+    color = '#FFFF00'; // Yellow for this week
+  } else {
+    type = 'date';
+    displayString = formattedDate;
+    color = '#808080'; // Grey for other dates
+  }
+
+  Map<String, String> datesTimeline = {
+    'type': type,
+    'string': displayString,
+    'color': color
+  };
+
+  String datesTimelineJSON = jsonEncode(datesTimeline);
+  Map<String, dynamic> datesTimelineMap = jsonDecode(datesTimelineJSON);
+
+  return datesTimelineMap;
+}
