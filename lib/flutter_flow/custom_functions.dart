@@ -179,30 +179,36 @@ String getTaskStatus(String endDateString) {
   DateTime endDate = DateTime.parse(endDateString);
   DateTime today = DateTime.now();
   DateTime tomorrow = today.add(Duration(days: 1));
-  DateTime nextFriday;
+  DateTime yesterday = today.subtract(Duration(days: 1));
 
   // Set times to 00:00:00 for date comparison
   endDate = DateTime(endDate.year, endDate.month, endDate.day);
   today = DateTime(today.year, today.month, today.day);
   tomorrow = DateTime(tomorrow.year, tomorrow.month, tomorrow.day);
+  yesterday = DateTime(yesterday.year, yesterday.month, yesterday.day);
 
-  // Calculate the next Friday
-  int dayOfWeek = today.weekday;
-  int daysUntilFriday = (DateTime.friday - dayOfWeek + 7) % 7;
-  nextFriday = today.add(Duration(days: daysUntilFriday));
-  nextFriday = DateTime(nextFriday.year, nextFriday.month, nextFriday.day);
-
+  // Check if endDate is today, tomorrow, or yesterday
   if (endDate.isAtSameMomentAs(today)) {
     return "Today";
-  } else if (endDate.isBefore(today)) {
-    return "Pending";
   } else if (endDate.isAtSameMomentAs(tomorrow)) {
     return "Tomorrow";
-  } else if (endDate.isAtSameMomentAs(nextFriday)) {
-    return "This week";
-  } else {
-    return "Future";
+  } else if (endDate.isAtSameMomentAs(yesterday)) {
+    return "Yesterday";
   }
+
+  // // Check if endDate is within the next week
+  // int daysDifference = endDate.difference(today).inDays;
+  // if (daysDifference > 0 && daysDifference <= 7) {
+  //   return getWeekdayName(endDate.weekday);
+  // }
+
+  // // If endDate is before today or more than 7 days away
+  // if (endDate.isBefore(today)) {
+  //   return formatDate(endDate);
+  // } else {
+  //   return formatDate(endDate);
+  // }
+  return "";
 }
 
 String? removePTagsAndFormatParagraph(String? text) {
@@ -218,4 +224,25 @@ String? removePTagsAndFormatParagraph(String? text) {
   String paragraph = cleanedText.split(' ').join(' ');
 
   return paragraph;
+}
+
+String? getWeekdayName(String? weekday) {
+  switch (weekday) {
+    case DateTime.monday:
+      return "Monday";
+    case DateTime.tuesday:
+      return "Tuesday";
+    case DateTime.wednesday:
+      return "Wednesday";
+    case DateTime.thursday:
+      return "Thursday";
+    case DateTime.friday:
+      return "Friday";
+    case DateTime.saturday:
+      return "Saturday";
+    case DateTime.sunday:
+      return "Sunday";
+    default:
+      return "";
+  }
 }

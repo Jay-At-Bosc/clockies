@@ -57,7 +57,7 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                   padding: const EdgeInsets.all(16.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       wrapWithModel(
                         model: _model.backButtonModel,
@@ -67,14 +67,37 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                           color: FlutterFlowTheme.of(context).iconColor,
                         ),
                       ),
+                      Expanded(
+                        child: Text(
+                          'Task Detail',
+                          style: FlutterFlowTheme.of(context)
+                              .displayMedium
+                              .override(
+                                fontFamily: 'Inter',
+                                letterSpacing: 0.0,
+                              ),
+                        ),
+                      ),
                       Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Icon(
-                            Icons.check,
-                            color: FlutterFlowTheme.of(context).iconColor,
-                            size: 23.0,
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              _model.isCompleted = !_model.isCompleted;
+                              setState(() {});
+                            },
+                            child: Icon(
+                              Icons.check,
+                              color: _model.isCompleted
+                                  ? FlutterFlowTheme.of(context).success
+                                  : FlutterFlowTheme.of(context).iconColor,
+                              size: 23.0,
+                            ),
                           ),
                           Icon(
                             Icons.thumb_up_outlined,
@@ -93,29 +116,8 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                           ),
                         ].divide(const SizedBox(width: 12.0)),
                       ),
-                    ],
+                    ].divide(const SizedBox(width: 8.0)),
                   ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    const Icon(
-                      Icons.lock_sharp,
-                      color: Color(0xFF6F6F6F),
-                      size: 14.0,
-                    ),
-                    Text(
-                      'Private to members of its projects',
-                      style: FlutterFlowTheme.of(context).titleMedium.override(
-                            fontFamily: 'Inter',
-                            color: const Color(0xFF6A6A6A),
-                            letterSpacing: 0.0,
-                          ),
-                    ),
-                  ].divide(const SizedBox(width: 8.0)),
                 ),
               ),
               Expanded(
@@ -128,6 +130,58 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                16.0, 8.0, 16.0, 8.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                const Icon(
+                                  Icons.lock_sharp,
+                                  color: Color(0xFF6F6F6F),
+                                  size: 14.0,
+                                ),
+                                Text(
+                                  'Private to members of its projects',
+                                  style: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        color: const Color(0xFF6A6A6A),
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ].divide(const SizedBox(width: 8.0)),
+                            ),
+                          ),
+                        ),
+                        if (_model.isCompleted)
+                          Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context).checkedColor,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 8.0, 16.0, 8.0),
+                              child: Text(
+                                'Completed',
+                                style: FlutterFlowTheme.of(context)
+                                    .titleMedium
+                                    .override(
+                                      fontFamily: 'Inter',
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
+                            ),
+                          ),
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
@@ -135,25 +189,25 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Column(
+                              Row(
                                 mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
+                                  Expanded(
+                                    child: Text(
+                                      'UI : My task List',
+                                      style: FlutterFlowTheme.of(context)
+                                          .displayLarge
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ),
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      Expanded(
-                                        child: Text(
-                                          'UI : My task',
-                                          style: FlutterFlowTheme.of(context)
-                                              .displayLarge
-                                              .override(
-                                                fontFamily: 'Inter',
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                      ),
                                       Container(
                                         decoration: BoxDecoration(
                                           color: const Color(0x6EFBC738),
@@ -180,49 +234,6 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                                         ),
                                       ),
                                     ],
-                                  ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Icon(
-                                            Icons.notes_outlined,
-                                            color: FlutterFlowTheme.of(context)
-                                                .iconColor,
-                                            size: 18.0,
-                                          ),
-                                          Text(
-                                            'Project',
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleLarge
-                                                .override(
-                                                  fontFamily: 'Inter',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  fontSize: 14.0,
-                                                  letterSpacing: 0.0,
-                                                ),
-                                          ),
-                                        ].divide(const SizedBox(width: 2.0)),
-                                      ),
-                                      Expanded(
-                                        child: Text(
-                                          'Clockies',
-                                          style: FlutterFlowTheme.of(context)
-                                              .headlineMedium
-                                              .override(
-                                                fontFamily: 'Inter',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                      ),
-                                    ].divide(const SizedBox(width: 10.0)),
                                   ),
                                 ],
                               ),
@@ -335,6 +346,46 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Icon(
+                                        Icons.notes,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 16.0,
+                                      ),
+                                      Text(
+                                        'Projects',
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleLarge
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .iconColor,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ].divide(const SizedBox(width: 8.0)),
+                                  ),
+                                  Text(
+                                    'Clockies',
+                                    style: FlutterFlowTheme.of(context)
+                                        .headlineMedium
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                ].divide(const SizedBox(height: 6.0)),
+                              ),
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
                                   Text(
                                     'Section',
                                     style: FlutterFlowTheme.of(context)
@@ -386,8 +437,7 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                               ),
                               Row(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -413,7 +463,7 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                                         ],
                                       ),
                                       Text(
-                                        'Issue',
+                                        'My task',
                                         style: FlutterFlowTheme.of(context)
                                             .headlineMedium
                                             .override(
@@ -442,22 +492,25 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                                             ),
                                       ),
                                       Text(
-                                        'Issue',
+                                        'Critical',
                                         style: FlutterFlowTheme.of(context)
                                             .headlineMedium
                                             .override(
                                               fontFamily: 'Inter',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
                                               letterSpacing: 0.0,
                                             ),
                                       ),
                                     ].divide(const SizedBox(height: 6.0)),
                                   ),
-                                ],
+                                ].divide(const SizedBox(width: 64.0)),
                               ),
                             ]
                                 .divide(const SizedBox(height: 16.0))
                                 .addToStart(const SizedBox(height: 16.0))
-                                .addToEnd(const SizedBox(height: 8.0)),
+                                .addToEnd(const SizedBox(height: 16.0)),
                           ),
                         ),
                         Container(
@@ -479,7 +532,7 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                                       height: 28.0,
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
-                                            .success,
+                                            .secondaryBackground,
                                         borderRadius:
                                             BorderRadius.circular(28.0),
                                         border: Border.all(
@@ -490,7 +543,7 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                                       child: Icon(
                                         Icons.calendar_today,
                                         color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
+                                            .success,
                                         size: 16.0,
                                       ),
                                     ),
@@ -619,7 +672,7 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                               ),
                             ]
                                 .divide(const SizedBox(height: 8.0))
-                                .addToStart(const SizedBox(height: 8.0))
+                                .addToStart(const SizedBox(height: 16.0))
                                 .addToEnd(const SizedBox(height: 16.0)),
                           ),
                         ),

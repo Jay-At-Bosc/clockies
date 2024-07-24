@@ -367,7 +367,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .titleMedium
+                                                                .titleSmall
                                                                 .override(
                                                                   fontFamily:
                                                                       'Inter',
@@ -778,7 +778,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .titleMedium
+                                                                .titleSmall
                                                                 .override(
                                                                   fontFamily:
                                                                       'Inter',

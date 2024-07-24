@@ -49,7 +49,7 @@ class _MyTaskWidgetState extends State<MyTaskWidget> {
             children: [
               Material(
                 color: Colors.transparent,
-                elevation: 4.0,
+                elevation: 3.0,
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -78,7 +78,7 @@ class _MyTaskWidgetState extends State<MyTaskWidget> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'My Tasks',
+                                    'My tasks',
                                     style: FlutterFlowTheme.of(context)
                                         .headlineLarge
                                         .override(
