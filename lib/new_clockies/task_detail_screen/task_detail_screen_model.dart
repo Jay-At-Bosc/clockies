@@ -5,6 +5,10 @@ import 'task_detail_screen_widget.dart' show TaskDetailScreenWidget;
 import 'package:flutter/material.dart';
 
 class TaskDetailScreenModel extends FlutterFlowModel<TaskDetailScreenWidget> {
+  ///  Local state fields for this page.
+
+  bool isCompleted = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

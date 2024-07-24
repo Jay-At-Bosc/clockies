@@ -59,7 +59,7 @@ class _MyTaskListWidgetState extends State<MyTaskListWidget> {
           color: FlutterFlowTheme.of(context).secondaryBackground,
         ),
         child: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 16.0, 8.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 0.0, 8.0),
           child: Container(
             width: double.infinity,
             color: Colors.white,
@@ -85,65 +85,84 @@ class _MyTaskListWidgetState extends State<MyTaskListWidget> {
                         final pendingTaskItem = pendingTask[pendingTaskIndex];
                         return Container(
                           decoration: const BoxDecoration(),
-                          child: Row(
+                          child: Column(
                             mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Expanded(
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 4.0, 16.0, 4.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Icon(
-                                      Icons.check_circle_outline_sharp,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      size: 24.0,
-                                    ),
-                                    Text(
-                                      pendingTaskItem,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Inter',
+                                    Expanded(
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Icon(
+                                            Icons.check_circle_outline_sharp,
                                             color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            fontSize: 14.0,
-                                            letterSpacing: 0.0,
+                                                .secondaryText,
+                                            size: 24.0,
                                           ),
+                                          Text(
+                                            pendingTaskItem,
+                                            style: FlutterFlowTheme.of(context)
+                                                .titleSmall
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
+                                        ].divide(const SizedBox(width: 16.0)),
+                                      ),
                                     ),
-                                  ].divide(const SizedBox(width: 16.0)),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            6.0, 4.0, 6.0, 4.0),
+                                        child: Text(
+                                          'Status',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                                fontSize: 12.0,
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  borderRadius: BorderRadius.circular(16.0),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      6.0, 4.0, 6.0, 4.0),
-                                  child: Text(
-                                    'Status',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Inter',
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                          fontSize: 12.0,
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                ),
+                              const Divider(
+                                thickness: 0.5,
+                                indent: 36.0,
+                                endIndent: 0.0,
+                                color: Color(0x3E57636C),
                               ),
                             ],
                           ),
                         );
-                      }),
+                      }).divide(const SizedBox(height: 4.0)),
                     );
                   },
                 ),
-                theme: const ExpandableThemeData(
+                theme: ExpandableThemeData(
                   tapHeaderToExpand: true,
                   tapBodyToExpand: false,
                   tapBodyToCollapse: false,
@@ -151,6 +170,7 @@ class _MyTaskListWidgetState extends State<MyTaskListWidget> {
                   hasIcon: true,
                   expandIcon: Icons.arrow_drop_down,
                   collapseIcon: Icons.arrow_drop_up,
+                  iconColor: FlutterFlowTheme.of(context).iconColor,
                 ),
               ),
             ),

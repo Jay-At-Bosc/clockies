@@ -17,10 +17,10 @@ class MyTaskModel extends FlutterFlowModel<MyTaskWidget> {
       filterItemList[index] = updateFn(filterItemList[index]);
 
   List<String> taskCategoryList = [
-    'Pending Tasks',
-    'Due Today',
-    'Due Tomorrow',
-    'Due By this Week'
+    'Recently assigned',
+    'Due today',
+    'Due tomorrow',
+    'Due by this week'
   ];
   void addToTaskCategoryList(String item) => taskCategoryList.add(item);
   void removeFromTaskCategoryList(String item) => taskCategoryList.remove(item);
