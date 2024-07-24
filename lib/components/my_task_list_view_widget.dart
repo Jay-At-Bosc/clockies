@@ -1,3 +1,4 @@
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/new_component/my_task_list_tile/my_task_list_tile_widget.dart';
@@ -8,12 +9,14 @@ export 'my_task_list_view_model.dart';
 class MyTaskListViewWidget extends StatefulWidget {
   const MyTaskListViewWidget({
     super.key,
-    required this.parameter1,
+    required this.sectionList,
     required this.parameter2,
+    required this.data,
   });
 
-  final List<String>? parameter1;
+  final List<String>? sectionList;
   final List<String>? parameter2;
+  final MainTaskModelStruct? data;
 
   @override
   State<MyTaskListViewWidget> createState() => _MyTaskListViewWidgetState();
@@ -49,29 +52,21 @@ class _MyTaskListViewWidgetState extends State<MyTaskListViewWidget> {
       ),
       child: Builder(
         builder: (context) {
-          final taskCategoryListItem = widget.parameter2!.toList();
+          final myTaskSection = _model.sectionList.toList();
 
           return SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: List.generate(taskCategoryListItem.length,
-                  (taskCategoryListItemIndex) {
-                final taskCategoryListItemItem =
-                    taskCategoryListItem[taskCategoryListItemIndex];
-                return wrapWithModel(
-                  model: _model.myTaskListTileModels.getModel(
-                    taskCategoryListItemIndex.toString(),
-                    taskCategoryListItemIndex,
-                  ),
-                  updateCallback: () => setState(() {}),
-                  child: MyTaskListTileWidget(
-                    key: Key(
-                      'Keycq2_${taskCategoryListItemIndex.toString()}',
-                    ),
-                    parameter1: taskCategoryListItemItem,
-                    parameter2: widget.parameter1!,
-                  ),
+              children:
+                  List.generate(myTaskSection.length, (myTaskSectionIndex) {
+                final myTaskSectionItem = myTaskSection[myTaskSectionIndex];
+                return MyTaskListTileWidget(
+                  key: Key(
+                      'Keycq2_${myTaskSectionIndex}_of_${myTaskSection.length}'),
+                  myAllTaskList: widget.data!.rows,
+                  section: myTaskSectionItem,
+                  index: myTaskSectionIndex,
                 );
               }).divide(const SizedBox(height: 4.0)),
             ),

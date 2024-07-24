@@ -55,6 +55,20 @@ class FetchMyTaskssCall {
       alwaysAllowBody: false,
     );
   }
+
+  int? count(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.data.count''',
+      ));
+  List? myTaskList(dynamic response) => getJsonField(
+        response,
+        r'''$.data.rows''',
+        true,
+      ) as List?;
+  dynamic myTaskData(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+      );
 }
 
 class LoginCall {

@@ -174,7 +174,8 @@ class _DashboardTimeLineComponentWidgetState
                           .headlineSmall
                           .override(
                             fontFamily: 'Inter',
-                            color: FlutterFlowTheme.of(context).dashboardText1,
+                            color:
+                                FlutterFlowTheme.of(context).pendingDayStatus,
                             fontSize: 20.0,
                             letterSpacing: 0.0,
                             fontWeight: FontWeight.bold,
@@ -277,7 +278,7 @@ class _DashboardTimeLineComponentWidgetState
                 width: double.infinity,
                 height: 100.0,
                 decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).dashboard4,
+                  color: FlutterFlowTheme.of(context).futureDayStatus,
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: Column(

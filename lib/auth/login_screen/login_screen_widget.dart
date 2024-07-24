@@ -3,6 +3,7 @@ import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -393,51 +394,62 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                           if ((String password) {
                             return password.length >= 6;
                           }(_model.passowrdTextFieldTextController.text)) {
-                            _model.loginApiResult =
-                                await ClockiesAPIGroup.loginCall.call(
-                              email: _model.emailTextFieldTextController.text,
-                              password:
-                                  _model.passowrdTextFieldTextController.text,
+                            _model.hasInternet =
+                                await actions.checkInternetWithSnackbar(
+                              context,
                             );
-
                             shouldSetState = true;
-                            if ((_model.loginApiResult?.succeeded ?? true)) {
-                              context.goNamed('Home');
-
-                              FFAppState().userToken = getJsonField(
-                                (_model.loginApiResult?.jsonBody ?? ''),
-                                r'''$.data.token''',
-                              ).toString();
-                              FFAppState().user = UserModelStruct.maybeFromMap(
-                                  ClockiesAPIGroup.loginCall.user(
-                                (_model.loginApiResult?.jsonBody ?? ''),
-                              ))!;
-                              setState(() {});
-                            } else {
-                              ScaffoldMessenger.of(context).clearSnackBars();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    getJsonField(
-                                      (_model.loginApiResult?.jsonBody ?? ''),
-                                      r'''$.message''',
-                                    ).toString(),
-                                    style: GoogleFonts.getFont(
-                                      'Public Sans',
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      fontSize: 16.0,
-                                    ),
-                                  ),
-                                  duration: const Duration(milliseconds: 2000),
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).error,
-                                ),
+                            if (_model.hasInternet!) {
+                              _model.loginApiResult =
+                                  await ClockiesAPIGroup.loginCall.call(
+                                email: _model.emailTextFieldTextController.text,
+                                password:
+                                    _model.passowrdTextFieldTextController.text,
                               );
-                            }
 
-                            if (shouldSetState) setState(() {});
-                            return;
+                              shouldSetState = true;
+                              if ((_model.loginApiResult?.succeeded ?? true)) {
+                                context.goNamed('Home');
+
+                                FFAppState().userToken = getJsonField(
+                                  (_model.loginApiResult?.jsonBody ?? ''),
+                                  r'''$.data.token''',
+                                ).toString();
+                                FFAppState().user =
+                                    UserModelStruct.maybeFromMap(
+                                        ClockiesAPIGroup.loginCall.user(
+                                  (_model.loginApiResult?.jsonBody ?? ''),
+                                ))!;
+                                setState(() {});
+                              } else {
+                                ScaffoldMessenger.of(context).clearSnackBars();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      getJsonField(
+                                        (_model.loginApiResult?.jsonBody ?? ''),
+                                        r'''$.message''',
+                                      ).toString(),
+                                      style: GoogleFonts.getFont(
+                                        'Public Sans',
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        fontSize: 16.0,
+                                      ),
+                                    ),
+                                    duration: const Duration(milliseconds: 2000),
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context).error,
+                                  ),
+                                );
+                              }
+
+                              if (shouldSetState) setState(() {});
+                              return;
+                            } else {
+                              if (shouldSetState) setState(() {});
+                              return;
+                            }
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
