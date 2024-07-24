@@ -208,11 +208,24 @@ class _SearchWidgetState extends State<SearchWidget>
                                     onTap: () async {
                                       _model.selectSearch = searchTypeItemsItem;
                                       setState(() {});
+                                      if (_model.selectedSearchTypes
+                                          .contains(searchTypeItemsItem)) {
+                                        _model.removeFromSelectedSearchTypes(
+                                            _model.selectSearch);
+                                        setState(() {});
+                                      } else {
+                                        _model.addToSelectedSearchTypes(
+                                            _model.selectSearch);
+                                        setState(() {});
+                                      }
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
+                                        color: _model.selectedSearchTypes
+                                                .contains(searchTypeItemsItem)
+                                            ? const Color(0x7F2065D1)
+                                            : FlutterFlowTheme.of(context)
+                                                .primaryBackground,
                                         borderRadius:
                                             BorderRadius.circular(16.0),
                                       ),
