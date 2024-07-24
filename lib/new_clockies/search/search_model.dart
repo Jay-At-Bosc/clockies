@@ -14,6 +14,21 @@ class SearchModel extends FlutterFlowModel<SearchWidget> {
   void updateSearchTypesAtIndex(int index, Function(String) updateFn) =>
       searchTypes[index] = updateFn(searchTypes[index]);
 
+  List<String> selectedSearchTypes = [];
+  void addToSelectedSearchTypes(String item) => selectedSearchTypes.add(item);
+  void removeFromSelectedSearchTypes(String item) =>
+      selectedSearchTypes.remove(item);
+  void removeAtIndexFromSelectedSearchTypes(int index) =>
+      selectedSearchTypes.removeAt(index);
+  void insertAtIndexInSelectedSearchTypes(int index, String item) =>
+      selectedSearchTypes.insert(index, item);
+  void updateSelectedSearchTypesAtIndex(int index, Function(String) updateFn) =>
+      selectedSearchTypes[index] = updateFn(selectedSearchTypes[index]);
+
+  bool isShowCancel = true;
+
+  String selectSearch = ' ';
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

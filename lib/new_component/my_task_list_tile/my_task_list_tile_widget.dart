@@ -1,6 +1,7 @@
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -39,11 +40,25 @@ class _MyTaskListTileWidgetState extends State<MyTaskListTileWidget> {
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.displayList = widget.index == 1
-          ? widget.myAllTaskList!
-              .where((e) => e.endDate == getCurrentTimestamp.toString())
-              .toList()
-          : widget.myAllTaskList!.toList().cast<TaskModelStruct>();
+      _model.displayList = () {
+        if (widget.index == 1) {
+          return widget.myAllTaskList!
+              .where((e) => functions.checkDateTimeLine(e.endDate, 'today'))
+              .toList();
+        } else if (widget.index == 2) {
+          return widget.myAllTaskList!
+              .where((e) => functions.checkDateTimeLine(e.endDate, 'tomorrow'))
+              .toList();
+        } else if (widget.index == 3) {
+          return widget.myAllTaskList!
+              .where((e) => functions.checkDateTimeLine(e.endDate, 'this week'))
+              .toList();
+        } else {
+          return widget.myAllTaskList!;
+        }
+      }()
+          .toList()
+          .cast<TaskModelStruct>();
       setState(() {});
     });
 

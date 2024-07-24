@@ -1,5 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'search_model.dart';
 export 'search_model.dart';
@@ -45,6 +47,8 @@ class _SearchWidgetState extends State<SearchWidget>
         body: SafeArea(
           top: true,
           child: Container(
+            width: double.infinity,
+            height: double.infinity,
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).secondaryBackground,
             ),
@@ -60,67 +64,127 @@ class _SearchWidgetState extends State<SearchWidget>
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        TextFormField(
-                          controller: _model.textController,
-                          focusNode: _model.textFieldFocusNode,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            isDense: false,
-                            labelText: 'Search...',
-                            labelStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Inter',
-                                  color: const Color(0x8057636C),
-                                  letterSpacing: 0.0,
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Expanded(
+                              child: TextFormField(
+                                controller: _model.textController,
+                                focusNode: _model.textFieldFocusNode,
+                                onFieldSubmitted: (_) async {
+                                  _model.isShowCancel = !_model.isShowCancel;
+                                  setState(() {});
+                                },
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  isDense: false,
+                                  labelText: 'Search...',
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        color: const Color(0x8057636C),
+                                        letterSpacing: 0.0,
+                                      ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context)
+                                          .borderColor,
+                                      width: 0.5,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context)
+                                          .borderColor,
+                                      width: 0.5,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 0.5,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 0.5,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  filled: true,
+                                  fillColor: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  prefixIcon: const Icon(
+                                    Icons.search_outlined,
+                                    color: Color(0x7F57636C),
+                                  ),
                                 ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).borderColor,
-                                width: 0.5,
+                                style: FlutterFlowTheme.of(context)
+                                    .labelSmall
+                                    .override(
+                                      fontFamily: 'Inter',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      letterSpacing: 0.0,
+                                    ),
+                                maxLines: null,
+                                minLines: 1,
+                                validator: _model.textControllerValidator
+                                    .asValidator(context),
                               ),
-                              borderRadius: BorderRadius.circular(8.0),
                             ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).borderColor,
-                                width: 0.5,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
+                            Builder(
+                              builder: (context) {
+                                if (!_model.isShowCancel) {
+                                  return FFButtonWidget(
+                                    onPressed: () async {
+                                      _model.isShowCancel =
+                                          !_model.isShowCancel;
+                                      setState(() {});
+                                      await actions.hideKeyboard();
+                                    },
+                                    text: 'Cancel',
+                                    options: FFButtonOptions(
+                                      height: 40.0,
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          24.0, 0.0, 24.0, 0.0),
+                                      iconPadding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .headlineSmall
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                          ),
+                                      elevation: 0.0,
+                                      borderSide: const BorderSide(
+                                        color: Colors.transparent,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                  );
+                                } else {
+                                  return Container(
+                                    width: 0.0,
+                                    height: 0.0,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                    ),
+                                  );
+                                }
+                              },
                             ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0x00000000),
-                                width: 0.5,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0x00000000),
-                                width: 0.5,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            filled: true,
-                            fillColor:
-                                FlutterFlowTheme.of(context).primaryBackground,
-                            prefixIcon: const Icon(
-                              Icons.search_outlined,
-                              color: Color(0x7F57636C),
-                            ),
-                          ),
-                          style: FlutterFlowTheme.of(context)
-                              .labelSmall
-                              .override(
-                                fontFamily: 'Inter',
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                letterSpacing: 0.0,
-                              ),
-                          maxLines: null,
-                          minLines: 1,
-                          validator: _model.textControllerValidator
-                              .asValidator(context),
+                          ],
                         ),
                         Builder(
                           builder: (context) {
@@ -136,27 +200,38 @@ class _SearchWidgetState extends State<SearchWidget>
                                     (searchTypeItemsIndex) {
                                   final searchTypeItemsItem =
                                       searchTypeItems[searchTypeItemsIndex];
-                                  return Container(
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
-                                      borderRadius: BorderRadius.circular(16.0),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        searchTypeItemsItem,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Inter',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .iconColor,
-                                              fontSize: 14.0,
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.w500,
-                                            ),
+                                  return InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      _model.selectSearch = searchTypeItemsItem;
+                                      setState(() {});
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          searchTypeItemsItem,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .iconColor,
+                                                fontSize: 14.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                        ),
                                       ),
                                     ),
                                   );

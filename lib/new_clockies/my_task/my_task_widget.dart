@@ -5,6 +5,7 @@ import '/new_component/bottom_sheet/filter_option/filter_option_widget.dart';
 import '/new_component/circular_profile_image/circular_profile_image_widget.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'my_task_model.dart';
 export 'my_task_model.dart';
@@ -25,6 +26,16 @@ class _MyTaskWidgetState extends State<MyTaskWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MyTaskModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.isLoading = true;
+      setState(() {});
+      await _model.getMyTask(context);
+      setState(() {});
+      _model.isLoading = false;
+      setState(() {});
+    });
   }
 
   @override
