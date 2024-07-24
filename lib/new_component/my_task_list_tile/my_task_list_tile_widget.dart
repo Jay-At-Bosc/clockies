@@ -43,10 +43,7 @@ class _MyTaskListTileWidgetState extends State<MyTaskListTileWidget> {
       _model.displayList = () {
         if (widget.index == 1) {
           return widget.myAllTaskList!
-              .where((e) => getJsonField(
-                    functions.checkDateTimelines(e.endDate),
-                    r'''$.type''',
-                  ))
+              .where((e) => functions.checkDateTimeLine(e.endDate, 'today'))
               .toList();
         } else if (widget.index == 2) {
           return widget.myAllTaskList!
@@ -161,8 +158,12 @@ class _MyTaskListTileWidgetState extends State<MyTaskListTileWidget> {
                                     ),
                                     Container(
                                       decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
+                                        color: DateTimelineModelStruct
+                                            .maybeFromMap(getJsonField(
+                                          functions.checkDateTimelines(
+                                              pendingTaskItem.endDate),
+                                          r'''$.color''',
+                                        ))?.color,
                                         borderRadius:
                                             BorderRadius.circular(16.0),
                                       ),
@@ -170,7 +171,11 @@ class _MyTaskListTileWidgetState extends State<MyTaskListTileWidget> {
                                         padding: const EdgeInsetsDirectional.fromSTEB(
                                             6.0, 4.0, 6.0, 4.0),
                                         child: Text(
-                                          'Status',
+                                          getJsonField(
+                                            functions.checkDateTimelines(
+                                                pendingTaskItem.endDate),
+                                            r'''$.string''',
+                                          ).toString(),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(

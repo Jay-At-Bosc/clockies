@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'search_model.dart';
 export 'search_model.dart';
@@ -24,9 +25,11 @@ class _SearchWidgetState extends State<SearchWidget>
     super.initState();
     _model = createModel(context, () => SearchModel());
 
-    _model.textController ??= TextEditingController();
+    _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
     _model.textFieldFocusNode!.addListener(() => setState(() {}));
+    _model.searchFieldTextController ??= TextEditingController();
+    _model.searchFieldFocusNode ??= FocusNode();
   }
 
   @override
@@ -70,7 +73,7 @@ class _SearchWidgetState extends State<SearchWidget>
                           children: [
                             Expanded(
                               child: TextFormField(
-                                controller: _model.textController,
+                                controller: _model.textController1,
                                 focusNode: _model.textFieldFocusNode,
                                 onFieldSubmitted: (_) async {
                                   _model.isShowCancel = false;
@@ -136,7 +139,7 @@ class _SearchWidgetState extends State<SearchWidget>
                                     ),
                                 maxLines: null,
                                 minLines: 1,
-                                validator: _model.textControllerValidator
+                                validator: _model.textController1Validator
                                     .asValidator(context),
                               ),
                             ),
@@ -171,6 +174,73 @@ class _SearchWidgetState extends State<SearchWidget>
                                 ),
                               ),
                           ],
+                        ),
+                        TextFormField(
+                          controller: _model.searchFieldTextController,
+                          focusNode: _model.searchFieldFocusNode,
+                          onChanged: (_) => EasyDebounce.debounce(
+                            '_model.searchFieldTextController',
+                            const Duration(milliseconds: 500),
+                            () => setState(() {}),
+                          ),
+                          autofocus: true,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            labelStyle: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
+                            hintText: 'Search User',
+                            hintStyle: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).borderColor,
+                                width: 0.5,
+                              ),
+                              borderRadius: BorderRadius.circular(28.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primary,
+                                width: 0.5,
+                              ),
+                              borderRadius: BorderRadius.circular(28.0),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 0.5,
+                              ),
+                              borderRadius: BorderRadius.circular(28.0),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 0.5,
+                              ),
+                              borderRadius: BorderRadius.circular(28.0),
+                            ),
+                            filled: true,
+                            fillColor:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                            prefixIcon: const Icon(
+                              Icons.search_sharp,
+                            ),
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
+                          validator: _model.searchFieldTextControllerValidator
+                              .asValidator(context),
                         ),
                         Builder(
                           builder: (context) {

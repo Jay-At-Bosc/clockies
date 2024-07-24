@@ -480,7 +480,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                             24.0, 0.0, 24.0, 0.0),
                         iconPadding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).blueColor,
+                        color: const Color(0xFF1C4D86),
                         textStyle: FlutterFlowTheme.of(context)
                             .headlineMedium
                             .override(
