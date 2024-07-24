@@ -298,6 +298,18 @@ class FFAppState extends ChangeNotifier {
     Status.insert(index, value);
     prefs.setStringList('ff_Status', _Status);
   }
+
+  bool _internetConnect = false;
+  bool get internetConnect => _internetConnect;
+  set internetConnect(bool value) {
+    _internetConnect = value;
+  }
+
+  int _MyTaskSelectedView = 0;
+  int get MyTaskSelectedView => _MyTaskSelectedView;
+  set MyTaskSelectedView(int value) {
+    _MyTaskSelectedView = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

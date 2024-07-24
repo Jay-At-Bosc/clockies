@@ -246,3 +246,44 @@ String? getWeekdayName(String? weekday) {
       return "";
   }
 }
+
+bool checkDateTimeLine(
+  String? utcDateString,
+  String? condition,
+) {
+  if (utcDateString == null || utcDateString.isEmpty) {
+    // Handle null or empty date string
+    return false;
+  }
+
+  DateTime utcDateTime = DateTime.parse(utcDateString);
+  DateTime localDateTime = utcDateTime.toLocal();
+  print(localDateTime.toString());
+//   print(DateTime.now().toString());
+  DateTime now = DateTime.now();
+  DateTime today = DateTime(now.year, now.month, now.day);
+  DateTime tomorrow = today.add(Duration(days: 1));
+  DateTime startOfWeek = today.subtract(Duration(days: today.weekday));
+  DateTime endOfWeek = startOfWeek.add(Duration(days: 6));
+  DateTime yesterday = today.subtract(Duration(days: 1));
+
+  switch (condition ?? 'today'.toLowerCase()) {
+    case 'today':
+      return localDateTime.year == today.year &&
+          localDateTime.month == today.month &&
+          localDateTime.day == today.day;
+    case 'tomorrow':
+      return localDateTime.year == tomorrow.year &&
+          localDateTime.month == tomorrow.month &&
+          localDateTime.day == tomorrow.day;
+    case 'yesterday':
+      return localDateTime.year == yesterday.year &&
+          localDateTime.month == yesterday.month &&
+          localDateTime.day == yesterday.day;
+    case 'this week':
+      return localDateTime.isAfter(startOfWeek.subtract(Duration(days: 1))) &&
+          localDateTime.isBefore(endOfWeek.add(Duration(days: 1)));
+    default:
+      return false;
+  }
+}

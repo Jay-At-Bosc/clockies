@@ -24,6 +24,8 @@ class LoginScreenModel extends FlutterFlowModel<LoginScreenWidget> {
   late bool passowrdTextFieldVisibility;
   String? Function(BuildContext, String?)?
       passowrdTextFieldTextControllerValidator;
+  // Stores action output result for [Custom Action - checkInternetWithSnackbar] action in LoginButton widget.
+  bool? hasInternet;
   // Stores action output result for [Backend Call - API (Login)] action in LoginButton widget.
   ApiCallResponse? loginApiResult;
 

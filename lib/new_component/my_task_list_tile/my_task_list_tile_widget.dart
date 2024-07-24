@@ -1,5 +1,7 @@
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -9,12 +11,14 @@ export 'my_task_list_tile_model.dart';
 class MyTaskListTileWidget extends StatefulWidget {
   const MyTaskListTileWidget({
     super.key,
-    required this.parameter1,
-    required this.parameter2,
+    required this.myAllTaskList,
+    required this.section,
+    required this.index,
   });
 
-  final String? parameter1;
-  final List<String>? parameter2;
+  final List<TaskModelStruct>? myAllTaskList;
+  final String? section;
+  final int? index;
 
   @override
   State<MyTaskListTileWidget> createState() => _MyTaskListTileWidgetState();
@@ -35,7 +39,28 @@ class _MyTaskListTileWidgetState extends State<MyTaskListTileWidget> {
     _model = createModel(context, () => MyTaskListTileModel());
 
     // On component load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {});
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.displayList = () {
+        if (widget.index == 1) {
+          return widget.myAllTaskList!
+              .where((e) => functions.checkDateTimeLine(e.endDate, 'today'))
+              .toList();
+        } else if (widget.index == 2) {
+          return widget.myAllTaskList!
+              .where((e) => functions.checkDateTimeLine(e.endDate, 'tomorrow'))
+              .toList();
+        } else if (widget.index == 3) {
+          return widget.myAllTaskList!
+              .where((e) => functions.checkDateTimeLine(e.endDate, 'this week'))
+              .toList();
+        } else {
+          return widget.myAllTaskList!;
+        }
+      }()
+          .toList()
+          .cast<TaskModelStruct>();
+      setState(() {});
+    });
 
     _model.expandableExpandableController =
         ExpandableController(initialExpanded: false);
@@ -71,7 +96,10 @@ class _MyTaskListTileWidgetState extends State<MyTaskListTileWidget> {
               controller: _model.expandableExpandableController,
               child: ExpandablePanel(
                 header: Text(
-                  widget.parameter1!,
+                  valueOrDefault<String>(
+                    widget.section,
+                    '-',
+                  ),
                   style: FlutterFlowTheme.of(context).headlineSmall.override(
                         fontFamily: 'Inter',
                         letterSpacing: 0.0,
@@ -80,7 +108,7 @@ class _MyTaskListTileWidgetState extends State<MyTaskListTileWidget> {
                 collapsed: Container(),
                 expanded: Builder(
                   builder: (context) {
-                    final pendingTask = widget.parameter2!.toList();
+                    final pendingTask = _model.displayList.toList();
 
                     return Column(
                       mainAxisSize: MainAxisSize.max,
@@ -111,7 +139,10 @@ class _MyTaskListTileWidgetState extends State<MyTaskListTileWidget> {
                                             size: 24.0,
                                           ),
                                           Text(
-                                            pendingTaskItem,
+                                            valueOrDefault<String>(
+                                              pendingTaskItem.taskName,
+                                              'Task Name',
+                                            ),
                                             style: FlutterFlowTheme.of(context)
                                                 .titleSmall
                                                 .override(
