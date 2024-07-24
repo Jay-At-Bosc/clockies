@@ -98,7 +98,7 @@ class _MyTaskWidgetState extends State<MyTaskWidget> {
                                       width: 120.0,
                                       height: 20.0,
                                       onItemSelected: (index) async {
-                                        _model.selectedViewIndex = index;
+                                        FFAppState().MyTaskSelectedView = index;
                                         setState(() {});
                                       },
                                     ),

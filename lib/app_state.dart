@@ -304,6 +304,12 @@ class FFAppState extends ChangeNotifier {
   set internetConnect(bool value) {
     _internetConnect = value;
   }
+
+  int _MyTaskSelectedView = 0;
+  int get MyTaskSelectedView => _MyTaskSelectedView;
+  set MyTaskSelectedView(int value) {
+    _MyTaskSelectedView = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {
