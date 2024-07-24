@@ -298,6 +298,12 @@ class FFAppState extends ChangeNotifier {
     Status.insert(index, value);
     prefs.setStringList('ff_Status', _Status);
   }
+
+  bool _internetConnect = false;
+  bool get internetConnect => _internetConnect;
+  set internetConnect(bool value) {
+    _internetConnect = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

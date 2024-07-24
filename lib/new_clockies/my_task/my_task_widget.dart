@@ -98,19 +98,8 @@ class _MyTaskWidgetState extends State<MyTaskWidget> {
                                       width: 120.0,
                                       height: 20.0,
                                       onItemSelected: (index) async {
-                                        if (index != 0) {
-                                          if (index == 1) {
-                                            context.pushNamed('BoardScreen');
-
-                                            return;
-                                          } else {
-                                            context.pushNamed('CalenderScreen');
-
-                                            return;
-                                          }
-                                        } else {
-                                          return;
-                                        }
+                                        _model.selectedViewIndex = index;
+                                        setState(() {});
                                       },
                                     ),
                                   ),
@@ -209,13 +198,33 @@ class _MyTaskWidgetState extends State<MyTaskWidget> {
                 ),
               ),
               Expanded(
-                child: wrapWithModel(
-                  model: _model.myTaskListViewModel,
-                  updateCallback: () => setState(() {}),
-                  child: MyTaskListViewWidget(
-                    parameter1: _model.pendingTaskList,
-                    parameter2: _model.taskCategoryList,
-                  ),
+                child: Builder(
+                  builder: (context) {
+                    if (_model.selectedViewIndex == 1) {
+                      return Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                        ),
+                      );
+                    } else if (_model.selectedViewIndex == 2) {
+                      return Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).primary,
+                        ),
+                      );
+                    } else {
+                      return wrapWithModel(
+                        model: _model.myTaskListViewModel,
+                        updateCallback: () => setState(() {}),
+                        child: MyTaskListViewWidget(
+                          parameter1: _model.pendingTaskList,
+                          parameter2: _model.taskCategoryList,
+                        ),
+                      );
+                    }
+                  },
                 ),
               ),
             ],

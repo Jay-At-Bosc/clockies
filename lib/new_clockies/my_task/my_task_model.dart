@@ -42,6 +42,8 @@ class MyTaskModel extends FlutterFlowModel<MyTaskWidget> {
   void updatePendingTaskListAtIndex(int index, Function(String) updateFn) =>
       pendingTaskList[index] = updateFn(pendingTaskList[index]);
 
+  int selectedViewIndex = 0;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

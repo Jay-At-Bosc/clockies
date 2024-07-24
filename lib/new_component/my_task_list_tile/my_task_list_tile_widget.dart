@@ -2,7 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'my_task_list_tile_model.dart';
 export 'my_task_list_tile_model.dart';
 
@@ -33,9 +32,6 @@ class _MyTaskListTileWidgetState extends State<MyTaskListTileWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MyTaskListTileModel());
-
-    // On component load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {});
 
     _model.expandableExpandableController =
         ExpandableController(initialExpanded: false);
