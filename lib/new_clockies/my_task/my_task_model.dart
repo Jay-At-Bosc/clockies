@@ -1,3 +1,4 @@
+import '/components/my_task_list_view_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/new_component/circular_profile_image/circular_profile_image_widget.dart';
 import 'my_task_widget.dart' show MyTaskWidget;
@@ -46,16 +47,20 @@ class MyTaskModel extends FlutterFlowModel<MyTaskWidget> {
   final unfocusNode = FocusNode();
   // Model for CircularProfileImage component.
   late CircularProfileImageModel circularProfileImageModel;
+  // Model for MyTaskListView component.
+  late MyTaskListViewModel myTaskListViewModel;
 
   @override
   void initState(BuildContext context) {
     circularProfileImageModel =
         createModel(context, () => CircularProfileImageModel());
+    myTaskListViewModel = createModel(context, () => MyTaskListViewModel());
   }
 
   @override
   void dispose() {
     unfocusNode.dispose();
     circularProfileImageModel.dispose();
+    myTaskListViewModel.dispose();
   }
 }

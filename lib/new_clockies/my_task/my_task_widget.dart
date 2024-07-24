@@ -1,10 +1,11 @@
+import '/components/my_task_list_view_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/new_component/bottom_sheet/filter_option/filter_option_widget.dart';
 import '/new_component/circular_profile_image/circular_profile_image_widget.dart';
-import '/new_component/my_task_list/my_task_list_widget.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'my_task_model.dart';
 export 'my_task_model.dart';
 
@@ -24,6 +25,9 @@ class _MyTaskWidgetState extends State<MyTaskWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MyTaskModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {});
   }
 
   @override
@@ -49,7 +53,7 @@ class _MyTaskWidgetState extends State<MyTaskWidget> {
             children: [
               Material(
                 color: Colors.transparent,
-                elevation: 3.0,
+                elevation: 5.0,
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -204,39 +208,13 @@ class _MyTaskWidgetState extends State<MyTaskWidget> {
                   ),
                 ),
               ),
-              const Divider(
-                height: 8.0,
-                thickness: 0.5,
-                color: Color(0x0057636C),
-              ),
               Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).primaryBackground,
-                  ),
-                  child: Builder(
-                    builder: (context) {
-                      final taskCategoryListItem =
-                          _model.taskCategoryList.toList();
-
-                      return SingleChildScrollView(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: List.generate(taskCategoryListItem.length,
-                              (taskCategoryListItemIndex) {
-                            final taskCategoryListItemItem =
-                                taskCategoryListItem[taskCategoryListItemIndex];
-                            return MyTaskListWidget(
-                              key: Key(
-                                  'Keykjn_${taskCategoryListItemIndex}_of_${taskCategoryListItem.length}'),
-                              parameter1: taskCategoryListItemItem,
-                              parameter2: _model.pendingTaskList,
-                            );
-                          }).divide(const SizedBox(height: 4.0)),
-                        ),
-                      );
-                    },
+                child: wrapWithModel(
+                  model: _model.myTaskListViewModel,
+                  updateCallback: () => setState(() {}),
+                  child: MyTaskListViewWidget(
+                    parameter1: _model.pendingTaskList,
+                    parameter2: _model.taskCategoryList,
                   ),
                 ),
               ),

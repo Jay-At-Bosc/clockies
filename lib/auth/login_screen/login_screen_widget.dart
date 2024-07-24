@@ -59,11 +59,11 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 48.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 36.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -71,46 +71,57 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                         children: [
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 24.0, 0.0, 0.0),
+                                0.0, 100.0, 0.0, 0.0),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8.0),
                               child: Image.asset(
                                 'assets/images/Clockies_png.png',
                                 width: 100.0,
-                                height: 80.0,
+                                height: 100.0,
                                 fit: BoxFit.scaleDown,
                               ),
                             ),
                           ),
-                          Text(
-                            FFAppConstants.clockies,
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'PT Serif',
-                                  fontSize: 22.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 4.0, 0.0, 0.0),
+                            child: Text(
+                              FFAppConstants.clockies,
+                              style: FlutterFlowTheme.of(context)
+                                  .displayMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    letterSpacing: 0.0,
+                                  ),
+                            ),
                           ),
                         ],
                       ),
                     ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 42.0),
-                      child: Text(
-                        FFAppConstants.signIn,
-                        style: FlutterFlowTheme.of(context).titleLarge.override(
-                              fontFamily: 'Inter',
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.w600,
-                            ),
+                    Align(
+                      alignment: const AlignmentDirectional(-1.0, 0.0),
+                      child: Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
+                        child: Text(
+                          'Hi, Welcome',
+                          style: FlutterFlowTheme.of(context)
+                              .headlineMedium
+                              .override(
+                                fontFamily: 'Inter',
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontSize: 21.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.w600,
+                              ),
+                        ),
                       ),
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 18.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 14.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,17 +135,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                               onChanged: (_) => EasyDebounce.debounce(
                                 '_model.emailTextFieldTextController',
                                 const Duration(milliseconds: 100),
-                                () async {
-                                  if (_model.emailTextFieldTextController
-                                              .text !=
-                                          '') {
-                                    _model.emailState = true;
-                                    setState(() {});
-                                  } else {
-                                    _model.emailState = false;
-                                    setState(() {});
-                                  }
-                                },
+                                () async {},
                               ),
                               autofocus: false,
                               textCapitalization: TextCapitalization.none,
@@ -146,11 +147,9 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                     .labelMedium
                                     .override(
                                       fontFamily: 'Inter',
-                                      color: (_model.emailTextFieldFocusNode
-                                                  ?.hasFocus ??
-                                              false)
+                                      color: _model.emailState
                                           ? FlutterFlowTheme.of(context).primary
-                                          : const Color(0x9757636C),
+                                          : FlutterFlowTheme.of(context).error,
                                       fontSize: 16.0,
                                       letterSpacing: 0.0,
                                     ),
@@ -165,8 +164,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                   borderSide: BorderSide(
                                     color: _model.emailState
                                         ? FlutterFlowTheme.of(context).blueColor
-                                        : FlutterFlowTheme.of(context)
-                                            .checkedColor,
+                                        : FlutterFlowTheme.of(context).error,
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(8.0),
@@ -217,8 +215,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Inter',
-                                    color: FlutterFlowTheme.of(context)
-                                        .checkedColor,
+                                    color: FlutterFlowTheme.of(context).error,
                                     letterSpacing: 0.0,
                                   ),
                             ),
@@ -238,17 +235,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                             onChanged: (_) => EasyDebounce.debounce(
                               '_model.passowrdTextFieldTextController',
                               const Duration(milliseconds: 100),
-                              () async {
-                                if (_model.passowrdTextFieldTextController
-                                            .text !=
-                                        '') {
-                                  _model.passwordState = true;
-                                  setState(() {});
-                                } else {
-                                  _model.passwordState = false;
-                                  setState(() {});
-                                }
-                              },
+                              () async {},
                             ),
                             autofocus: false,
                             textCapitalization: TextCapitalization.none,
@@ -260,11 +247,9 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                   .labelMedium
                                   .override(
                                     fontFamily: 'Inter',
-                                    color: (_model.passowrdTextFieldFocusNode
-                                                ?.hasFocus ??
-                                            false)
+                                    color: _model.passwordState
                                         ? FlutterFlowTheme.of(context).primary
-                                        : const Color(0x5C57636C),
+                                        : FlutterFlowTheme.of(context).error,
                                     fontSize: 16.0,
                                     letterSpacing: 0.0,
                                   ),
@@ -272,15 +257,15 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                   .labelMedium
                                   .override(
                                     fontFamily: 'Inter',
-                                    color: const Color(0xFFC4CDD5),
+                                    color:
+                                        FlutterFlowTheme.of(context).secondary,
                                     letterSpacing: 0.0,
                                   ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: _model.passwordState
                                       ? FlutterFlowTheme.of(context).primary
-                                      : FlutterFlowTheme.of(context)
-                                          .checkedColor,
+                                      : FlutterFlowTheme.of(context).error,
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(8.0),
@@ -345,8 +330,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                     .bodyMedium
                                     .override(
                                       fontFamily: 'Inter',
-                                      color: FlutterFlowTheme.of(context)
-                                          .checkedColor,
+                                      color: FlutterFlowTheme.of(context).error,
                                       letterSpacing: 0.0,
                                     ),
                               ),
@@ -485,12 +469,14 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                         iconPadding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).secondary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Inter',
-                                  color: Colors.white,
-                                  letterSpacing: 0.0,
-                                ),
+                        textStyle: FlutterFlowTheme.of(context)
+                            .headlineMedium
+                            .override(
+                              fontFamily: 'Inter',
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              letterSpacing: 0.0,
+                            ),
                         elevation: 0.0,
                         borderSide: const BorderSide(
                           color: Colors.transparent,

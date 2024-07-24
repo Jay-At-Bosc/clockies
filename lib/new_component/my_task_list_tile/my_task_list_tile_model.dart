@@ -1,9 +1,9 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'my_task_list_widget.dart' show MyTaskListWidget;
+import 'my_task_list_tile_widget.dart' show MyTaskListTileWidget;
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 
-class MyTaskListModel extends FlutterFlowModel<MyTaskListWidget> {
+class MyTaskListTileModel extends FlutterFlowModel<MyTaskListTileWidget> {
   ///  Local state fields for this component.
 
   bool selected = false;
