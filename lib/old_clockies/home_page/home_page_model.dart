@@ -1,10 +1,10 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
-import '/components/custom_drawer_component/custom_drawer_component_widget.dart';
-import '/components/dashboard_time_line_component/dashboard_time_line_component_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/old_clockies/components/custom_drawer_component/custom_drawer_component_widget.dart';
+import '/old_clockies/components/dashboard_time_line_component/dashboard_time_line_component_widget.dart';
 import 'home_page_widget.dart' show HomePageWidget;
 import 'package:flutter/material.dart';
 

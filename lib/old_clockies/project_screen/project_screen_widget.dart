@@ -1,10 +1,10 @@
 import '/backend/schema/enums/enums.dart';
 import '/backend/schema/structs/index.dart';
-import '/components/add_project_dialog/add_project_dialog_widget.dart';
-import '/components/custom_drawer_component/custom_drawer_component_widget.dart';
 import '/flutter_flow/flutter_flow_data_table.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/old_clockies/components/add_project_dialog/add_project_dialog_widget.dart';
+import '/old_clockies/components/custom_drawer_component/custom_drawer_component_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

@@ -9,6 +9,55 @@ export 'api_manager.dart' show ApiCallResponse;
 
 const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
+/// Start Clockies API Group Code
+
+class ClockiesAPIGroup {
+  static String getBaseUrl({
+    String? authToken = '',
+  }) =>
+      'http://3.144.249.140:5000';
+  static Map<String, String> headers = {
+    'Authorization': '[authToken]',
+  };
+  static FetchMyTaskssCall fetchMyTaskssCall = FetchMyTaskssCall();
+}
+
+class FetchMyTaskssCall {
+  Future<ApiCallResponse> call({
+    int? pageNumber,
+    int? pageSize,
+    dynamic filtersJson,
+    String? authToken = '',
+  }) async {
+    final baseUrl = ClockiesAPIGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    final filters = _serializeJson(filtersJson, true);
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'Fetch My Taskss',
+      apiUrl: '$baseUrl/api/task/myTask',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': '$authToken',
+      },
+      params: {
+        'pageSize': pageSize,
+        'filters': filters,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+/// End Clockies API Group Code
+
 class LoginAPICall {
   static Future<ApiCallResponse> call({
     String? email = 'vishal.sorani@bosctechlabs.com',
@@ -384,7 +433,10 @@ class FetchMyTaskCall {
     String? search = '',
     String? order = '',
     String? orderBy = '',
+    dynamic filtersJson,
   }) async {
+    final filters = _serializeJson(filtersJson, true);
+
     return ApiManager.instance.makeApiCall(
       callName: 'Fetch My Task',
       apiUrl: 'http://3.144.249.140:5000/api/task/myTask',
