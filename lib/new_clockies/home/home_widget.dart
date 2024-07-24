@@ -1,9 +1,9 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
-import '/components/task_complete_dialogue_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/new_component/task_complete_dialogue/task_complete_dialogue_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/random_data_util.dart' as random_data;

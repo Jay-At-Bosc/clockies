@@ -1,8 +1,8 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
-import '/components/task_edit_delete_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/old_clockies/components/task_edit_delete/task_edit_delete_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:flutter/material.dart';

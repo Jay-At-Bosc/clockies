@@ -136,7 +136,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                   }
                                 },
                               ),
-                              autofocus: true,
+                              autofocus: false,
                               textCapitalization: TextCapitalization.none,
                               textInputAction: TextInputAction.next,
                               obscureText: false,
@@ -146,9 +146,15 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                     .labelMedium
                                     .override(
                                       fontFamily: 'Inter',
+                                      color: (_model.emailTextFieldFocusNode
+                                                  ?.hasFocus ??
+                                              false)
+                                          ? FlutterFlowTheme.of(context).primary
+                                          : const Color(0x9757636C),
                                       fontSize: 16.0,
                                       letterSpacing: 0.0,
                                     ),
+                                alignLabelWithHint: false,
                                 hintStyle: FlutterFlowTheme.of(context)
                                     .labelMedium
                                     .override(
@@ -244,7 +250,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                 }
                               },
                             ),
-                            autofocus: true,
+                            autofocus: false,
                             textCapitalization: TextCapitalization.none,
                             textInputAction: TextInputAction.done,
                             obscureText: !_model.passowrdTextFieldVisibility,
@@ -254,6 +260,11 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                   .labelMedium
                                   .override(
                                     fontFamily: 'Inter',
+                                    color: (_model.passowrdTextFieldFocusNode
+                                                ?.hasFocus ??
+                                            false)
+                                        ? FlutterFlowTheme.of(context).primary
+                                        : const Color(0x5C57636C),
                                     fontSize: 16.0,
                                     letterSpacing: 0.0,
                                   ),
@@ -398,7 +409,8 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                           if ((String password) {
                             return password.length >= 6;
                           }(_model.passowrdTextFieldTextController.text)) {
-                            _model.loginApiResult = await LoginAPICall.call(
+                            _model.loginApiResult =
+                                await ClockiesAPIGroup.loginCall.call(
                               email: _model.emailTextFieldTextController.text,
                               password:
                                   _model.passowrdTextFieldTextController.text,
@@ -413,7 +425,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                 r'''$.data.token''',
                               ).toString();
                               FFAppState().user = UserModelStruct.maybeFromMap(
-                                  LoginAPICall.user(
+                                  ClockiesAPIGroup.loginCall.user(
                                 (_model.loginApiResult?.jsonBody ?? ''),
                               ))!;
                               setState(() {});
@@ -472,7 +484,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                             24.0, 0.0, 24.0, 0.0),
                         iconPadding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).pinkColor,
+                        color: FlutterFlowTheme.of(context).secondary,
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
                                   fontFamily: 'Inter',

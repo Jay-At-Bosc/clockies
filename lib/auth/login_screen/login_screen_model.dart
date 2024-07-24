@@ -24,7 +24,7 @@ class LoginScreenModel extends FlutterFlowModel<LoginScreenWidget> {
   late bool passowrdTextFieldVisibility;
   String? Function(BuildContext, String?)?
       passowrdTextFieldTextControllerValidator;
-  // Stores action output result for [Backend Call - API (Login API)] action in LoginButton widget.
+  // Stores action output result for [Backend Call - API (Login)] action in LoginButton widget.
   ApiCallResponse? loginApiResult;
 
   @override

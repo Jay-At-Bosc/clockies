@@ -15,11 +15,12 @@ class ClockiesAPIGroup {
   static String getBaseUrl({
     String? authToken = '',
   }) =>
-      'http://3.144.249.140:5000';
+      'http://3.144.249.140:5000/api';
   static Map<String, String> headers = {
     'Authorization': '[authToken]',
   };
   static FetchMyTaskssCall fetchMyTaskssCall = FetchMyTaskssCall();
+  static LoginCall loginCall = LoginCall();
 }
 
 class FetchMyTaskssCall {
@@ -33,11 +34,11 @@ class FetchMyTaskssCall {
       authToken: authToken,
     );
 
-    final filters = _serializeJson(filtersJson, true);
+    final filters = _serializeJson(filtersJson);
 
     return ApiManager.instance.makeApiCall(
       callName: 'Fetch My Taskss',
-      apiUrl: '$baseUrl/api/task/myTask',
+      apiUrl: '$baseUrl/task/myTask',
       callType: ApiCallType.GET,
       headers: {
         'Authorization': '$authToken',
@@ -54,6 +55,54 @@ class FetchMyTaskssCall {
       alwaysAllowBody: false,
     );
   }
+}
+
+class LoginCall {
+  Future<ApiCallResponse> call({
+    String? email = '',
+    String? password = '',
+    String? authToken = '',
+  }) async {
+    final baseUrl = ClockiesAPIGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "email": "$email",
+  "password": "$password"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Login',
+      apiUrl: '$baseUrl/auth/login',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': '$authToken',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  dynamic user(dynamic response) => getJsonField(
+        response,
+        r'''$.data.user''',
+      );
+  String? message(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
+  String? token(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.token''',
+      ));
 }
 
 /// End Clockies API Group Code

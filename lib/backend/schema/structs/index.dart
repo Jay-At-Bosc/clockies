@@ -10,4 +10,3 @@ export 'timeline_model_struct.dart';
 export 'user_model_struct.dart';
 export 'dashboard_model_struct.dart';
 export 'projects_struct.dart';
-export 'task_user_struct.dart';
