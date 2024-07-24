@@ -213,6 +213,20 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'CalenderScreen',
           path: '/calenderScreen',
           builder: (context, params) => const CalenderScreenWidget(),
+        ),
+        FFRoute(
+          name: 'account',
+          path: '/account',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'account')
+              : const AccountWidget(),
+        ),
+        FFRoute(
+          name: 'search',
+          path: '/search',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'search')
+              : const SearchWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

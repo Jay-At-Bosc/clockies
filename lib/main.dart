@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'index.dart';
 
 void main() async {
@@ -102,6 +103,8 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'Home': const HomeWidget(),
       'MyTask': const MyTaskWidget(),
+      'search': const SearchWidget(),
+      'account': const AccountWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -116,8 +119,8 @@ class _NavBarPageState extends State<NavBarPage> {
         backgroundColor: FlutterFlowTheme.of(context).primaryText,
         selectedItemColor: FlutterFlowTheme.of(context).secondaryBackground,
         unselectedItemColor: FlutterFlowTheme.of(context).secondaryText,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -126,7 +129,7 @@ class _NavBarPageState extends State<NavBarPage> {
               size: 24.0,
             ),
             activeIcon: Icon(
-              FFIcons.khome,
+              Icons.home_sharp,
               size: 24.0,
             ),
             label: 'Home',
@@ -134,14 +137,38 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.turned_in_not,
+              Icons.check_circle_outlined,
               size: 24.0,
             ),
             activeIcon: Icon(
-              Icons.turned_in,
+              Icons.check_circle,
               size: 24.0,
             ),
-            label: 'Home',
+            label: 'My Task',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.search_sharp,
+              size: 24.0,
+            ),
+            activeIcon: FaIcon(
+              FontAwesomeIcons.search,
+              size: 24.0,
+            ),
+            label: 'Search',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person_outline,
+              size: 24.0,
+            ),
+            activeIcon: Icon(
+              Icons.person,
+              size: 24.0,
+            ),
+            label: 'Account',
             tooltip: '',
           )
         ],
