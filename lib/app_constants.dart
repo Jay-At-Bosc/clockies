@@ -4,7 +4,7 @@ abstract class FFAppConstants {
   static const String signIn = 'Sign In';
   static const String email = 'Email Address';
   static const String password = 'Password';
-  static const String forgotPassword = 'Forgot Password';
+  static const String forgotPassword = 'Forgot Password?';
   static const String login = 'Login';
   static const String dashboard = 'Dashboard';
   static const String myTask = 'My Task';
@@ -40,4 +40,6 @@ abstract class FFAppConstants {
   static const String editTask = 'Edit a Task';
   static const List<String> emptyList = [''];
   static const String Completed = 'Completed';
+  static const String Donthaveanaccount = 'Don’t have an account?';
+  static const String Getstarted = 'Get started';
 }
