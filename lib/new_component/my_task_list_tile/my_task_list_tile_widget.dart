@@ -166,25 +166,21 @@ class _MyTaskListTileWidgetState extends State<MyTaskListTileWidget> {
                                           if (functions.checkDateTimeLine(
                                               pendingTaskItem.endDate,
                                               DateTimelines.today.name)) {
-                                            return FlutterFlowTheme.of(context)
-                                                .tertiary;
+                                            return const Color(0xEB98C6F9);
                                           } else if (functions
                                               .checkDateTimeLine(
                                                   pendingTaskItem.endDate,
                                                   DateTimelines
                                                       .tomorrow.name)) {
-                                            return FlutterFlowTheme.of(context)
-                                                .error;
+                                            return const Color(0xEBAFFDA7);
                                           } else if (functions
                                               .checkDateTimeLine(
                                                   pendingTaskItem.endDate,
                                                   DateTimelines
                                                       .yesterday.name)) {
-                                            return FlutterFlowTheme.of(context)
-                                                .success;
+                                            return const Color(0xFFFA8795);
                                           } else {
-                                            return FlutterFlowTheme.of(context)
-                                                .primaryBackground;
+                                            return const Color(0xFFFDBA82);
                                           }
                                         }(),
                                         borderRadius:

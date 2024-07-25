@@ -9,13 +9,9 @@ export 'my_task_list_view_model.dart';
 class MyTaskListViewWidget extends StatefulWidget {
   const MyTaskListViewWidget({
     super.key,
-    required this.sectionList,
-    required this.parameter2,
     required this.data,
   });
 
-  final List<String>? sectionList;
-  final List<String>? parameter2;
   final MainTaskModelStruct? data;
 
   @override

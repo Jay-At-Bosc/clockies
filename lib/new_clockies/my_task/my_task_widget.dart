@@ -232,8 +232,6 @@ class _MyTaskWidgetState extends State<MyTaskWidget> {
                         model: _model.myTaskListViewModel,
                         updateCallback: () => setState(() {}),
                         child: MyTaskListViewWidget(
-                          sectionList: _model.listViewSectionList,
-                          parameter2: _model.listViewSectionList,
                           data: _model.myTaskData!,
                         ),
                       );
