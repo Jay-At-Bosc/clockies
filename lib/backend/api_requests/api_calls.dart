@@ -21,6 +21,7 @@ class ClockiesAPIGroup {
   };
   static FetchMyTaskssCall fetchMyTaskssCall = FetchMyTaskssCall();
   static LoginCall loginCall = LoginCall();
+  static FetchTaskDetailsCall fetchTaskDetailsCall = FetchTaskDetailsCall();
 }
 
 class FetchMyTaskssCall {
@@ -116,6 +117,58 @@ class LoginCall {
   String? token(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.data.token''',
+      ));
+}
+
+class FetchTaskDetailsCall {
+  Future<ApiCallResponse> call({
+    int? taskId,
+    String? authToken = '',
+  }) async {
+    final baseUrl = ClockiesAPIGroup.getBaseUrl(
+      authToken: authToken,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'Fetch Task Details',
+      apiUrl: '$baseUrl/task/$taskId',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': '$authToken',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  String? message(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
+  dynamic taskDetailsData(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+      );
+  String? projectName(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.projects.projectName''',
+      ));
+  String? creatorName(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.creator.userName''',
+      ));
+  dynamic userName(dynamic response) => getJsonField(
+        response,
+        r'''$.data.user''',
+      );
+  String? sectionName(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.section.name''',
       ));
 }
 

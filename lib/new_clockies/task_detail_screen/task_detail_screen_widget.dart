@@ -6,12 +6,16 @@ import '/new_component/shimmers/task_detail_screen_shimmer/task_detail_screen_sh
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'task_detail_screen_model.dart';
 export 'task_detail_screen_model.dart';
 
 class TaskDetailScreenWidget extends StatefulWidget {
-  const TaskDetailScreenWidget({super.key});
+  const TaskDetailScreenWidget({
+    super.key,
+    required this.taskId,
+  });
+
+  final int? taskId;
 
   @override
   State<TaskDetailScreenWidget> createState() => _TaskDetailScreenWidgetState();
@@ -31,7 +35,8 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.isLoading = true;
       setState(() {});
-      await Future.delayed(const Duration(milliseconds: 3000));
+      await _model.getTaskDetailsBlock(context);
+      setState(() {});
       _model.isLoading = false;
       setState(() {});
     });
@@ -89,43 +94,22 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                               ),
                         ),
                       ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              _model.isCompleted = !_model.isCompleted;
-                              setState(() {});
-                            },
-                            child: Icon(
-                              Icons.check,
-                              color: _model.isCompleted
-                                  ? FlutterFlowTheme.of(context).success
-                                  : FlutterFlowTheme.of(context).iconColor,
-                              size: 23.0,
-                            ),
-                          ),
-                          Icon(
-                            Icons.thumb_up_outlined,
-                            color: FlutterFlowTheme.of(context).iconColor,
-                            size: 24.0,
-                          ),
-                          FaIcon(
-                            FontAwesomeIcons.link,
-                            color: FlutterFlowTheme.of(context).iconColor,
-                            size: 24.0,
-                          ),
-                          Icon(
-                            Icons.keyboard_control_rounded,
-                            color: FlutterFlowTheme.of(context).iconColor,
-                            size: 24.0,
-                          ),
-                        ].divide(const SizedBox(width: 12.0)),
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          _model.isCompleted = !_model.isCompleted;
+                          setState(() {});
+                        },
+                        child: Icon(
+                          Icons.check,
+                          color: _model.isCompleted
+                              ? FlutterFlowTheme.of(context).success
+                              : FlutterFlowTheme.of(context).iconColor,
+                          size: 23.0,
+                        ),
                       ),
                     ].divide(const SizedBox(width: 8.0)),
                   ),
@@ -175,29 +159,6 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                                   ),
                                 ),
                               ),
-                              if (_model.isCompleted)
-                                Container(
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .checkedColor,
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 8.0, 16.0, 8.0),
-                                    child: Text(
-                                      'Completed',
-                                      style: FlutterFlowTheme.of(context)
-                                          .titleMedium
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                  ),
-                                ),
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 0.0, 16.0, 0.0),
@@ -212,7 +173,10 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            'UI : My task List',
+                                            valueOrDefault<String>(
+                                              _model.taskDetailsData?.taskName,
+                                              '-',
+                                            ),
                                             style: FlutterFlowTheme.of(context)
                                                 .displayLarge
                                                 .override(
@@ -237,7 +201,11 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                                                     .fromSTEB(
                                                         6.0, 4.0, 6.0, 4.0),
                                                 child: Text(
-                                                  'In progress',
+                                                  valueOrDefault<String>(
+                                                    _model.taskDetailsData
+                                                        ?.status,
+                                                    '-',
+                                                  ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyMedium
@@ -294,7 +262,11 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                                                       ),
                                                 ),
                                                 Text(
-                                                  'Jeel',
+                                                  valueOrDefault<String>(
+                                                    _model.taskDetailsData?.user
+                                                        .userName,
+                                                    '-',
+                                                  ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .titleMedium
@@ -408,7 +380,11 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                                           ].divide(const SizedBox(width: 8.0)),
                                         ),
                                         Text(
-                                          'Clockies',
+                                          valueOrDefault<String>(
+                                            _model.taskDetailsData?.projects
+                                                .projectName,
+                                            '-',
+                                          ),
                                           style: FlutterFlowTheme.of(context)
                                               .headlineMedium
                                               .override(
@@ -439,7 +415,11 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                                               ),
                                         ),
                                         Text(
-                                          'To Do',
+                                          valueOrDefault<String>(
+                                            _model
+                                                .taskDetailsData?.section.name,
+                                            '-',
+                                          ),
                                           style: FlutterFlowTheme.of(context)
                                               .headlineMedium
                                               .override(
@@ -468,7 +448,10 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                                               ),
                                         ),
                                         Text(
-                                          'Issue',
+                                          valueOrDefault<String>(
+                                            _model.taskDetailsData?.taskType,
+                                            '-',
+                                          ),
                                           style: FlutterFlowTheme.of(context)
                                               .headlineMedium
                                               .override(
@@ -478,86 +461,90 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                                         ),
                                       ].divide(const SizedBox(height: 6.0)),
                                     ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Text(
-                                                  'Parent task name',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .titleLarge
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .iconColor,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
+                                    if (_model.taskDetailsData?.taskType ==
+                                        'Issue')
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Parent task name',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleLarge
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .iconColor,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                              ),
+                                              Text(
+                                                valueOrDefault<String>(
+                                                  _model.taskDetailsData
+                                                      ?.parentTask.taskName,
+                                                  '-',
                                                 ),
-                                              ],
-                                            ),
-                                            Text(
-                                              'My task',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .headlineMedium
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                          ].divide(const SizedBox(height: 6.0)),
-                                        ),
-                                        Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Issue type',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .titleLarge
-                                                  .override(
-                                                    fontFamily: 'Inter',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .iconColor,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                            ),
-                                            Text(
-                                              'Critical',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .headlineMedium
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                          ].divide(const SizedBox(height: 6.0)),
-                                        ),
-                                      ].divide(const SizedBox(width: 64.0)),
-                                    ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .headlineMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                            ].divide(const SizedBox(height: 6.0)),
+                                          ),
+                                          Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Issue type',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleLarge
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .iconColor,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                              ),
+                                              Text(
+                                                valueOrDefault<String>(
+                                                  _model.taskDetailsData
+                                                      ?.issueType,
+                                                  '-',
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .headlineMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                            ].divide(const SizedBox(height: 6.0)),
+                                          ),
+                                        ].divide(const SizedBox(width: 64.0)),
+                                      ),
                                   ]
                                       .divide(const SizedBox(height: 16.0))
                                       .addToStart(const SizedBox(height: 16.0))
@@ -620,7 +607,12 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                                                         ),
                                               ),
                                               Text(
-                                                '23th July, 2024',
+                                                valueOrDefault<String>(
+                                                  functions.formateDateString(
+                                                      _model.taskDetailsData
+                                                          ?.startDate),
+                                                  '-',
+                                                ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .titleMedium
@@ -681,7 +673,12 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                                                         ),
                                               ),
                                               Text(
-                                                '25th July, 2024',
+                                                valueOrDefault<String>(
+                                                  functions.formateDateString(
+                                                      _model.taskDetailsData
+                                                          ?.endDate),
+                                                  '-',
+                                                ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .titleMedium
@@ -720,8 +717,12 @@ class _TaskDetailScreenWidgetState extends State<TaskDetailScreenWidget> {
                                           ),
                                     ),
                                     Text(
-                                      functions.removePTagsAndFormatParagraph(
-                                          '<p>Task: Develop a User Onboarding Flow for Mobile App</p>  <p>Develop a comprehensive user onboarding flow for our mobile application. This includes creating an engaging welcome screen, a step-by-step guide to key features, and interactive tutorials.</p> <p>The goal is to ensure new users understand the app\\\'s value and functionality quickly. Design should be user-friendly, visually appealing, and align with our brand aesthetics. Implement tracking to monitor user progress through the onboarding process and gather feedback for continuous improvement. Collaborate with the design and development teams to ensure seamless integration. The final deliverable should be a fully functional and tested onboarding flow ready for deployment.</p>')!,
+                                      valueOrDefault<String>(
+                                        functions.removePTagsAndFormatParagraph(
+                                            _model
+                                                .taskDetailsData?.description),
+                                        ' -',
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .titleMedium
                                           .override(

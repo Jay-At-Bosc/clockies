@@ -526,7 +526,14 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                   Colors.transparent,
                                               onTap: () async {
                                                 context.pushNamed(
-                                                    'TaskDetailScreen');
+                                                  'TaskDetailScreen',
+                                                  queryParameters: {
+                                                    'taskId': serializeParam(
+                                                      taskDataItem.id,
+                                                      ParamType.int,
+                                                    ),
+                                                  }.withoutNulls,
+                                                );
                                               },
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,

@@ -79,47 +79,55 @@ class _MyTaskListTileWidgetState extends State<MyTaskListTileWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      splashColor: Colors.transparent,
-      focusColor: Colors.transparent,
-      hoverColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      onTap: () async {
-        context.pushNamed('TaskDetailScreen');
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).secondaryBackground,
-        ),
-        child: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 0.0, 8.0),
-          child: Container(
-            width: double.infinity,
-            color: Colors.white,
-            child: ExpandableNotifier(
-              controller: _model.expandableExpandableController,
-              child: ExpandablePanel(
-                header: Text(
-                  valueOrDefault<String>(
-                    widget.section,
-                    '-',
-                  ),
-                  style: FlutterFlowTheme.of(context).headlineSmall.override(
-                        fontFamily: 'Inter',
-                        letterSpacing: 0.0,
-                      ),
+    return Container(
+      decoration: BoxDecoration(
+        color: FlutterFlowTheme.of(context).secondaryBackground,
+      ),
+      child: Padding(
+        padding: const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 0.0, 8.0),
+        child: Container(
+          width: double.infinity,
+          color: Colors.white,
+          child: ExpandableNotifier(
+            controller: _model.expandableExpandableController,
+            child: ExpandablePanel(
+              header: Text(
+                valueOrDefault<String>(
+                  widget.section,
+                  '-',
                 ),
-                collapsed: Container(),
-                expanded: Builder(
-                  builder: (context) {
-                    final pendingTask = _model.displayList.toList();
+                style: FlutterFlowTheme.of(context).headlineSmall.override(
+                      fontFamily: 'Inter',
+                      letterSpacing: 0.0,
+                    ),
+              ),
+              collapsed: Container(),
+              expanded: Builder(
+                builder: (context) {
+                  final pendingTask = _model.displayList.toList();
 
-                    return Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children:
-                          List.generate(pendingTask.length, (pendingTaskIndex) {
-                        final pendingTaskItem = pendingTask[pendingTaskIndex];
-                        return Container(
+                  return Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children:
+                        List.generate(pendingTask.length, (pendingTaskIndex) {
+                      final pendingTaskItem = pendingTask[pendingTaskIndex];
+                      return InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed(
+                            'TaskDetailScreen',
+                            queryParameters: {
+                              'taskId': serializeParam(
+                                pendingTaskItem.id,
+                                ParamType.int,
+                              ),
+                            }.withoutNulls,
+                          );
+                        },
+                        child: Container(
                           decoration: const BoxDecoration(),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
@@ -219,21 +227,21 @@ class _MyTaskListTileWidgetState extends State<MyTaskListTileWidget> {
                               ),
                             ],
                           ),
-                        );
-                      }).divide(const SizedBox(height: 4.0)),
-                    );
-                  },
-                ),
-                theme: ExpandableThemeData(
-                  tapHeaderToExpand: true,
-                  tapBodyToExpand: false,
-                  tapBodyToCollapse: false,
-                  headerAlignment: ExpandablePanelHeaderAlignment.center,
-                  hasIcon: true,
-                  expandIcon: Icons.arrow_drop_down,
-                  collapseIcon: Icons.arrow_drop_up,
-                  iconColor: FlutterFlowTheme.of(context).iconColor,
-                ),
+                        ),
+                      );
+                    }).divide(const SizedBox(height: 4.0)),
+                  );
+                },
+              ),
+              theme: ExpandableThemeData(
+                tapHeaderToExpand: true,
+                tapBodyToExpand: false,
+                tapBodyToCollapse: false,
+                headerAlignment: ExpandablePanelHeaderAlignment.center,
+                hasIcon: true,
+                expandIcon: Icons.arrow_drop_down,
+                collapseIcon: Icons.arrow_drop_up,
+                iconColor: FlutterFlowTheme.of(context).iconColor,
               ),
             ),
           ),

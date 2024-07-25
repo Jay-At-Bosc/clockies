@@ -202,7 +202,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'TaskDetailScreen',
           path: '/taskDetailScreen',
-          builder: (context, params) => const TaskDetailScreenWidget(),
+          builder: (context, params) => TaskDetailScreenWidget(
+            taskId: params.getParam(
+              'taskId',
+              ParamType.int,
+            ),
+          ),
         ),
         FFRoute(
           name: 'BoardScreen',
